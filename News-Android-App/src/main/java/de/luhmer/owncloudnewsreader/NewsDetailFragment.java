@@ -86,7 +86,7 @@ public class NewsDetailFragment extends Fragment implements RssItemToHtmlTask.Li
 
     private int section_number;
     protected String html;
-    // private GestureDetector mGestureDetector;
+    private GestureDetector mGestureDetector;
 
 
     public NewsDetailFragment() { }
@@ -175,7 +175,7 @@ public class NewsDetailFragment extends Fragment implements RssItemToHtmlTask.Li
             this.addBottomPaddingForFastActions(binding.webview);
         }
 
-        // setUpGestureDetector();
+        setUpGestureDetector();
 
 		return binding.getRoot();
 	}
@@ -195,7 +195,6 @@ public class NewsDetailFragment extends Fragment implements RssItemToHtmlTask.Li
     /**
      * Double tap to star listener (double tap the webview to mark the current item as read)
      */
-    /*
 	private void setUpGestureDetector() {
         mGestureDetector = new GestureDetector(getContext(), new GestureDetector.SimpleOnGestureListener());
 
@@ -214,7 +213,7 @@ public class NewsDetailFragment extends Fragment implements RssItemToHtmlTask.Li
                     ((NewsDetailActivity) getActivity()).toggleRssItemStarredState();
 
                     // Star has 5 corners. So we can rotate it by 2/5
-                    View view = getActivity().findViewById(R.id.action_starred);
+                    View view = getActivity().findViewById(R.id.fa_star);
                     ObjectAnimator animator = ObjectAnimator.ofFloat(view, "rotation", view.getRotation() + (2*(360f/5f)));
                     animator.start();
                 }
@@ -227,7 +226,6 @@ public class NewsDetailFragment extends Fragment implements RssItemToHtmlTask.Li
             }
         });
     }
-    */
 
 
     protected void startLoadRssItemToWebViewTask() {
@@ -334,12 +332,10 @@ public class NewsDetailFragment extends Fragment implements RssItemToHtmlTask.Li
             }
         });
 
-        /*
         binding.webview.setOnTouchListener((v, event) -> {
             mGestureDetector.onTouchEvent(event);
             return false;
         });
-        */
 	}
 
     /**

@@ -65,6 +65,7 @@ android {
         // 100% Open-Source Edition
         oss {
             dimension "default"
+            versionNameSuffix '-doubletab'
         }
         // Used for continous integration, e.g. to test built .apk-files from pull requests
         dev {

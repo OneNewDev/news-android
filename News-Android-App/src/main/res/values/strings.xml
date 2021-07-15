@@ -9,6 +9,7 @@
     <string name="title_activity_sync_interval_selector">Sync Interval</string>
     <string name="title_activity_news_detail">NewsDetailActivity</string>
     <string name="empty_view_content">No items here</string>
+    <string name="empty_view_content_action">Pull down to refresh</string>
     <string name="toast_GettingMoreItems">Download of more items started… Please wait.</string>
     <string name="no_wifi_available">No WiFi connected</string>
     <string name="do_you_want_to_download_without_wifi">Do you want to download the images without a Wi-Fi connection</string>
@@ -420,6 +421,7 @@
     <string name="opml_export">OPML Export</string>
     <string name="parsing_opml">Parsing OPML</string>
     <string name="please_wait">Please wait…</string>
+    <string name="interval_sync_title">Interval Sync</string>
 
     <string-array name="array_sync_interval" translatable="false">
         <item>@string/array_sync_interval_min_0</item>

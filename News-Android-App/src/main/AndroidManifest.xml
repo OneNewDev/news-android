@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="de.luhmer.owncloudnewsreader"
     android:installLocation="internalOnly"
-    android:versionCode="164"
-    android:versionName="0.9.9.61">
+    android:versionCode="165"
+    android:versionName="0.9.9.62">
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -68,10 +68,12 @@
         <activity
             android:name=".SettingsActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/title_activity_settings" />
-        <activity
-            android:name=".SyncIntervalSelectorActivity"
-            android:label="@string/title_activity_sync_interval_selector" />
+            android:label="@string/title_activity_settings">
+        <intent-filter>
+            <action android:name="de.luhmer.owncloudnewsreader.ACCOUNT_MANAGER_ENTRY" />
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+        </activity>
         <activity
             android:name=".LoginDialogActivity"
             android:label="@string/action_sign_in_short" />

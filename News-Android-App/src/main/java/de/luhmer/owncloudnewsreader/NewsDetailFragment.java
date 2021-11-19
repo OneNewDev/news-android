@@ -68,7 +68,6 @@ import de.luhmer.owncloudnewsreader.adapter.ProgressBarWebChromeClient;
 import de.luhmer.owncloudnewsreader.async_tasks.RssItemToHtmlTask;
 import de.luhmer.owncloudnewsreader.database.model.RssItem;
 import de.luhmer.owncloudnewsreader.databinding.FragmentNewsDetailBinding;
-import de.luhmer.owncloudnewsreader.helper.AdBlocker;
 import de.luhmer.owncloudnewsreader.helper.AsyncTaskHelper;
 import de.luhmer.owncloudnewsreader.helper.ColorHelper;
 import de.luhmer.owncloudnewsreader.services.DownloadWebPageService;
@@ -303,6 +302,7 @@ public class NewsDetailFragment extends Fragment implements RssItemToHtmlTask.Li
 
         binding.webview.setWebViewClient(new WebViewClient() {
 
+            /*
             private final Map<String, Boolean> loadedUrls = new HashMap<>();
 
             @Override
@@ -318,6 +318,7 @@ public class NewsDetailFragment extends Fragment implements RssItemToHtmlTask.Li
                 }
                 return isAd ? AdBlocker.createEmptyResource() : super.shouldInterceptRequest(view, url);
             }
+            */
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {

@@ -2,7 +2,6 @@
 <resources>
 
     <string name="auto_sync_string">Auto sünk</string>
-    <string name="title_activity_news_detail">UudisteÜksikasjadeTegevused</string>
     <string name="empty_view_content">Siin pole üksusi</string>
     <string name="no_wifi_available">WiFi pole ühendatud</string>
     <string name="current_version">Sa kasutad versioon %s</string>
@@ -129,12 +128,6 @@
     <string name="content_desc_show_password">näita parooli</string>
     <string name="content_desc_delete">kustuta</string>
     <string name="content_desc_download">laadi alla</string>
-
-
-    <!-- Settings for Notifications -->
-    <string name="pref_header_notifications">Teavitused</string>
-    <string name="pref_title_notification_new_articles_available">Näita teavitusi kui on saadaval uusi arikleid</string>
-
 
     <!-- Login Dialog -->
     <string name="login_dialog_title_error">Viga</string>

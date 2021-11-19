@@ -3,7 +3,6 @@
 
     <string name="auto_sync_string">Autosynk</string>
     <string name="title_activity_sync_interval_selector">Synkroniseringsintervall</string>
-    <string name="title_activity_news_detail">NyheterDetaljAktivitet</string>
     <string name="empty_view_content">Ingenting her</string>
     <string name="toast_GettingMoreItems">Nedlasting av flere elementer startet… Vennligst vent.</string>
     <string name="no_wifi_available">Ingen WiFI tilkoblet</string>
@@ -219,12 +218,6 @@
     <string name="content_desc_delete">slett</string>
     <string name="content_desc_download">last ned</string>
 
-
-    <!-- Settings for Notifications -->
-    <string name="pref_header_notifications">Varsler</string>
-    <string name="pref_title_notification_new_articles_available">Vis varsel når nye artikler er tilgjengelig</string>
-
-
     <!-- Login Dialog -->
     <string name="login_dialog_title_error">Feil</string>
     <string name="login_dialog_text_news_app_not_installed_on_server" formatted="true">Nyhets tillegg er ikke installert eller aktivert på din server. Følge instruksjonene angitt her for å sette opp din server: %1$s</string>
@@ -233,8 +226,6 @@
     <string name="login_dialog_text_not_compatible">Denne app-versjonen er ikke kompatibel md Nextcloud nyhetsapp. Vennligst oppgrader denne appen. </string>
     <string name="login_dialog_title_security_warning">Sikkerhetsadvarsel</string>
     <string name="login_dialog_text_security_warning">HTTPS er sterkt anbefalt for din sikkerhet. Uten HTTPS kan andre se din trafikk og hente ut innholdet  som for eksempel passord.</string>
-
-
     <!-- Data & Sync -->
     <string name="pref_header_data_sync">Data &amp; synk.</string>
     <string name="pref_title_clearCache">Slett hurtiglager</string>

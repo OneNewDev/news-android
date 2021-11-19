@@ -3,7 +3,6 @@
 
     <string name="auto_sync_string">Sincronitza automàticament</string>
     <string name="title_activity_sync_interval_selector">Interval de sincronització</string>
-    <string name="title_activity_news_detail">NotíciesDetailActivitat</string>
     <string name="empty_view_content">Cap element</string>
     <string name="toast_GettingMoreItems">Ha començat la descàrrega de més elements... Espereu si us plau.</string>
     <string name="no_wifi_available">Sense connexió Wi-Fi</string>
@@ -67,6 +66,7 @@
     <string name="action_link_share">Comparteix l\'enllaç</string>
     <string name="action_link_open">Obre l\'enllaç al navegador</string>
     <string name="action_link_copy">Copia l\'enllaç</string>
+    <string name="toast_img_download_wait">S\'està descarregant... espereu si us plau</string>
     <string name="toast_img_saved">S\'ha desat la imatge</string>
     <string name="toast_img_notwriteable">No s\'ha pogut escriure la imatge.</string>
     <string name="toast_copied_to_clipboard">S\'ha copiat al porta-retalls</string>
@@ -217,12 +217,6 @@
     <string name="content_desc_delete">suprimeix</string>
     <string name="content_desc_download">descarrega</string>
 
-
-    <!-- Settings for Notifications -->
-    <string name="pref_header_notifications">Notificacions</string>
-    <string name="pref_title_notification_new_articles_available">Mostra una notificació quan hi hagi nous articles disponibles</string>
-
-
     <!-- Login Dialog -->
     <string name="login_dialog_title_error">Error</string>
     <string name="login_dialog_text_news_app_not_installed_on_server" formatted="true">Sembla com si la vostra aplicació de notícies no estigués instal·lada o activada al vostre servidor. Si us plau, seguiu aquestes instruccions per configurar-la primer al vostre servidor: %1$s</string>
@@ -231,8 +225,6 @@
     <string name="login_dialog_text_not_compatible">Aquesta versió d\'aplicació no és compatible amb la vostra aplicació de notícies de Nextcloud. Si us plau, actualitzeu l\'aplicació de notícies i el seu marc de treball.</string>
     <string name="login_dialog_title_security_warning">Avís de seguretat</string>
     <string name="login_dialog_text_security_warning">No esteu fent servir HTTPS, i no és gens recomanable. Un atacant podria interceptar el vostre trafic de dades i guanyar accés a les vostres dades més sensibles (p.ex. la vostra contrasenya).</string>
-
-
     <!-- Data & Sync -->
     <string name="pref_header_data_sync">Sincronització &amp; de dades </string>
     <string name="pref_title_clearCache">Neteja la memòria cau</string>
@@ -245,4 +237,14 @@
     <string name="pref_data_sync_image_cache_ask">Pregunta-m\'ho quan no estigui connectat a una xarxa Wi-Fi</string>
 
     <string name="array_sync_interval_min_0">Mai</string>
+    <string name="array_sync_interval_min_5">5 minuts</string>
+    <string name="array_sync_interval_min_15">15 minuts</string>
+    <string name="array_sync_interval_min_30">30 minuts</string>
+    <string name="array_sync_interval_min_45">45 minuts</string>
+    <string name="array_sync_interval_hour_1">1 hora</string>
+    <string name="array_sync_interval_hour_2">2 hores</string>
+    <string name="array_sync_interval_hour_3">3 hores</string>
+    <string name="array_sync_interval_hour_6">6 hores</string>
+    <string name="array_sync_interval_hour_12">12 hores</string>
+    <string name="array_sync_interval_hour_24">24 hores</string>
     </resources>

@@ -1,3 +1,19 @@
+0.9.9.64
+---------------------
+- Fixed - <a href="https://github.com/nextcloud/news-android/issues/1006">#1006 Refactor and fix sync issues</a>
+- Changed - Improve OPML import dialog
+- Changed - Increase the soft limit of articles in the app from 1500 to 5000 articles
+
+
+0.9.9.63 (Beta)
+---------------------
+- Added - <a href="https://github.com/nextcloud/news-android/issues/1002">#1002 support for more granular notification settings</a>
+- Changed - added file extension to downloaded/exported images
+- Changed - allow clicks on notification after an image has been saved/downloaded from detail view
+- Fixed - <a href="https://github.com/nextcloud/news-android/issues/1018">#1018 Item state sync is not working correctly when many items have been changed</a>
+- Fix security issue GHSL-2021-1033 (Thanks to GitHub Security Lab - with special thanks to Tony Torralba and Kevin Backhouse)
+
+
 0.9.9.62
 ---------------------
 - Changed - <a href="https://github.com/nextcloud/news-android/issues/824">#824 Enhance empty content view (thanks Stefan)</a>

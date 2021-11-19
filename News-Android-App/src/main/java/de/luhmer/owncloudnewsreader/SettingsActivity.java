@@ -34,8 +34,6 @@ import javax.inject.Inject;
 
 import de.luhmer.owncloudnewsreader.helper.ThemeChooser;
 
-import static de.luhmer.owncloudnewsreader.LoginDialogActivity.RESULT_LOGIN;
-
 /**
 * A {@link PreferenceActivity} that presents a set of application settings. On
 * handset devices, settings are presented as a single list. On tablets,
@@ -74,7 +72,6 @@ public class SettingsActivity extends AppCompatActivity {
     public static final String CB_SHOW_FAST_ACTIONS = "cb_ShowFastActions";
     public static final String CB_DISABLE_HOSTNAME_VERIFICATION_STRING = "cb_DisableHostnameVerification";
     public static final String CB_SKIP_DETAILVIEW_AND_OPEN_BROWSER_DIRECTLY_STRING = "cb_openInBrowserDirectly";
-    public static final String CB_SHOW_NOTIFICATION_NEW_ARTICLES_STRING = "cb_showNotificationNewArticles";
 
     //public static final String CB_ENABLE_PODCASTS_STRING = "cb_enablePodcasts";
 
@@ -85,10 +82,11 @@ public class SettingsActivity extends AppCompatActivity {
     public static final String SP_APP_THEME = "sp_app_theme";
     public static final String CB_OLED_MODE = "cb_oled_mode";
 
-    public static final String SP_FEED_LIST_LAYOUT = "sp_feed_list_layout";
+    public static final String SP_FEED_LIST_LAYOUT = "sp_feed_list_layout"; // used for shared prefs
+    public static final String RI_FEED_LIST_LAYOUT = "ai_feed_list_layout"; // used for result intents
     public static final String SP_FONT_SIZE = "sp_font_size";
 
-    public static final String CACHE_CLEARED = "CACHE_CLEARED";
+    public static final String RI_CACHE_CLEARED = "CACHE_CLEARED"; // used for result intents
     public static final String SP_MAX_CACHE_SIZE = "sp_max_cache_size";
     public static final String SP_SORT_ORDER = "sp_sort_order";
     public static final String SP_DISPLAY_BROWSER = "sp_display_browser";
@@ -103,6 +101,8 @@ public class SettingsActivity extends AppCompatActivity {
 
     protected @Inject SharedPreferences mPrefs;
 
+    public Intent resultIntent = new Intent();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ((NewsReaderApplication) getApplication()).getAppComponent().injectActivity(this);
@@ -114,6 +114,10 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
 
         setupActionBar();
+
+        // some settings might add a few flags to the result Intent at runtime
+        // (e.g. clearing cache / switching list layout / theme / ...)
+        setResult(RESULT_OK, resultIntent);
     }
 
     @Override
@@ -126,7 +130,6 @@ public class SettingsActivity extends AppCompatActivity {
                 .commit();
     }
 
-
     private void setupActionBar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -135,13 +138,11 @@ public class SettingsActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(R.string.title_activity_settings);
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                return true;
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -149,11 +150,9 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Intent intent = getIntent();
-        intent.putExtra(
-                SettingsActivity.SP_FEED_LIST_LAYOUT,
-                mPrefs.getString(SettingsActivity.SP_FEED_LIST_LAYOUT, "0")
-        );
-        setResult(RESULT_OK,intent);
+
+        // Fix GHSL-2021-1033
+        String feedListLayout = mPrefs.getString(SettingsActivity.SP_FEED_LIST_LAYOUT, "0");
+        resultIntent.putExtra(SettingsActivity.RI_FEED_LIST_LAYOUT, feedListLayout);
     }
 }

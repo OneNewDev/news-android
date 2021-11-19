@@ -3,7 +3,6 @@
 
     <string name="auto_sync_string">همگام‌سازی خودکار</string>
     <string name="title_activity_sync_interval_selector">فواصل همگام‌سازی</string>
-    <string name="title_activity_news_detail">فعالیت جزییات اخبار</string>
     <string name="empty_view_content">موردی وجود ندارد</string>
     <string name="toast_GettingMoreItems">بارگیری موارد بیش‌تر آغاز شد… صبر لطفاً </string>
     <string name="no_wifi_available">وای‌فایی وصل نیست</string>
@@ -214,12 +213,6 @@
     <string name="content_desc_delete">حذف</string>
     <string name="content_desc_download">بارگیری</string>
 
-
-    <!-- Settings for Notifications -->
-    <string name="pref_header_notifications">آگاهی‌ها</string>
-    <string name="pref_title_notification_new_articles_available">نمایش آگاهی هنگام موجود بودن مقاله‌های جدید</string>
-
-
     <!-- Login Dialog -->
     <string name="login_dialog_title_error">خطا</string>
     <string name="login_dialog_text_news_app_not_installed_on_server" formatted="true">به نظر می‌رسد کارهٔ اخبار روی کارسازتان نصب یا فعّال نشده است. لطفاً برای برپایی کارهٔ اخبار روی کارسازتان، ابتدا روشی که این‌جا گفته شده را دنبال کنید: %1$s</string>
@@ -228,8 +221,6 @@
     <string name="login_dialog_text_not_compatible">نگارش کاره با کارهٔ اخبار نکست‌کلودتان سازگار نیست. لطفاً کارهٔ اخبار و چارچوب کاره را ارتقا دهید.</string>
     <string name="login_dialog_title_security_warning">اخطار امنیتی</string>
     <string name="login_dialog_text_security_warning">شما از HTTPS که قویاً تشویق می‌شود، استفاده نمی‌کنید. یک نفوذگر می‌تواند ترافیکتان را شنود کرده و به برخی داده‌های حسّاس (مانند گذرواژه) دسترسی پیدا کنید.</string>
-
-
     <!-- Data & Sync -->
     <string name="pref_header_data_sync">داده ها و همگام سازی</string>
     <string name="pref_title_clearCache">پاک‌سازی انباره</string>

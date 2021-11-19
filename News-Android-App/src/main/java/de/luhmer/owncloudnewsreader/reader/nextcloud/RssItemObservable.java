@@ -39,7 +39,7 @@ public class RssItemObservable implements Publisher<Integer> {
     private final NewsAPI mNewsApi;
     private final SharedPreferences mPrefs;
     private static final String TAG = RssItemObservable.class.getCanonicalName();
-    private static int maxSizePerSync = 300;
+    private static final int maxSizePerSync = 300;
 
     public RssItemObservable(DatabaseConnectionOrm dbConn, NewsAPI newsApi, SharedPreferences prefs) {
         this.mDbConn = dbConn;
@@ -57,29 +57,79 @@ public class RssItemObservable implements Publisher<Integer> {
         }
     }
 
-    public void sync(Subscriber<? super Integer> subscriber) throws IOException {
+    public static Observable<RssItem> events(final BufferedSource source) {
+        return Observable.create(e -> {
+            try {
+                InputStreamReader isr = new InputStreamReader(source.inputStream());
+                BufferedReader br = new BufferedReader(isr);
+                JsonReader reader = new JsonReader(br);
 
+                try {
+                    reader.beginObject();
+
+                    String currentName;
+                    while (reader.hasNext() && (currentName = reader.nextName()) != null) {
+                        if (currentName.equals("items")) {
+                            break;
+                        } else {
+                            reader.skipValue();
+                        }
+                    }
+
+                    reader.beginArray();
+                    while (reader.hasNext()) {
+                        JsonObject jsonObj = getJsonObjectFromReader(reader);
+                        RssItem item = InsertRssItemIntoDatabase.parseItem(Objects.requireNonNull(jsonObj));
+                        e.onNext(item);
+                    }
+                    reader.endArray();
+                } finally {
+                    reader.close();
+                    br.close();
+                    isr.close();
+                }
+            } catch (IOException | NullPointerException err) {
+                err.printStackTrace();
+                e.onError(err);
+            }
+            e.onComplete();
+        });
+    }
+
+    private static long getMaxIdFromItems(List<RssItem> buffer) {
+        long max = 0;
+        for (RssItem item : buffer) {
+            if (item.getId() > max) {
+                max = item.getId();
+            }
+        }
+        return max;
+    }
+
+    public static boolean performDatabaseBatchInsert(DatabaseConnectionOrm dbConn, List<RssItem> buffer) {
+        Log.v(TAG, "performDatabaseBatchInsert() called with: dbConn = [" + dbConn + "], buffer = [" + buffer + "]");
+        dbConn.insertNewItems(buffer);
+        buffer.clear();
+        return true;
+    }
+
+    public void sync(Subscriber<? super Integer> subscriber) throws IOException {
         mDbConn.clearDatabaseOverSize();
 
-        //String authKey = AuthenticationManager.getGoogleAuthKey(username, password);
-        //int maxItemsInDatabase = Integer.parseInt(mPrefs.getString(SettingsActivity.SP_MAX_ITEMS_SYNC, "200"));
-
         long lastModified = mDbConn.getLastModified();
-        //dbConn.clearDatabaseOverSize();
 
         int requestCount = 0;
-        int totalCount   = 0;
+        int totalCount = 0;
         int maxSyncSize = maxSizePerSync;
 
-        if(lastModified == 0)//Only on first sync
-        {
+        if (lastModified == 0) { // Only on first sync
             long offset = 0;
 
             Log.v(TAG, "First sync - download all available unread articles!!");
-            int maxItemsInDatabase = Constants.maxItemsCount;
+            // int maxItemsInDatabase = Constants.maxItemsCount;
 
             do {
-                Log.v(TAG, "offset=" + offset + ",  requestCount=" + requestCount + "");
+                Log.v(TAG, "[unread] offset=" + offset + ",  requestCount=" + requestCount + ", maxSyncSize=" + maxSyncSize + ", total downloaded=" + totalCount);
                 List<RssItem> buffer = (mNewsApi.items(maxSyncSize, offset, Integer.parseInt(FeedItemTags.ALL.toString()), 0, false, true).execute().body());
 
                 requestCount = 0;
@@ -103,45 +153,43 @@ public class RssItemObservable implements Publisher<Integer> {
 
             offset = 0;
             do {
-                List<RssItem> buffer = mNewsApi.items(maxSyncSize, offset, Integer.parseInt(FeedItemTags.ALL_STARRED.toString()), 0, false, true).execute().body();
+                List<RssItem> buffer = mNewsApi.items(maxSyncSize, offset, Integer.parseInt(FeedItemTags.ALL_STARRED.toString()), 0, true, true).execute().body();
                 requestCount = 0;
                 if(buffer != null) {
                     requestCount = buffer.size();
                     offset = getMaxIdFromItems(buffer); // get maximum id of returned items
                     performDatabaseBatchInsert(mDbConn, buffer);
                 }
-                Log.v(TAG, "[starred] offset=" + offset + ",  requestCount=" + requestCount + ", maxSyncSize=" + maxSyncSize);
+                Log.v(TAG, "[starred] offset=" + offset + ",  requestCount=" + requestCount + ", maxSyncSize=" + maxSyncSize + ", total downloaded=" + totalCount);
                 totalCount += requestCount;
 
                 subscriber.onNext(totalCount);
             } while(requestCount == maxSyncSize);
-        }
-        else
-        {
+        } else {
             Log.v(TAG, "Incremental sync!!");
             //First reset the count of last updated items
             mPrefs.edit().putInt(Constants.LAST_UPDATE_NEW_ITEMS_COUNT_STRING, 0).apply();
 
-            //long highestItemIdBeforeSync = mDbConn.getHighestItemId();
+            // long highestItemIdBeforeSync = mDbConn.getHighestItemId();
 
-            //Get all updated items
+            // Get all updated items
             mNewsApi.updatedItems(lastModified, Integer.parseInt(FeedItemTags.ALL.toString()), 0)
                     .flatMap((Function<ResponseBody, ObservableSource<RssItem>>) responseBody -> events(responseBody.source()))
-                    .subscribe(new Observer<RssItem>() {
+                    .subscribe(new Observer<>() {
                         int totalUpdatedUnreadItemCount = 0;
                         final int bufferSize = 150;
                         final List<RssItem> buffer = new ArrayList<>(bufferSize); //Buffer of size X
 
                         @Override
                         public void onSubscribe(@NonNull Disposable d) {
-                            Log.v(TAG, "onSubscribe() called with Disposable: d = [" + d + "]");
+                            Log.v(TAG, "onSubscribe() called");
                         }
 
                         @Override
                         public void onNext(@NonNull RssItem rssItem) {
                             long rssLastModified = rssItem.getLastModified().getTime();
                             // If updated item is unread and last modification was different from last sync time
-                            if(!rssItem.getRead() && rssLastModified != lastModified) {
+                            if (!rssItem.getRead() && rssLastModified != lastModified) {
                                 totalUpdatedUnreadItemCount++;
                             }
 
@@ -166,65 +214,6 @@ public class RssItemObservable implements Publisher<Integer> {
                         }
                     });
         }
-    }
-
-    private static long getMaxIdFromItems(List<RssItem> buffer) {
-        long max = 0;
-        for(RssItem item : buffer) {
-            if(item.getId() > max) {
-                max = item.getId();
-            }
-        }
-        return max;
-    }
-
-    public static boolean performDatabaseBatchInsert(DatabaseConnectionOrm dbConn, List<RssItem> buffer) {
-        Log.v(TAG, "performDatabaseBatchInsert() called with: dbConn = [" + dbConn + "], buffer = [" + buffer + "]");
-        dbConn.insertNewItems(buffer);
-        buffer.clear();
-        return true;
-    }
-
-    public static Observable<RssItem> events(final BufferedSource source) {
-        return Observable.create(e -> {
-            try {
-                InputStreamReader isr = new InputStreamReader(source.inputStream());
-                BufferedReader br = new BufferedReader(isr);
-                JsonReader reader = new JsonReader(br);
-
-                try {
-                    reader.beginObject();
-
-                    String currentName;
-                    while(reader.hasNext() && (currentName = reader.nextName()) != null) {
-                        if(currentName.equals("items")) {
-                            break;
-                        } else {
-                            reader.skipValue();
-                        }
-                    }
-
-                    reader.beginArray();
-                    while (reader.hasNext()) {
-                        JsonObject jsonObj = getJsonObjectFromReader(reader);
-                        RssItem item = InsertRssItemIntoDatabase.parseItem(Objects.requireNonNull(jsonObj));
-                        e.onNext(item);
-                    }
-                    reader.endArray();
-                } finally {
-                    reader.close();
-                    br.close();
-                    isr.close();
-                }
-            } catch (IOException err) {
-                err.printStackTrace();
-                e.onError(err);
-            } catch(NullPointerException npe) {
-                npe.printStackTrace();
-                e.onError(npe);
-            }
-            e.onComplete();
-        });
     }
 
 

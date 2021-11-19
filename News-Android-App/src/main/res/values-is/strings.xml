@@ -3,7 +3,6 @@
 
     <string name="auto_sync_string">Sjálfvirk samstilling</string>
     <string name="title_activity_sync_interval_selector">Bil milli samstillinga</string>
-    <string name="title_activity_news_detail">NewsDetailActivity</string>
     <string name="empty_view_content">Engin atriði hér</string>
     <string name="toast_GettingMoreItems">Byrjaði að sækja fleiri atriði... Bíddu aðeins.</string>
     <string name="no_wifi_available">Ekkert WiFi-net tengt</string>
@@ -214,12 +213,6 @@
     <string name="content_desc_delete">eyða</string>
     <string name="content_desc_download">sækja</string>
 
-
-    <!-- Settings for Notifications -->
-    <string name="pref_header_notifications">Tilkynningar</string>
-    <string name="pref_title_notification_new_articles_available">Birta tilkynningu þegar nýjar greinar eru tiltækar</string>
-
-
     <!-- Login Dialog -->
     <string name="login_dialog_title_error">Villa</string>
     <string name="login_dialog_text_news_app_not_installed_on_server" formatted="true">Það lítur út fyrir að fréttaforritið sé ekki sett upp eða virkjað á þjóninum þínum. Farðu eftir leiðbeinungunum hér til að setja fréttaforritið upp fyrst á þjóninum þínum: %1$s</string>
@@ -228,8 +221,6 @@
     <string name="login_dialog_text_not_compatible">Útgáfa þessa forrits er ekki samhæfð við Nextcloud fréttaforritið þitt. Endilega uppfærðu fréttaforritið og forritsumhverfi þess.</string>
     <string name="login_dialog_title_security_warning">Öryggisaðvörun</string>
     <string name="login_dialog_text_security_warning">Þú ert ekki að nota HTTPS, sem sterklega er mælt með að gera. Utanaðkomandi aðili gæti komist inn í samskiptin og öðlast þannig aðgang að viðkvæmum gögnum (t.d. lykilorðinu þínu).</string>
-
-
     <!-- Data & Sync -->
     <string name="pref_header_data_sync">Gögn &amp; samstilling</string>
     <string name="pref_title_clearCache">Hreinsa skyndiminni</string>

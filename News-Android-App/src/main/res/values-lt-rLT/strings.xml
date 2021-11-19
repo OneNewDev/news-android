@@ -3,7 +3,6 @@
 
     <string name="auto_sync_string">Auto sinchronizavimas</string>
     <string name="title_activity_sync_interval_selector">Sinchronizavimo intervalas</string>
-    <string name="title_activity_news_detail">NaujienosInformacijaVeikla</string>
     <string name="empty_view_content">Nėra elementų</string>
     <string name="toast_GettingMoreItems">Elementai pradėti siųsti... Prašome palaukti.</string>
     <string name="no_wifi_available">Nėra WiFi ryšio</string>
@@ -203,12 +202,6 @@
     <string name="content_desc_show_password">rodyti slaptažodį</string>
     <string name="content_desc_delete">ištrinti</string>
     <string name="content_desc_download">atsisiųsti</string>
-
-
-    <!-- Settings for Notifications -->
-    <string name="pref_header_notifications">Pranešimai</string>
-    <string name="pref_title_notification_new_articles_available">Rodyti pranešimus kai galimi nauji straipsniai</string>
-
 
     <!-- Login Dialog -->
     <string name="login_dialog_title_error">Klaida</string>

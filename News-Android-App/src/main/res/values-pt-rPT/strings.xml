@@ -3,7 +3,6 @@
 
     <string name="auto_sync_string">Sincronização Automática</string>
     <string name="title_activity_sync_interval_selector">Intervalo de Sincronização</string>
-    <string name="title_activity_news_detail">NotíciasDetalheAtividade</string>
     <string name="empty_view_content">Sem itens aqui</string>
     <string name="toast_GettingMoreItems">Foi iniciada a transferência de mais itens... Por favor, aguarde.</string>
     <string name="no_wifi_available">Sem ligação wi-fi</string>
@@ -204,12 +203,6 @@
     <string name="content_desc_show_password">Mostrar senha</string>
     <string name="content_desc_delete">eliminar</string>
     <string name="content_desc_download">transferir</string>
-
-
-    <!-- Settings for Notifications -->
-    <string name="pref_header_notifications">Notificações</string>
-    <string name="pref_title_notification_new_articles_available">Mostrar notificações quando existirem novos artigos</string>
-
 
     <!-- Login Dialog -->
     <string name="login_dialog_title_error">Erro</string>

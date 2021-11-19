@@ -2,7 +2,6 @@
 <resources>
 
     <string name="auto_sync_string">Sync otomatis</string>
-    <string name="title_activity_news_detail">AktivitasRinciBerita</string>
     <string name="empty_view_content">Tak ada item disini</string>
     <string name="no_wifi_available">Tidak ada WiFi yang terhubung</string>
     <string name="current_version">Anda menggunakan Versi %s</string>
@@ -136,12 +135,6 @@
     <string name="content_desc_show_password">tampilkan kata sandi</string>
     <string name="content_desc_delete">hapus</string>
     <string name="content_desc_download">unduh</string>
-
-
-    <!-- Settings for Notifications -->
-    <string name="pref_header_notifications">Pemberitahuan</string>
-    <string name="pref_title_notification_new_articles_available">Tampilkan pemberitahuan ketika artikel baru tersedia</string>
-
 
     <!-- Login Dialog -->
     <string name="login_dialog_title_error">Kesalahan</string>

@@ -3,8 +3,8 @@
 
     <string name="auto_sync_string">自动同步</string>
     <string name="title_activity_sync_interval_selector">同步间隔</string>
-    <string name="title_activity_news_detail">新闻详细活动</string>
     <string name="empty_view_content">无内容</string>
+    <string name="empty_view_content_action">下拉刷新</string>
     <string name="toast_GettingMoreItems">正在下载多个文件...请稍候。</string>
     <string name="no_wifi_available">没有连接到 WiFi</string>
     <string name="do_you_want_to_download_without_wifi">确定要通过非 Wi-Fi 连接下载图片？</string>
@@ -81,6 +81,11 @@
     <string name="confirm_feed_remove">您真的要删除此订阅源吗？本操作不可恢复！</string>
     <string name="feed_move_list_description">选择文件夹以移动订阅源</string>
     <string name="move_feed_root_folder">根目录</string>
+
+    <!-- Strings related to NewsReaderListDialogFragment (Notification Settings) -->
+    <string name="notification_feed_unique">接收此订阅源的单独通知</string>
+    <string name="notification_feed_default">所有默认设置的订阅源的通知将整合成一个</string>
+    <string name="notification_feed_none">完全没有通知</string>
 
     <!-- Strings related to login -->
     <string name="login_manual">手动登录</string>
@@ -176,7 +181,7 @@
 
     <string name="pref_display_news_detail_actionbar_icons_title">动作图标（详情页）</string>
 
-    <string name="pref_display_apptheme_auto">浅色/深色主题 （基于白天时间）</string>
+    <string name="pref_display_apptheme_auto">系统默认</string>
     <string name="pref_display_apptheme_light">浅色</string>
     <string name="pref_display_apptheme_dark">深色</string>
 
@@ -217,12 +222,6 @@
     <string name="content_desc_delete">删除</string>
     <string name="content_desc_download">下载</string>
 
-
-    <!-- Settings for Notifications -->
-    <string name="pref_header_notifications">通知</string>
-    <string name="pref_title_notification_new_articles_available">有新消息时显示通知</string>
-
-
     <!-- Login Dialog -->
     <string name="login_dialog_title_error">错误</string>
     <string name="login_dialog_text_news_app_not_installed_on_server" formatted="true">您的服务器上似乎未安装或激活您的新闻应用。 请按照此处给出的说明在您的服务器上首先设置新闻应用：%1$s</string>
@@ -231,6 +230,7 @@
     <string name="login_dialog_text_not_compatible">此 App 版本与您的 Nextcloud 新闻应用版本不兼容。请更新新闻 app 和 appframework。</string>
     <string name="login_dialog_title_security_warning">安全警告</string>
     <string name="login_dialog_text_security_warning">您没有使用 HTTPS，该方法我们强烈推荐使用。攻击者可能会截获您的流量并获得某些敏感信息（例如您的密码）</string>
+    <string name="login_dialog_select_account_unknown_error_toast">出错了。请再试一次。</string>
 
 
     <!-- Data & Sync -->
@@ -261,5 +261,6 @@
     <string name="opml_export">OPML 导出</string>
     <string name="parsing_opml">解析 OPML</string>
     <string name="please_wait">请等待 ...</string>
+    <string name="interval_sync_title">间隔同步</string>
 
     </resources>

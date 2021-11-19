@@ -3,7 +3,6 @@
 
     <string name="auto_sync_string">Автоматична синхронізація</string>
     <string name="title_activity_sync_interval_selector">Інтервал синхронізації</string>
-    <string name="title_activity_news_detail">Останні Новини</string>
     <string name="empty_view_content">Нічого нема</string>
     <string name="toast_GettingMoreItems">Звантаження більшої кількості елементів... Будь ласка, зачекайте.</string>
     <string name="no_wifi_available">Відсутнє WiFi з\'єднання</string>
@@ -125,12 +124,6 @@
     <string name="content_desc_add_to_favorites">додати до улюбленого</string>
     <string name="content_desc_delete">вилучити</string>
     <string name="content_desc_download">звантажити</string>
-
-
-    <!-- Settings for Notifications -->
-    <string name="pref_header_notifications">Сповіщення</string>
-    <string name="pref_title_notification_new_articles_available">Показати сповіщення коли доступна нова стаття</string>
-
 
     <!-- Login Dialog -->
     <string name="login_dialog_title_error">Помилка</string>

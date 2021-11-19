@@ -3,7 +3,6 @@
 
     <string name="auto_sync_string">Auto sync</string>
     <string name="title_activity_sync_interval_selector">Sync Interval</string>
-    <string name="title_activity_news_detail">NewsDetailActivity</string>
     <string name="empty_view_content">No items here</string>
     <string name="toast_GettingMoreItems">Download of more items started… Please wait.</string>
     <string name="no_wifi_available">No WiFi connection</string>
@@ -84,6 +83,8 @@
     <string name="feed_move_list_description">Select folder to move feed in</string>
     <string name="move_feed_root_folder">Root folder</string>
 
+    <!-- Strings related to NewsReaderListDialogFragment (Notification Settings) -->
+    <string name="notification_feed_unique">Receive individual notification for this feed</string>
     <!-- Strings related to login -->
     <string name="login_manual">Manual login</string>
     <string name="login_sso">Login using Nextcloud Files App</string>
@@ -217,12 +218,6 @@
     <string name="content_desc_delete">delete</string>
     <string name="content_desc_download">download</string>
 
-
-    <!-- Settings for Notifications -->
-    <string name="pref_header_notifications">Notifications</string>
-    <string name="pref_title_notification_new_articles_available">Show notification when new articles are available</string>
-
-
     <!-- Login Dialog -->
     <string name="login_dialog_title_error">Error</string>
     <string name="login_dialog_text_news_app_not_installed_on_server" formatted="true">It looks like your news app is not installed or activated on your server. Please follow the instructions given here to setup the news app on your server first: %1$s</string>
@@ -231,8 +226,6 @@
     <string name="login_dialog_text_not_compatible">This App version is not compatible with your Nextcloud News App. Please upgrade the news app and the appframework.</string>
     <string name="login_dialog_title_security_warning">Security Warning</string>
     <string name="login_dialog_text_security_warning">You\'re not using HTTPS, which is strongly encouraged. An attacker could intercept your traffic and gain access to some sensitive data (e.g. your password).</string>
-
-
     <!-- Data & Sync -->
     <string name="pref_header_data_sync">Data &amp; sync</string>
     <string name="pref_title_clearCache">Clear cache</string>

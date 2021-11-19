@@ -3,7 +3,6 @@
 
     <string name="auto_sync_string">Automatisk synkronisering </string>
     <string name="title_activity_sync_interval_selector">Synkroniseringsinterval</string>
-    <string name="title_activity_news_detail">DetaljeretNyhedsAktivitet</string>
     <string name="empty_view_content">Her er ingen artikler</string>
     <string name="toast_GettingMoreItems">Hentning af flere elementer påbegyndt... Vent venligst.</string>
     <string name="no_wifi_available">Ingen WiFi-forbindelse</string>
@@ -213,12 +212,6 @@
     <string name="content_desc_delete">slet</string>
     <string name="content_desc_download">hent</string>
 
-
-    <!-- Settings for Notifications -->
-    <string name="pref_header_notifications">Notifikationer</string>
-    <string name="pref_title_notification_new_articles_available">Vis notifikation når der er nye artikler tilgængelige</string>
-
-
     <!-- Login Dialog -->
     <string name="login_dialog_title_error">Fejl</string>
     <string name="login_dialog_text_news_app_not_installed_on_server" formatted="true">Det ser ud til at news app-en ikke er installeret eller aktiveret på din server. Følg venligst instruktionerne her for at installere news app-en på din server først: %1$s</string>
@@ -227,8 +220,6 @@
     <string name="login_dialog_text_not_compatible">Denne App version er ikke kompatibel med din Nextcloud News App. Opgrader venligst news app-en og dens framework</string>
     <string name="login_dialog_title_security_warning">Sikkerhedsadvarsel</string>
     <string name="login_dialog_text_security_warning">Du benytter ikke HTTPS, hvilket er stærkt anbefalet. En hacker kunne opsnappe din forbindelse og få adgang til følsomme data (f.eks. din adgangskode).</string>
-
-
     <!-- Data & Sync -->
     <string name="pref_header_data_sync">Data &amp; sync</string>
     <string name="pref_title_clearCache">Ryd mellemlageret</string>

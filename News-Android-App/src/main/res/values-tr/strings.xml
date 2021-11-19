@@ -3,10 +3,10 @@
 
     <string name="auto_sync_string">Otomatik eşitleme</string>
     <string name="title_activity_sync_interval_selector">Eşitleme sıklığı</string>
-    <string name="title_activity_news_detail">HaberAyrıntıİşlem</string>
     <string name="empty_view_content">Burada herhangi bir öge yok</string>
+    <string name="empty_view_content_action">Yenilemek için aşağı çekin</string>
     <string name="toast_GettingMoreItems">Lütfen bekleyin, diğer ögelerin indirilmesine başlandı …</string>
-    <string name="no_wifi_available">Wi-Fi bağlantısı yapılmamış</string>
+    <string name="no_wifi_available">Wi-Fi bağlantısı kurulmamış</string>
     <string name="do_you_want_to_download_without_wifi">Görselleri bir kablosuz ağ bağlantısı olmadan indirmek ister misiniz</string>
     <string name="current_version">%s sürümünü kullanıyorsunuz</string>
     <string name="widget_header">Nextcloud News</string>
@@ -84,6 +84,11 @@
     <string name="confirm_feed_remove">Bu akışı gerçekten silmek istiyor musunuz? Bu işlem geri alınamaz!</string>
     <string name="feed_move_list_description">Akışın içine taşınacağı klasörü seçin</string>
     <string name="move_feed_root_folder">Kök klasör</string>
+
+    <!-- Strings related to NewsReaderListDialogFragment (Notification Settings) -->
+    <string name="notification_feed_unique">Bu akışın benzersiz bildirimlerini al</string>
+    <string name="notification_feed_default">Varsayılan ayarlardaki tüm bildirimler bir bildirim olarak görüntülenecek</string>
+    <string name="notification_feed_none">Henüz bir bildirim yok</string>
 
     <!-- Strings related to login -->
     <string name="login_manual">El ile oturum açma</string>
@@ -181,7 +186,7 @@
 
     <string name="pref_display_news_detail_actionbar_icons_title">İşlem simgeleri (ayrıntı görünümü)</string>
 
-    <string name="pref_display_apptheme_auto">Açık/koyu (gün ışığına göre)</string>
+    <string name="pref_display_apptheme_auto">Sistem varsayılanı</string>
     <string name="pref_display_apptheme_light">Açık</string>
     <string name="pref_display_apptheme_dark">Koyu</string>
 
@@ -222,12 +227,6 @@
     <string name="content_desc_delete">sil</string>
     <string name="content_desc_download">indir</string>
 
-
-    <!-- Settings for Notifications -->
-    <string name="pref_header_notifications">Bildirimler</string>
-    <string name="pref_title_notification_new_articles_available">Yeni makaleler yayınlandığında bildirim görüntülensin</string>
-
-
     <!-- Login Dialog -->
     <string name="login_dialog_title_error">Hata</string>
     <string name="login_dialog_text_news_app_not_installed_on_server" formatted="true">Haberler uygulamanız sunucu üzerinde kurulmamış ya da etkinleştirilmemiş gibi görünüyor. Lütfen önce sunucu üzerine haberler uygulamasını kurmak için yönergeleri izleyin: %1$s</string>
@@ -236,6 +235,7 @@
     <string name="login_dialog_text_not_compatible">Bu uygulama sürümü kullandığınız Nextcloud Haberler uygulaması ile uyumlu değil. Lütfen Haberler uygulaması ve uygulama çatısını güncelleyin.</string>
     <string name="login_dialog_title_security_warning">Güvenlik uyarısı</string>
     <string name="login_dialog_text_security_warning">Kullanılması önemle önerilen HTTPS kullanmıyorsunuz. Bir saldırgan trafiğinizi izleyip önemli verilere erişebilir (parolanız gibi).</string>
+    <string name="login_dialog_select_account_unknown_error_toast">Bir şeyler ters gitti. Lütfen yeniden deneyin.</string>
 
 
     <!-- Data & Sync -->
@@ -266,5 +266,6 @@
     <string name="opml_export">OPML dışa aktar</string>
     <string name="parsing_opml">OPML işleniyor</string>
     <string name="please_wait">Lütfen bekleyin…</string>
+    <string name="interval_sync_title">Eşitleme aralığı</string>
 
     </resources>

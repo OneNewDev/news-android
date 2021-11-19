@@ -1,5 +1,10 @@
 package de.luhmer.owncloudnewsreader.database;
 
+import static de.luhmer.owncloudnewsreader.ListView.SubscriptionExpandableListAdapter.SPECIAL_FOLDERS;
+import static de.luhmer.owncloudnewsreader.ListView.SubscriptionExpandableListAdapter.SPECIAL_FOLDERS.ALL_ITEMS;
+import static de.luhmer.owncloudnewsreader.ListView.SubscriptionExpandableListAdapter.SPECIAL_FOLDERS.ALL_STARRED_ITEMS;
+import static de.luhmer.owncloudnewsreader.ListView.SubscriptionExpandableListAdapter.SPECIAL_FOLDERS.ALL_UNREAD_ITEMS;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.os.AsyncTask;
@@ -10,8 +15,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -34,11 +41,6 @@ import de.luhmer.owncloudnewsreader.helper.StopWatch;
 import de.luhmer.owncloudnewsreader.model.PodcastFeedItem;
 import de.luhmer.owncloudnewsreader.model.PodcastItem;
 import de.luhmer.owncloudnewsreader.services.PodcastDownloadService;
-
-import static de.luhmer.owncloudnewsreader.ListView.SubscriptionExpandableListAdapter.SPECIAL_FOLDERS;
-import static de.luhmer.owncloudnewsreader.ListView.SubscriptionExpandableListAdapter.SPECIAL_FOLDERS.ALL_ITEMS;
-import static de.luhmer.owncloudnewsreader.ListView.SubscriptionExpandableListAdapter.SPECIAL_FOLDERS.ALL_STARRED_ITEMS;
-import static de.luhmer.owncloudnewsreader.ListView.SubscriptionExpandableListAdapter.SPECIAL_FOLDERS.ALL_UNREAD_ITEMS;
 
 public class DatabaseConnectionOrm {
 
@@ -81,47 +83,23 @@ public class DatabaseConnectionOrm {
         daoSession = DatabaseHelperOrm.getDaoSession(context, databasePath);
     }
 
-    /*
-    public void insertNewFolder (Folder folder) {
-        daoSession.getFolderDao().insertOrReplace(folder);
-    }*/
-
     public void deleteOldAndInsertNewFolders (final Folder... folder) {
-        daoSession.runInTx(new Runnable() {
-            @Override
-            public void run() {
-                daoSession.getFolderDao().deleteAll();
-                daoSession.getFolderDao().insertInTx(folder);
-            }
+        daoSession.runInTx(() -> {
+            daoSession.getFolderDao().deleteAll();
+            daoSession.getFolderDao().insertInTx(folder);
         });
     }
 
     public void deleteOldAndInsertNewFolders (final Iterable<Folder> folder) {
-        daoSession.runInTx(new Runnable() {
-            @Override
-            public void run() {
-                daoSession.getFolderDao().deleteAll();
-                daoSession.getFolderDao().insertInTx(folder);
-            }
+        daoSession.runInTx(() -> {
+            daoSession.getFolderDao().deleteAll();
+            daoSession.getFolderDao().insertInTx(folder);
         });
-
     }
-
-    /*
-    public void insertNewFeed (Feed... feeds) {
-        daoSession.getFeedDao().insertOrReplaceInTx(feeds);
-    }
-*/
 
     public void insertNewFeed (Iterable<Feed> feeds) {
         daoSession.getFeedDao().insertOrReplaceInTx(feeds);
     }
-
-    /*
-    public void insertNewItems(RssItem... items) {
-        daoSession.getRssItemDao().insertOrReplaceInTx(items);
-    }
-*/
 
     public void insertNewItems(Iterable<RssItem> items) {
         daoSession.getRssItemDao().insertOrReplaceInTx(items);
@@ -359,14 +337,27 @@ public class DatabaseConnectionOrm {
         return daoSession.getRssItemDao().queryBuilder().where(RssItemDao.Properties.Read_temp.eq(false)).limit(100).orderDesc(RssItemDao.Properties.PubDate).listLazy();
     }
 
-    public LazyList<RssItem> getAllUnreadRssItemsForNotification(SORT_DIRECTION sortDirection) {
-        QueryBuilder<RssItem> qb = daoSession.getRssItemDao().queryBuilder().where(RssItemDao.Properties.Read_temp.eq(false)).limit(6);
+    public Set<String> getNotificationGroups() {
+        List<Feed> feeds = daoSession.getFeedDao().loadAll();
+        String[] notificationChannelsGroups = feeds.stream().map(Feed::getNotificationChannel).toArray(String[]::new);
+        return new HashSet<>(Arrays.asList(notificationChannelsGroups));
+    }
+
+    public QueryBuilder<RssItem> getAllUnreadRssItemsForNotificationGroup(SORT_DIRECTION sortDirection, String notificationGroup) {
+        QueryBuilder<RssItem> qb = daoSession.getRssItemDao().queryBuilder()
+                .where(RssItemDao.Properties.Read_temp.eq(false));
+
+        // filter for notification group
+        qb.join(RssItemDao.Properties.FeedId, Feed.class, FeedDao.Properties.Id)
+                .where(FeedDao.Properties.NotificationChannel.eq(notificationGroup));
+
         if (sortDirection == SORT_DIRECTION.asc) {
             qb = qb.orderAsc(RssItemDao.Properties.PubDate);
         } else {
             qb = qb.orderDesc(RssItemDao.Properties.PubDate);
         }
-        return qb.listLazy();
+
+        return qb;
     }
 
     public void markAllItemsAsRead() {
@@ -428,24 +419,15 @@ public class DatabaseConnectionOrm {
 
             return null;
         }
-    };
-
-
-    public boolean doesRssItemAlreadyExsists (long feedId) {
-        List<RssItem> feeds = daoSession.getRssItemDao().queryBuilder().where(RssItemDao.Properties.Id.eq(feedId)).list();
-        return feeds.size() > 0;
     }
 
     public void removeFeedById(final long feedId) {
-        daoSession.runInTx(new Runnable() {
-            @Override
-            public void run() {
-                daoSession.getFeedDao().deleteByKey(feedId);
+        daoSession.runInTx(() -> {
+            daoSession.getFeedDao().deleteByKey(feedId);
 
-                List<RssItem> list = daoSession.getRssItemDao().queryBuilder().where(RssItemDao.Properties.FeedId.eq(feedId)).list();
-                for (RssItem rssItem : list) {
-                    daoSession.getRssItemDao().delete(rssItem);
-                }
+            List<RssItem> list = daoSession.getRssItemDao().queryBuilder().where(RssItemDao.Properties.FeedId.eq(feedId)).list();
+            for (RssItem rssItem : list) {
+                daoSession.getRssItemDao().delete(rssItem);
             }
         });
     }

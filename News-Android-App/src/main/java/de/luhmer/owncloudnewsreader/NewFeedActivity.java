@@ -1,9 +1,10 @@
 package de.luhmer.owncloudnewsreader;
 
+import static java.util.Objects.requireNonNull;
+
 import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -26,6 +27,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -64,8 +67,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static java.util.Objects.requireNonNull;
-
 public class NewFeedActivity extends AppCompatActivity {
 
     private static final String TAG = NewFeedActivity.class.getCanonicalName();
@@ -102,12 +103,16 @@ public class NewFeedActivity extends AppCompatActivity {
 
 
         folders = dbConn.getListOfFolders();
-        folders.add(0, new Folder(0, getString(R.string.move_feed_root_folder)));
+        Folder rootFolder = new Folder(0, getString(R.string.move_feed_root_folder));
 
-        String[] folderNames = new String[folders.size()];
-        for(int i = 0; i < folders.size(); i++) {
-            folderNames[i] = folders.get(i).getLabel();
+        if (folders.isEmpty()) {
+            // list is of type EmptyList and is not modifiable - therefore create a new modifiable list
+            folders = new ArrayList<>();
         }
+
+        folders.add(0, rootFolder);
+
+        String[] folderNames = folders.stream().map(Folder::getLabel).toArray(String[]::new);
 
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, folderNames);
         binding.spFolder.setAdapter(spinnerArrayAdapter);
@@ -117,7 +122,7 @@ public class NewFeedActivity extends AppCompatActivity {
 
         if (action != null) {
             String url = "";
-            if(action.equals(Intent.ACTION_VIEW)) {
+            if (action.equals(Intent.ACTION_VIEW)) {
                 url = intent.getDataString();
             } else if(action.equals(Intent.ACTION_SEND)) {
                 url = intent.getStringExtra(Intent.EXTRA_TEXT);
@@ -141,7 +146,6 @@ public class NewFeedActivity extends AppCompatActivity {
         InputMethodManager imm = (InputMethodManager)getSystemService(
                 Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(binding.etFeedUrl.getWindowToken(), 0);
-
 
         attemptAddNewFeed();
     }
@@ -245,7 +249,7 @@ public class NewFeedActivity extends AppCompatActivity {
 
         private final String mUrlToFile;
         private HashMap<String, String> extractedUrls;
-        private ProgressDialog pd;
+        private NewsReaderOPMLImportDialogFragment pd;
         private final Context mContext;
 
         ImportOpmlSubscriptionsTask(String urlToFile, Context context) {
@@ -255,21 +259,30 @@ public class NewFeedActivity extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
-            pd = new ProgressDialog(mContext);
-            pd.setTitle(getString(R.string.parsing_opml));
-            pd.setMessage(getString(R.string.please_wait));
-            pd.setCancelable(false);
-            pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-            pd.show();
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            Fragment prev = getSupportFragmentManager().findFragmentByTag("news_reader_opml_import_dialog");
+            if (prev != null) {
+                ft.remove(prev);
+            }
+            ft.addToBackStack(null);
+            pd = NewsReaderOPMLImportDialogFragment.newInstance(false);
+            pd.show(ft, "news_reader_opml_import_dialog");
 
             super.onPreExecute();
         }
 
         @Override
         protected Boolean doInBackground(Void... params) {
+            try {
+                // wait for NewsReaderOPMLImportDialogFragment to be visible
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
             String opmlContent;
             try {
-                if(mUrlToFile.startsWith("http")) {//http[s]
+                if (mUrlToFile.startsWith("http")) {//http[s]
                     opmlContent = URLConnectionReader.getText(mUrlToFile);
                 } else {
                     opmlContent = getStringFromFile(mUrlToFile);
@@ -283,7 +296,7 @@ public class NewFeedActivity extends AppCompatActivity {
                 extractedUrls = OpmlXmlParser.ReadFeed(parser);
 
                 List<String> result = new ArrayList<>();
-                publishProgress(result);
+                publishProgress(new ArrayList<>(result));
 
                 final HashMap<String, Long> existingFolders = new HashMap<>();
 
@@ -314,17 +327,18 @@ public class NewFeedActivity extends AppCompatActivity {
                     if (response.isSuccessful()) {
                         Feed feed = response.body().get(0);
                         result.add("✓ " + feed.getLink());
-                        Log.e(TAG, "Successfully imported feed: " + feedUrl + " - Feed-ID: " + feed.getId());
+                        Log.d(TAG, "Successfully imported feed: " + feedUrl + " - Feed-ID: " + feed.getId());
                     } else if (response.code() == 409) {
                         // already exists
-                        result.add("✓ " + " - " + feedUrl);
+                        result.add("⤏ " + feedUrl);
                     } else {
                         result.add("✗ " + response.code() + " - " + feedUrl);
                         Log.e(TAG, "Failed to import feed: " + feedUrl + " - Status-Code: " + response.code());
                         Log.e(TAG, response.errorBody().string());
                     }
 
-                    publishProgress(result);
+                    // make list immutable and report it as progress
+                    publishProgress(new ArrayList<>(result));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -335,36 +349,33 @@ public class NewFeedActivity extends AppCompatActivity {
 
         @Override
         protected void onProgressUpdate(List<String>... values) {
-            StringBuilder text = new StringBuilder("This might take a few minutes.. please wait:\n");
+            // StringBuilder text = new StringBuilder("This might take a few minutes.. please wait..\n");
+            StringBuilder text = new StringBuilder();
 
             List<String> log = values[0];
             for (String line : log) {
                 text.append("\n").append(line);
             }
 
-            pd.setMax(extractedUrls.size());
-            pd.setProgress(log.size());
-            pd.setMessage(text.toString());
+            pd.updateProgress(log.size(), extractedUrls.size());
+            pd.setMessage(text.toString().trim());
 
             super.onProgressUpdate(values);
         }
 
         @Override
         protected void onPostExecute(Boolean result) {
-            if (pd != null) {
-                pd.dismiss();
-            }
+            pd.setVisibilityOkButton(true);
 
             if(!result) {
                 Toast.makeText(mContext, "Failed to parse OPML file", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(mContext, "Imported done!", Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext, "Import done!", Toast.LENGTH_LONG).show();
             }
 
             super.onPostExecute(result);
         }
     }
-
 
 
     /**

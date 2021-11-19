@@ -3,7 +3,6 @@
 
     <string name="auto_sync_string">Ауто-освежавање</string>
     <string name="title_activity_sync_interval_selector">Интервал синхронизације</string>
-    <string name="title_activity_news_detail">Детаљне активности Вести</string>
     <string name="empty_view_content">Нема ставки</string>
     <string name="toast_GettingMoreItems">Започето скидање још ставки… Сачекајте.</string>
     <string name="no_wifi_available">Нема бежичне везе</string>
@@ -224,12 +223,6 @@
     <string name="content_desc_delete">обриши</string>
     <string name="content_desc_download">преузми</string>
 
-
-    <!-- Settings for Notifications -->
-    <string name="pref_header_notifications">Обавештења</string>
-    <string name="pref_title_notification_new_articles_available">Прикажи обавештења о новим чланцима</string>
-
-
     <!-- Login Dialog -->
     <string name="login_dialog_title_error">Грешка</string>
     <string name="login_dialog_text_news_app_not_installed_on_server" formatted="true">Изгледа да апликација Вести није инсталирана или активирана на серверу. Пратите упутства одавде да прво подесите апликацију Вести на серверу: %1$s</string>
@@ -238,8 +231,6 @@
     <string name="login_dialog_text_not_compatible">Верзија ове апликације није усклађена са апликацијом Некстклауд Вести. Ажурирајте апликацију и њен радни оквир.</string>
     <string name="login_dialog_title_security_warning">Сигурносно упозорење</string>
     <string name="login_dialog_text_security_warning">Не користите препоручени ХТТПС протокол. Нападач може пресрести ваш саобраћај и имати приступ осетљивим подацима (нпр. вашој лозинки).</string>
-
-
     <!-- Data & Sync -->
     <string name="pref_header_data_sync">Подаци и синхронизација</string>
     <string name="pref_title_clearCache">Очисти кеш</string>

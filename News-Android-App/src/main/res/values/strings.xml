@@ -7,7 +7,6 @@
     <string name="account_type" translatable="false">de.luhmer.owncloudnewsreader</string>
     <string name="authority" translatable="false">de.luhmer.owncloudnewsreader</string>
     <string name="title_activity_sync_interval_selector">Sync Interval</string>
-    <string name="title_activity_news_detail">NewsDetailActivity</string>
     <string name="empty_view_content">No items here</string>
     <string name="empty_view_content_action">Pull down to refresh</string>
     <string name="toast_GettingMoreItems">Download of more items started… Please wait.</string>
@@ -94,6 +93,11 @@
     <string name="confirm_feed_remove">Do you really want to remove this Feed? This cannot be undone!</string>
     <string name="feed_move_list_description">Select folder to move feed in</string>
     <string name="move_feed_root_folder">Root folder</string>
+
+    <!-- Strings related to NewsReaderListDialogFragment (Notification Settings) -->
+    <string name="notification_feed_unique">Receive unique notifications for this feed</string>
+    <string name="notification_feed_default">All feeds with the default settings will appear in one notification</string>
+    <string name="notification_feed_none">No notifications at all</string>
 
     <!-- Strings related to login -->
     <string name="login_manual">Manual login</string>
@@ -348,7 +352,7 @@
     <string name="content_desc_show_password">show password</string>
     <string name="content_desc_delete">delete</string>
     <string name="content_desc_download">download</string>
-    cb_showNotificationNewArticles
+
     <!-- Login Dialog -->
     <string name="login_dialog_title_error">Error</string>
     <string name="login_dialog_text_news_app_not_installed_on_server" formatted="true">It looks like your news app is not installed or activated on your server. Please follow the instructions given here to setup the news app on your server first: %1$s</string>
@@ -357,6 +361,7 @@
     <string name="login_dialog_text_not_compatible">This App version is not compatible with your Nextcloud News App. Please upgrade the news app and the appframework.</string>
     <string name="login_dialog_title_security_warning">Security Warning</string>
     <string name="login_dialog_text_security_warning">You\'re not using HTTPS, which is strongly encouraged. An attacker could intercept your traffic and gain access to some sensitive data (e.g. your password).</string>
+    <string name="login_dialog_select_account_unknown_error_toast">Something went wrong. Please try again.</string>
 
 
     <!-- Data & Sync -->

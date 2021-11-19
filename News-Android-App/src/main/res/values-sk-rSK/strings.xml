@@ -3,8 +3,8 @@
 
     <string name="auto_sync_string">Autosynchronizácia</string>
     <string name="title_activity_sync_interval_selector">Interval synchronizácie</string>
-    <string name="title_activity_news_detail">Podrobná aktivita noviniek</string>
     <string name="empty_view_content">Žiadne položky</string>
+    <string name="empty_view_content_action">Pre obnovenie potiahnite nadol</string>
     <string name="toast_GettingMoreItems">Sťahovanie ďalších položiek začalo ... Čakajte prosím.</string>
     <string name="no_wifi_available">Nie je pripojenie k WiFi</string>
     <string name="do_you_want_to_download_without_wifi">Chcete obrázky stiahnuť bez pripojenia Wi-Fi</string>
@@ -73,6 +73,7 @@
     <string name="action_link_share">Sprístupniť odkaz</string>
     <string name="action_link_open">Otvoriť odkaz v prehliadači</string>
     <string name="action_link_copy">Kopírovať odkaz</string>
+    <string name="toast_img_download_wait">Sťahujem… počkajte prosím</string>
     <string name="toast_img_saved">Obrázok uložený</string>
     <string name="toast_img_notwriteable">Obrázok sa nepodarilo zapísať.</string>
     <string name="toast_copied_to_clipboard">Skopírované do schránky</string>
@@ -89,6 +90,11 @@
     <string name="confirm_feed_remove">Naozaj chcete odstrániť tento informačný kanál? Nie je to možné vrátiť späť!</string>
     <string name="feed_move_list_description">Vyberte priečinok, do ktorého chcete presunúť informačný kanál</string>
     <string name="move_feed_root_folder">Koreňový priečinok</string>
+
+    <!-- Strings related to NewsReaderListDialogFragment (Notification Settings) -->
+    <string name="notification_feed_unique">Dostávajte jedinečné upozornenia na tento informačný kanál</string>
+    <string name="notification_feed_default">Všetky kanály s predvolenými nastaveniami sa zobrazia v jednom upozornení</string>
+    <string name="notification_feed_none">Žiadne oznámenia</string>
 
     <!-- Strings related to login -->
     <string name="login_manual">Ručné prihlásenie</string>
@@ -129,6 +135,9 @@
     <!-- General settings -->
     <string name="pref_header_general">Všeobecné</string>
     <string name="pref_title_general_sort_order">Zoradenie</string>
+
+    <string name="pref_general_sort_order_new_old">Nové → Staré</string>
+    <string name="pref_general_sort_order_old_new">Staré → Nové</string>
 
     <string name="pref_rename_action_swipe_right">Akcia pri potiahnutí prstom doprava</string>
     <string name="pref_rename_action_swipe_left">Akcia pri potiahnutí prstom doľava</string>
@@ -172,6 +181,8 @@
     <string name="pref_report_issue_summary">Vyžaduje (bezplatný) účet GitHub</string>
     <string name="pref_contribute">Prispievať!</string>
     <string name="pref_contribute_summary">Získajte zdrojový kód</string>
+    <string name="pref_privacy">Súkromie</string>
+    <string name="pref_privacy_summary">Nextcloud novinky pre Politiku Zabezpečenia Androidu</string>
     <string name="pref_version">Aplikácia Nextcloud novinky pre Android</string>
 
 
@@ -185,6 +196,7 @@
 
     <string name="pref_display_news_detail_actionbar_icons_title">Ikony akcií (podrobné zobrazenie)</string>
 
+    <string name="pref_display_apptheme_auto">Predvolené systémom</string>
     <string name="pref_display_apptheme_light">Svetlý</string>
     <string name="pref_display_apptheme_dark">Tmavý</string>
 
@@ -195,6 +207,7 @@
     <string name="pref_display_browser_built_in">Vstavaný prehliadač</string>
     <string name="pref_display_browser_external">Externý prehliadač</string>
 
+    <string name="pref_display_feed_list_layout_headline_thumbnails">Náhľady (iba Nadpisy)</string>
     <string name="pref_display_feed_list_layout_thumbnails">Náhľady</string>
     <string name="pref_display_feed_list_layout_simple_text">Jednoduchý text</string>
     <string name="pref_display_feed_list_layout_headlines">Nadpisy</string>
@@ -224,12 +237,6 @@
     <string name="content_desc_delete">vymazať</string>
     <string name="content_desc_download">stiahnuť</string>
 
-
-    <!-- Settings for Notifications -->
-    <string name="pref_header_notifications">Oznámenia</string>
-    <string name="pref_title_notification_new_articles_available">Zobraziť oznámenie, keď sú k dispozícii nové články</string>
-
-
     <!-- Login Dialog -->
     <string name="login_dialog_title_error">Chyba</string>
     <string name="login_dialog_text_news_app_not_installed_on_server" formatted="true">Zdá sa, že vaša aplikácia Novinky nie je nainštalovaná alebo aktivovaná na vašom serveri. Postupujte podľa pokynov, pre nastavenie aplikácie Novinky na servri:: %1$s</string>
@@ -238,6 +245,7 @@
     <string name="login_dialog_text_not_compatible">Táto verzia aplikácie nie je kompatibilná s vašou aplikáciou Nextcloud Novinky na strane sevra. Aktualizujte ju a jej aplikačné prostredie (framework). </string>
     <string name="login_dialog_title_security_warning">Bezpečnostné varovanie</string>
     <string name="login_dialog_text_security_warning">Nepoužívate protokol HTTPS, čo sa dôrazne odporúča. Útočník by mohol zachytiť vašu komunikáciu a získať prístup k niektorým citlivým údajom (napr. k heslu).</string>
+    <string name="login_dialog_select_account_unknown_error_toast">Niečo sa pokazilo. Skúste to prosím znova.</string>
 
 
     <!-- Data & Sync -->
@@ -252,4 +260,22 @@
     <string name="pref_data_sync_image_cache_ask">Spýtať sa keď nieste pripojený k WiFi</string>
 
     <string name="array_sync_interval_min_0">Nikdy</string>
+    <string name="array_sync_interval_min_5">5 minút</string>
+    <string name="array_sync_interval_min_15">15 minút</string>
+    <string name="array_sync_interval_min_30">30 minút</string>
+    <string name="array_sync_interval_min_45">45 minút</string>
+    <string name="array_sync_interval_hour_1">1 hodina</string>
+    <string name="array_sync_interval_hour_2">2 hodiny</string>
+    <string name="array_sync_interval_hour_3">3 hodiny</string>
+    <string name="array_sync_interval_hour_6">6 hodín</string>
+    <string name="array_sync_interval_hour_12">12 hodín</string>
+    <string name="array_sync_interval_hour_24">24 hodín</string>
+    <string name="switch_account">Prepnúť účet</string>
+    
+    <string name="successfully_exported">Úspešne exportované do:</string>
+    <string name="opml_export">OPML Export</string>
+    <string name="parsing_opml">Parsovanie OPML</string>
+    <string name="please_wait">Čakajte prosím...</string>
+    <string name="interval_sync_title">Interval synchronizácie</string>
+
     </resources>

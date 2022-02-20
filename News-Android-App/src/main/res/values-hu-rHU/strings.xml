@@ -5,7 +5,7 @@
     <string name="title_activity_sync_interval_selector">Szinkronizáció gyakorisága</string>
     <string name="empty_view_content">Itt nincs semmi</string>
     <string name="empty_view_content_action">Húzza lefelé a frissítéshez</string>
-    <string name="toast_GettingMoreItems">További elemek letöltése megkezdődött… Várjon.</string>
+    <string name="toast_GettingMoreItems">A további elemek letöltése elkezdődött. Kis türelmet…</string>
     <string name="no_wifi_available">Nincs csatlakoztatott WiFi</string>
     <string name="do_you_want_to_download_without_wifi">Letölti a képeket Wi-Fi kapcsolat nélkül?</string>
     <string name="current_version">A(z) %s verziót használja</string>
@@ -67,7 +67,7 @@
     <string name="action_link_share">Hivatkozás megosztása</string>
     <string name="action_link_open">Hivatkozás megnyitása böngészőben</string>
     <string name="action_link_copy">Hivatkozás másolása</string>
-    <string name="toast_img_download_wait">Letöltés… Kis türelmet.</string>
+    <string name="toast_img_download_wait">Letöltés. Kis türelmet…</string>
     <string name="toast_img_saved">Kép elmentve</string>
     <string name="toast_img_notwriteable">Kép írása nem sikerült.</string>
     <string name="toast_copied_to_clipboard">Vágólapra másolva</string>
@@ -112,8 +112,8 @@
     </plurals>
     <string name="toast_no_more_downloads_available">Nincs több elérhető elem</string>
     <plurals name="fetched_items_so_far">
-        <item quantity="one">Eddig %d elem lekérve…</item>
-        <item quantity="other">Eddig %d elem lekérve…</item>
+        <item quantity="one">Eddig %d elem lett letöltve…</item>
+        <item quantity="other">Eddig %d elem lett letöltve…</item>
     </plurals>
 
 
@@ -138,7 +138,7 @@
     <string name="pref_general_search_in_body">Törzs</string>
 
     <string name="dialog_clearing_cache">Gyorsítótár ürítése</string>
-    <string name="dialog_clearing_cache_please_wait">Gyorsítótár ürítése… Várjon.</string>
+    <string name="dialog_clearing_cache_please_wait">Gyorsítótár ürítése. Kis türelmet…</string>
     <string name="reset_cache_unsaved_changes">Nem szinkronizált változások vannak. Biztos, hogy mindenképp alaphelyzetbe állítja a gyorsítótárat?</string>
     <string name="warning">Figyelmeztetés</string>
     <string name="pref_title_AutoSyncOnStart">Szinkronizálás induláskor</string>

@@ -20,6 +20,8 @@
 
 package de.luhmer.owncloudnewsreader;
 
+import static java.util.Objects.requireNonNull;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
@@ -63,8 +65,6 @@ import de.luhmer.owncloudnewsreader.model.TTSItem;
 import de.luhmer.owncloudnewsreader.view.PodcastSlidingUpPanelLayout;
 import de.luhmer.owncloudnewsreader.widget.WidgetProvider;
 
-import static java.util.Objects.requireNonNull;
-
 
 public class NewsDetailActivity extends PodcastFragmentActivity {
 
@@ -91,6 +91,7 @@ public class NewsDetailActivity extends PodcastFragmentActivity {
 	private MenuItem menuItem_PlayPodcast;
 	private MenuItem menuItem_Starred;
 	private MenuItem menuItem_Read;
+	private MenuItem menuItem_Incognito;
 
 	private DatabaseConnectionOrm dbConn;
 	protected ActivityNewsDetailBinding binding;
@@ -159,14 +160,21 @@ public class NewsDetailActivity extends PodcastFragmentActivity {
 
 		//If the Activity gets started from the Widget, read the item id and get the selected index in the cursor.
 		if (intent.hasExtra(WidgetProvider.RSS_ITEM_ID)) {
+			boolean foundArticle = false;
 			long rss_item_id = intent.getExtras().getLong(WidgetProvider.RSS_ITEM_ID);
 			for (RssItem rssItem : rssItems) {
 				if (rss_item_id == rssItem.getId()) {
 					getSupportActionBar().setTitle(rssItem.getTitle());
+					foundArticle = true;
 					break;
 				} else {
 					item_id++;
 				}
+			}
+			// if article can't be found for whatever reason just use index 0 and prevent app from crashing
+			if(!foundArticle) {
+				item_id = 0;
+				Log.e(TAG, "RSS Item with ID " + rss_item_id + " cannot be found");
 			}
 		}
 
@@ -220,7 +228,7 @@ public class NewsDetailActivity extends PodcastFragmentActivity {
 			WeakReference<NewsDetailFragment> ndf = mSectionsPagerAdapter.items.get(i);
 			if (ndf != null) {
 				ndf.get().syncIncognitoState();
-				ndf.get().startLoadRssItemToWebViewTask();
+				ndf.get().startLoadRssItemToWebViewTask(this);
 			}
 		}
 	}
@@ -416,6 +424,15 @@ public class NewsDetailActivity extends PodcastFragmentActivity {
 				binding.faDetailBar.faMarkAsRead.setImageResource(darkIcons ? R.drawable.ic_checkbox_outline_black : R.drawable.ic_checkbox_outline_white);
 			}
 		}
+
+		if (menuItem_Incognito != null) {
+			if (isIncognitoEnabled()) {
+				// always show incognito icon if incognito mode is enabled
+				menuItem_Incognito.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+			} else {
+				menuItem_Incognito.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+			}
+		}
 	}
 
 
@@ -436,6 +453,7 @@ public class NewsDetailActivity extends PodcastFragmentActivity {
 		menuItem_Starred = menu.findItem(R.id.action_starred);
 		menuItem_Read = menu.findItem(R.id.action_read);
 		menuItem_PlayPodcast = menu.findItem(R.id.action_playPodcast);
+		menuItem_Incognito = menu.findItem(R.id.action_incognito_mode);
 
 		if (mShowFastActions) {
 			menuItem_Starred.setVisible(false);
@@ -493,6 +511,7 @@ public class NewsDetailActivity extends PodcastFragmentActivity {
 			this.share(currentPosition);
 		} else if (itemId == R.id.action_incognito_mode) {
 			toggleIncognitoMode();
+			updateActionBarIcons();
 		}
 
 		return super.onOptionsItemSelected(item);

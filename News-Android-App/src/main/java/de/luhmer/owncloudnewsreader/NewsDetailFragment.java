@@ -37,14 +37,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebBackForwardList;
 import android.webkit.WebHistoryItem;
-import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
@@ -59,8 +57,6 @@ import org.jsoup.select.Elements;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -85,6 +81,7 @@ public class NewsDetailFragment extends Fragment implements RssItemToHtmlTask.Li
 
     private int section_number;
     protected String html;
+    private String title = "";
     private GestureDetector mGestureDetector;
 
 
@@ -120,6 +117,7 @@ public class NewsDetailFragment extends Fragment implements RssItemToHtmlTask.Li
     @Override
     public void onDestroy() {
         super.onDestroy();
+        // Log.d(TAG, "onDestroy: " + title);
         binding.webview.destroy();
     }
 
@@ -128,8 +126,8 @@ public class NewsDetailFragment extends Fragment implements RssItemToHtmlTask.Li
         binding.webview.pauseTimers();
     }
 
-
     public void resumeCurrentPage() {
+        applyWebSettings();
         binding.webview.onResume();
         binding.webview.resumeTimers();
     }
@@ -151,7 +149,7 @@ public class NewsDetailFragment extends Fragment implements RssItemToHtmlTask.Li
     public void navigateBack() {
         if (isLastPageRssItem()) {
             binding.webview.clearHistory();
-            startLoadRssItemToWebViewTask();
+            startLoadRssItemToWebViewTask((NewsDetailActivity) getActivity());
         } else if (!isCurrentPageRssItem()){
             binding.webview.goBack();
         }
@@ -163,21 +161,39 @@ public class NewsDetailFragment extends Fragment implements RssItemToHtmlTask.Li
 
 		section_number = (Integer) requireArguments().get(ARG_SECTION_NUMBER);
 
-        // Do not reload webview if retained
-        if(savedInstanceState == null) {
-            startLoadRssItemToWebViewTask();
-        } else {
+        NewsDetailActivity ndActivity = ((NewsDetailActivity)getActivity());
+        assert ndActivity != null;
+
+        /*
+		// Do not reload webView if retained
+        if (savedInstanceState != null) {
+            Log.d(TAG, "onCreateView restore webview");
             binding.webview.restoreState(savedInstanceState);
+            setWebViewBackgroundColor(ndActivity);
             binding.progressBarLoading.setVisibility(View.GONE);
+            binding.progressbarWebview.setVisibility(View.GONE);
             // Make sure to sync the incognitio on retained views
             syncIncognitoState();
             this.addBottomPaddingForFastActions(binding.webview);
+        } else {
+            Log.d(TAG, "onCreateView new webview");
+            startLoadRssItemToWebViewTask(ndActivity);
         }
-
+        */
         setUpGestureDetector();
 
-		return binding.getRoot();
-	}
+        // the whole process of saving and restoring instances is way too expensive - especially
+        // for huge pages (such as android central has them) - it'll just freeze the webview
+        startLoadRssItemToWebViewTask(ndActivity);
+
+        return binding.getRoot();
+    }
+
+	private void setWebViewBackgroundColor(NewsDetailActivity ndActivity) {
+        int backgroundColor = ContextCompat.getColor(ndActivity, R.color.news_detail_background_color);
+        binding.webview.setBackgroundColor(backgroundColor);
+        ndActivity.setBackgroundColorOfViewPager(backgroundColor);
+    }
 
 	protected void syncIncognitoState() {
         NewsDetailActivity ndActivity = ((NewsDetailActivity) requireActivity());
@@ -186,10 +202,13 @@ public class NewsDetailFragment extends Fragment implements RssItemToHtmlTask.Li
         // binding.webview.getSettings().setBlockNetworkImage(isIncognito);
     }
 
+    /*
 	@Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
-        binding.webview.saveState(outState);
+        Log.d(TAG, "onSaveInstanceState: " + title);
+        //binding.webview.saveState(outState);
     }
+    */
 
     /**
      * Double tap to star listener (double tap the webview to mark the current item as read)
@@ -226,21 +245,16 @@ public class NewsDetailFragment extends Fragment implements RssItemToHtmlTask.Li
         });
     }
 
-
-    protected void startLoadRssItemToWebViewTask() {
-        Log.d(TAG, "startLoadRssItemToWebViewTask() called");
+    protected void startLoadRssItemToWebViewTask(NewsDetailActivity ndActivity) {
         binding.webview.setVisibility(View.GONE);
         binding.progressBarLoading.setVisibility(View.VISIBLE);
 
-        NewsDetailActivity ndActivity = ((NewsDetailActivity)getActivity());
-        assert ndActivity != null;
-
-        int backgroundColor = ContextCompat.getColor(ndActivity, R.color.news_detail_background_color);
-        binding.webview.setBackgroundColor(backgroundColor);
-        ndActivity.setBackgroundColorOfViewPager(backgroundColor);
+        setWebViewBackgroundColor(ndActivity);
 
         init_webView();
         RssItem rssItem = ndActivity.rssItems.get(section_number);
+        title = rssItem.getTitle();
+        Log.d(TAG, "startLoadRssItemToWebViewTask: " + title);
         RssItemToHtmlTask task = new RssItemToHtmlTask(ndActivity, rssItem, this, mPrefs);
         AsyncTaskHelper.StartAsyncTask(task);
     }
@@ -249,6 +263,7 @@ public class NewsDetailFragment extends Fragment implements RssItemToHtmlTask.Li
     public void onRssItemParsed(String htmlPage) {
         binding.webview.setVisibility(View.VISIBLE);
         binding.progressBarLoading.setVisibility(View.GONE);
+        Log.d(TAG, "progressBarLoading gone");
 
         setSoftwareRenderModeForWebView(htmlPage, binding.webview);
 
@@ -278,12 +293,7 @@ public class NewsDetailFragment extends Fragment implements RssItemToHtmlTask.Li
         }
     }
 
-    @SuppressLint("SetJavaScriptEnabled")
-	private void init_webView() {
-        int backgroundColor = ColorHelper.getColorFromAttribute(getContext(),
-                R.attr.news_detail_background_color);
-        binding.webview.setBackgroundColor(backgroundColor);
-
+    private void applyWebSettings() {
         WebSettings webSettings = binding.webview.getSettings();
         //webSettings.setPluginState(WebSettings.PluginState.ON);
         webSettings.setJavaScriptEnabled(true);
@@ -295,6 +305,17 @@ public class NewsDetailFragment extends Fragment implements RssItemToHtmlTask.Li
         webSettings.setSupportZoom(false);
         webSettings.setAppCacheEnabled(true);
         webSettings.setMediaPlaybackRequiresUserGesture(true);
+
+        syncIncognitoState();
+    }
+
+    @SuppressLint("SetJavaScriptEnabled")
+	private void init_webView() {
+        int backgroundColor = ColorHelper.getColorFromAttribute(getContext(),
+                R.attr.news_detail_background_color);
+        binding.webview.setBackgroundColor(backgroundColor);
+
+        applyWebSettings();
 
         syncIncognitoState();
 
@@ -368,7 +389,6 @@ public class NewsDetailFragment extends Fragment implements RssItemToHtmlTask.Li
      *
      * @param url address to load
      */
-
 	public void loadURL(String url) {
         int selectedBrowser = Integer.parseInt(mPrefs.getString(SettingsActivity.SP_DISPLAY_BROWSER, "0"));
 

@@ -97,23 +97,36 @@ class InsertRssItemIntoDatabase {
         int contentLength = content.length();
         double sizeInMb = contentLength/1024d/1024d;
         if(sizeInMb > 0.4) {
-            Log.w("InsertRssItem", "Massive rss item detected - " + content.length() + " chars  / " + content.length()/1024d/1024d + "mb - url:" + rssItem.getLink());
+            Log.w(TAG, "Massive rss item detected - " + content.length() + " chars  / " + content.length() / 1024d / 1024d + "mb - url: " + rssItem.getLink());
 
             // Trim string down to 500k characters
             int maxLengthAllowed = 500000;
             if(content.length() > maxLengthAllowed) {
-                Log.w("InsertRssItem", "Limiting rss item size to 500k characters - url:" + rssItem.getLink());
+                Log.w(TAG, "Limiting rss item size to 500k characters - url:" + rssItem.getLink());
                 content = content.substring(0, maxLengthAllowed);
             }
         } else if(sizeInMb > 0.1) {
-            Log.w("InsertRssItem", "Large rss item detected - " + content.length() + " chars  / " + content.length()/1024d/1024d + "mb - url:" + rssItem.getLink());
+            Log.w(TAG, "Large rss item detected - " + content.length() + " chars  / " + content.length() / 1024d / 1024d + "mb - url: " + rssItem.getLink());
+        }
+
+        try {
+            // try fixing relative image links
+            content = ImageHandler.fixBrokenImageLinksInArticle(url, content);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Log.e(TAG, "Error while fixing broken image links in article" + ex);
+        } catch (OutOfMemoryError error) {
+            error.printStackTrace();
+            Log.e(TAG, "OutOfMemoryError while fixing broken image links in article" + error);
+            Log.e(TAG, "OutOfMemoryError Article length:" + content.length());
+
         }
 
         rssItem.setBody(content);
 
         String mediaThumbnail = getStringOrEmpty("mediaThumbnail", e); // Possible XSS Fields
         if(mediaThumbnail.isEmpty()) {
-            List<String> images = ImageHandler.getImageLinksFromText(content);
+            List<String> images = ImageHandler.getImageLinksFromText(url, content);
             if(images.size() > 0) {
                 Log.d(TAG, "extracted mediaThumbnail from body");
                 mediaThumbnail = images.get(0);

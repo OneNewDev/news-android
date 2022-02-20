@@ -4,7 +4,7 @@
     <string name="auto_sync_string">자동 동기화</string>
     <string name="title_activity_sync_interval_selector">동기화 간격</string>
     <string name="empty_view_content">항목 없음</string>
-    <string name="toast_GettingMoreItems">더 많은 아이템들을 다운로드 하고 있습니다... 잠시 기다려 주십시오.</string>
+    <string name="empty_view_content_action">끌어 당겨서 새로 고침</string>
     <string name="no_wifi_available">Wi-Fi에 연결되지 않았음</string>
     <string name="do_you_want_to_download_without_wifi">Wi-Fi연결없이 이미지를 다운로드 하시겠습니까</string>
     <string name="current_version">현재 버전 %s을(를) 사용 중입니다.</string>
@@ -63,7 +63,6 @@
     <string name="action_link_share">링크 공유</string>
     <string name="action_link_open">브라우저에서 링크 열기</string>
     <string name="action_link_copy">링크 복사</string>
-    <string name="toast_img_download_wait">다운로드 중… 잠시만 기다려주세요.</string>
     <string name="toast_img_saved">이미지 저장됨</string>
     <string name="toast_img_notwriteable">사진을 기록할 수 없습니다.</string>
     <string name="toast_copied_to_clipboard">클립보드로 복사됨</string>
@@ -81,6 +80,11 @@
     <string name="feed_move_list_description">피드가 이동할 폴더 선택</string>
     <string name="move_feed_root_folder">루트 폴더</string>
 
+    <!-- Strings related to NewsReaderListDialogFragment (Notification Settings) -->
+    <string name="notification_feed_unique">이 피드에 대한 유일한 알림 받기</string>
+    <string name="notification_feed_default">기본 설정은 모든 피드당 하나의 알림 노출입니다.</string>
+    <string name="notification_feed_none">알림 없음</string>
+
     <!-- Strings related to login -->
     <string name="login_manual">수동 로그인</string>
     <string name="login_sso">Nextcloud Files App으로 로그인</string>
@@ -90,7 +94,6 @@
     <string name="pref_default_owncloudRootPath">https://1.2.3.4/nextcloud</string>
 
     <string name="action_sign_in_short">로그인</string>
-    <string name="login_progress_signing_in">로그인 중…</string>
     <!-- <string name="error_incorrect_password">Incorrect password</string> -->
     <string name="error_field_required">이 항목은 필수 사항입니다</string>
     <string name="error_invalid_url">잘못된 URL</string>
@@ -101,11 +104,6 @@
         <item quantity="other">오래된 항목 %d개 다운로드됨</item>
     </plurals>
     <string name="toast_no_more_downloads_available">더 이상 항목 없음</string>
-    <plurals name="fetched_items_so_far">
-        <item quantity="other">항목 %d개 가져옴…</item>
-    </plurals>
-
-
     <!-- Strings related to Settings -->
     <string name="title_activity_settings">설정</string>
     <string name="cache_is_cleared">캐시를 비웠습니다!</string>
@@ -127,7 +125,6 @@
     <string name="pref_general_search_in_body">몸통</string>
 
     <string name="dialog_clearing_cache">캐시 비우는 중</string>
-    <string name="dialog_clearing_cache_please_wait">캐시를 비우고 있습니다… 잠시 기다려 주십시오.</string>
     <string name="reset_cache_unsaved_changes">동기화되지 않은 변경 사항이 있습니다. 캐시를 비우시겠습니까?</string>
     <string name="warning">경고</string>
     <string name="pref_title_AutoSyncOnStart">시작할 때 동기화</string>
@@ -175,6 +172,7 @@
 
     <string name="pref_display_news_detail_actionbar_icons_title">동작 아이콘(자세히 보기)</string>
 
+    <string name="pref_display_apptheme_auto">시스템 기본값</string>
     <string name="pref_display_apptheme_light">밝게</string>
     <string name="pref_display_apptheme_dark">어둡게</string>
 
@@ -223,6 +221,9 @@
     <string name="login_dialog_text_not_compatible">이 앱 버전은 Nextcloud News App과 호환되지 않습니다. 뉴스앱과 앱프레임워크를 업그레이드해주세요.</string>
     <string name="login_dialog_title_security_warning">보안 경고</string>
     <string name="login_dialog_text_security_warning">HTTPS를 사용하고 있지 않습니다. 공격자가 트래픽을 가로채어 민감한 정보를 악용할 수 있습니다. (예: 비밀번호)</string>
+    <string name="login_dialog_select_account_unknown_error_toast">문제가 발생했습니다. 다시 시도하십시오.</string>
+
+
     <!-- Data & Sync -->
     <string name="pref_header_data_sync">데이터 및 동기화</string>
     <string name="pref_title_clearCache">캐시 비우기</string>
@@ -250,5 +251,6 @@
     <string name="successfully_exported">성공적으로 내보낸 위치 :</string>
     <string name="opml_export">OPML 내보내기</string>
     <string name="parsing_opml">OPML 구문 분석</string>
-    <string name="please_wait">잠시 기다리십시오 …</string>
+    <string name="interval_sync_title">반복적 싱크</string>
+
     </resources>

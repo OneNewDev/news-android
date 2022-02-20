@@ -4,7 +4,7 @@
     <string name="auto_sync_string">Autosynk</string>
     <string name="title_activity_sync_interval_selector">Synkintervall </string>
     <string name="empty_view_content">Inga objekt här</string>
-    <string name="toast_GettingMoreItems">Hämtning av fler objekt startade... Vänligen vänta.</string>
+    <string name="empty_view_content_action">Dra nedåt för uppdatera</string>
     <string name="no_wifi_available">Ingen Wi-Fi ansluten</string>
     <string name="do_you_want_to_download_without_wifi">Vill du hämta bilderna utan en Wi-Fi-anslutning</string>
     <string name="current_version">Du använder Version %s</string>
@@ -66,7 +66,7 @@
     <string name="action_link_share">Dela länk</string>
     <string name="action_link_open">Öppna länk i webbläsaren</string>
     <string name="action_link_copy">Kopiera länk</string>
-    <string name="toast_img_download_wait">Hämtar… Vänligen vänta.</string>
+    <string name="toast_img_download_wait">Laddar ner, vänligen vänta …</string>
     <string name="toast_img_saved">Bild sparad</string>
     <string name="toast_img_notwriteable">Misslyckades att skriva bilden.</string>
     <string name="toast_copied_to_clipboard">Kopierat till urklipp</string>
@@ -84,6 +84,11 @@
     <string name="feed_move_list_description">Välj mapp för att flytta flöde till</string>
     <string name="move_feed_root_folder">Topp-mapp</string>
 
+    <!-- Strings related to NewsReaderListDialogFragment (Notification Settings) -->
+    <string name="notification_feed_unique">Ta emot aviseringar från det här flödet</string>
+    <string name="notification_feed_default">Alla flöden med standardval kommer att synas i en gemensam avisering</string>
+    <string name="notification_feed_none">Inga aviseringar alls</string>
+
     <!-- Strings related to login -->
     <string name="login_manual">Manuell inloggning</string>
     <string name="login_sso">Logga in med Nextcloud filer-app</string>
@@ -93,7 +98,7 @@
     <string name="pref_default_owncloudRootPath">https://1.2.3.4/owncloud</string>
 
     <string name="action_sign_in_short">Logga in</string>
-    <string name="login_progress_signing_in">Logga in...</string>
+    <string name="login_progress_signing_in">Loggar in …</string>
     <!-- <string name="error_incorrect_password">Incorrect password</string> -->
     <string name="error_field_required">Detta fält obligatoriskt</string>
     <string name="error_invalid_url">Felaktig webbadress</string>
@@ -105,12 +110,6 @@
         <item quantity="other">Hämtade %d gamla artiklar</item>
     </plurals>
     <string name="toast_no_more_downloads_available">Inga fler föremål är tillgängliga</string>
-    <plurals name="fetched_items_so_far">
-        <item quantity="one">Hämtat %d artikel än så länge...</item>
-        <item quantity="other">Hämtat %d artiklar än så länge...</item>
-    </plurals>
-
-
     <!-- Strings related to Settings -->
     <string name="title_activity_settings">Inställningar</string>
     <string name="cache_is_cleared">Cacheminne rensat!</string>
@@ -132,7 +131,7 @@
     <string name="pref_general_search_in_body">Textyta</string>
 
     <string name="dialog_clearing_cache">Rensar cachen</string>
-    <string name="dialog_clearing_cache_please_wait">Rensar cachen, vänligen vänta ...</string>
+    <string name="dialog_clearing_cache_please_wait">Rensar cachen, vänligen vänta …</string>
     <string name="reset_cache_unsaved_changes">Det finns ändringar som ännu inte har synkroniserats. Vill du återställa cachen ändå?</string>
     <string name="warning">Varning</string>
     <string name="pref_title_AutoSyncOnStart">Synkronisera vid uppstart</string>
@@ -180,6 +179,7 @@
 
     <string name="pref_display_news_detail_actionbar_icons_title">Händelseikoner (Detaljvy)</string>
 
+    <string name="pref_display_apptheme_auto">Systemstandard</string>
     <string name="pref_display_apptheme_light">Ljus</string>
     <string name="pref_display_apptheme_dark">Mörk</string>
 
@@ -228,6 +228,9 @@
     <string name="login_dialog_text_not_compatible">Den här appversionen är inte kompatibel med din Nextcloud nyheter-app. Vänligen uppgradera nyhetsappen och appframework.</string>
     <string name="login_dialog_title_security_warning">Säkerhetsvarning</string>
     <string name="login_dialog_text_security_warning">Du använder inte HTTPS, vilket uppmuntras starkt. En angripare kan fånga upp din trafik och få åtkomst till vissa känsliga data (t.ex. ditt lösenord).</string>
+    <string name="login_dialog_select_account_unknown_error_toast">Något gick fel. Vänligen försök igen.</string>
+
+
     <!-- Data & Sync -->
     <string name="pref_header_data_sync">Data &amp; synkronisering</string>
     <string name="pref_title_clearCache">Rensa cachen</string>
@@ -255,5 +258,6 @@
     <string name="successfully_exported">Lyckad exportering till:</string>
     <string name="opml_export">OPML-export</string>
     <string name="parsing_opml">Läser OPML</string>
-    <string name="please_wait">Vänligen vänta…</string>
+    <string name="interval_sync_title">Synkningsintervall</string>
+
     </resources>

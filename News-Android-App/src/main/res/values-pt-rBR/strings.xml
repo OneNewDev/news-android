@@ -5,7 +5,7 @@
     <string name="title_activity_sync_interval_selector">Intervalo de Sincronização</string>
     <string name="empty_view_content">Este local está vazio</string>
     <string name="empty_view_content_action">Puxe para baixo para atualizar</string>
-    <string name="toast_GettingMoreItems">Download de mais itens iniciou... Aguarde.</string>
+    <string name="toast_GettingMoreItems">Download de mais itens iniciou.Por favor aguarde ...</string>
     <string name="no_wifi_available">Nenhum WiFi conectado</string>
     <string name="do_you_want_to_download_without_wifi">Quer baixar as imagens sem uma conexão WiFi?</string>
     <string name="current_version">Você está usando a versão %s</string>
@@ -67,7 +67,7 @@
     <string name="action_link_share">Link de Compartilhamento</string>
     <string name="action_link_open">Abrir o Link no Navegador</string>
     <string name="action_link_copy">Copiar link</string>
-    <string name="toast_img_download_wait">Fazendo o download... Aguarde.</string>
+    <string name="toast_img_download_wait">Fazendo download. Por favor aguarde ...</string>
     <string name="toast_img_saved">Imagem gravada</string>
     <string name="toast_img_notwriteable">Falhou ao salvar Imagem</string>
     <string name="toast_copied_to_clipboard">Copiado para área de transferência</string>
@@ -112,7 +112,7 @@
     </plurals>
     <string name="toast_no_more_downloads_available">Nenhum item disponível</string>
     <plurals name="fetched_items_so_far">
-        <item quantity="one">%d item já foi buscado...</item>
+        <item quantity="one">Já foi buscado %d itens até agora...</item>
         <item quantity="other">Já foram buscados %d itens até agora...</item>
     </plurals>
 
@@ -138,7 +138,7 @@
     <string name="pref_general_search_in_body">Corpo</string>
 
     <string name="dialog_clearing_cache">Limpando o cache</string>
-    <string name="dialog_clearing_cache_please_wait">Limpando o cache ... Por favor, aguarde.</string>
+    <string name="dialog_clearing_cache_please_wait">Limpando o cache. Por favor, aguarde ...</string>
     <string name="reset_cache_unsaved_changes">Há alterações não sincronizadas. Gostaria de redefinir o cache de qualquer maneira?</string>
     <string name="warning">Aviso</string>
     <string name="pref_title_AutoSyncOnStart">Sincronizar na inicialização</string>
@@ -265,7 +265,7 @@
     <string name="successfully_exported">Exportado com sucesso para:</string>
     <string name="opml_export">Exportar OPML</string>
     <string name="parsing_opml">Analisando o arquivo OPML</string>
-    <string name="please_wait">Aguarde...</string>
+    <string name="please_wait">Por favor aguarde ...</string>
     <string name="interval_sync_title">Intervalo de atualização</string>
 
     </resources>

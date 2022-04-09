@@ -2,7 +2,7 @@
 <resources>
     <color name="app_drawer_feed_list_background_color">#212121</color>
 
-    <color name="primaryTextColor">@android:color/white</color>
+    <color name="primaryTextColor">@color/material_grey_200</color>
 
     <color name="divider_row_color">#292929</color>
 
@@ -14,19 +14,19 @@
 
 
     <!-- see also assets/web.css -->
-    <color name="news_detail_background_color">@color/material_grey_900</color>
+    <color name="news_detail_background_color">@color/material_grey_800</color>
     <color name="news_detail_background_color_oled">@android:color/black</color>
 
     <color name="text_medium_emphasis">#a0ffffff</color>
 
     <color name="colorPrimary">@android:color/black</color>
     <color name="colorAccent">@android:color/white</color>
-    <color name="rss_item_list_background">@color/material_grey_900</color>
+    <color name="rss_item_list_background">@color/material_grey_800</color>
 
     <color name="tintColor">@android:color/white</color>
 
-    <color name="button_ripple">@color/material_grey_800</color>
+    <color name="button_ripple">@color/material_grey_700</color>
 
-    <color name="widget_background">#dd000000</color>
+    <color name="widget_background">#B5000000</color>
     <color name="widget_foreground">#d8d8d8</color>
 </resources>

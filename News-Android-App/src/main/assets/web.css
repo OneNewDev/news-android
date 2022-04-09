@@ -12,7 +12,7 @@
 */
 
 body.lightTheme {
-    background-color:	#ffffff;
+    background-color:	#eeeeee;
     color:				black;
 }
 
@@ -31,7 +31,7 @@ body.darkThemeOLED a:visited {
 
 body.darkTheme {
     background-color:   #212121;
-    color:              #ffffff;
+    color:              #eeeeee;
 }
 
 body.lightTheme a:link,

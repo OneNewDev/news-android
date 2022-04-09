@@ -18,7 +18,7 @@
         <item name="primaryTextColor">@android:color/white</item>
     </style>
 
-
+j
     <style name="AppTheme.Base" parent="Theme.MaterialComponents.DayNight">
         <item name="android:windowBackground">@color/rss_item_list_background</item>
 

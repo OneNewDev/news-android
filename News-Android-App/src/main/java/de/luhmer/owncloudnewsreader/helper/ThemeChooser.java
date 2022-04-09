@@ -56,7 +56,7 @@ public class ThemeChooser {
         switch(getSelectedThemeFromPreferences(false)) {
             case 0: // Auto (Light / Dark)
                 Log.v(TAG, "Auto (Light / Dark)");
-                if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P) {
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
                     //noinspection deprecation
                     defaultNightMode = AppCompatDelegate.MODE_NIGHT_AUTO_TIME;
                 } else { // Android 10+ (Q) supports a system-wide dark mode

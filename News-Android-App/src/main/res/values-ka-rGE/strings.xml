@@ -3,6 +3,7 @@
 
     <string name="auto_sync_string">ავტო სინქ.</string>
     <string name="empty_view_content">აქ ელემენტები არაა</string>
+    <string name="empty_view_content_action">ჩამოწიეთ განახლებისთვის</string>
     <string name="no_wifi_available">WiFi არაა დაკავშირებული</string>
     <string name="current_version">თქვენ სარგებლობთ ვერსიით %s</string>
     <string name="widget_header">Nextcloud სიახლეები</string>
@@ -64,6 +65,12 @@
     <string name="feed_remove_button">წაშლა</string>
     <string name="feed_rename_button">გადარქმევა</string>
     <string name="confirm_feed_remove">ნამდვილად გსურთ ამ ლენტის გაუქმება? ეს ვერ იქნება უკუქცეული.</string>
+    <string name="action_folder_rename">ფოლდერის სახელის გადარქმევა</string>
+    <string name="folder_remove_button">წაშლა</string>
+    <string name="folder_rename_button">სახელის შეცვლა</string>
+    <!-- Strings related to AddFolderDialogFragment (Add Folder) -->
+    <string name="folder_add_button">დამატება</string>
+    <string name="hint_folder_name">დირექტორიის სახელი</string>
     <string name="pref_title_username">მომხმარებლის სახელი</string>
     <string name="pref_title_password">პაროლი</string>
     <string name="pref_title_owncloudRootPath">Nextcloud საწყისი მისამართი</string>
@@ -109,6 +116,7 @@
     <!-- Settings for About -->
     <string name="pref_header_about">შესახებ</string>
     <string name="pref_license">ლიცენზია</string>
+    <string name="pref_privacy">კონფიდენციალურობა</string>
     <!-- Settings for Display -->
     <string name="pref_header_display">დისპლეი</string>
     <string name="pref_title_app_theme">ვიზუალური თემა</string>
@@ -126,16 +134,12 @@
     <string name="pref_display_font_size_d">საწყისი</string>
     <string name="content_desc_play">დაკვრა</string>
     <string name="content_desc_pause">პაუზა</string>
-    <string name="content_desc_rewind">გადახვევა</string>
     <string name="content_desc_forward">წინ</string>
-    <string name="content_desc_expand">ჩამოშლა</string>
     <string name="content_desc_collapse">აკეცვა</string>
     <string name="content_desc_mark_as_read">წაკითხულად მონიშვნა</string>
     <string name="content_desc_mark_as_unread">წაუკითხავად მონიშვნა</string>
-    <string name="content_desc_tap_to_refresh">განახლებისთვის შეახეთ ხელი</string>
     <string name="content_desc_add_to_favorites">რჩეულებში დამატება</string>
     <string name="content_desc_remove_from_favorites">რჩეულებიდან ამოშლა</string>
-    <string name="content_desc_show_password">პაროლის ჩვენება</string>
     <string name="content_desc_delete">წაშლა</string>
     <string name="content_desc_download">ჩამოტვირთვა</string>
 
@@ -156,4 +160,12 @@
     <string name="pref_data_sync_image_cache_ask">შეკითხვა როდესაც არაა კავშირი WiFi-სთან</string>
 
     <string name="array_sync_interval_min_0">არასდროს</string>
+    <string name="array_sync_interval_min_5">5 წუთი</string>
+    <string name="array_sync_interval_min_15">15 წუთი</string>
+    <string name="array_sync_interval_min_30">30 წუთი</string>
+    <string name="array_sync_interval_hour_1">1 საათი</string>
+    <string name="array_sync_interval_hour_3">3 საათი</string>
+    <string name="array_sync_interval_hour_6">6 საათი</string>
+    <string name="array_sync_interval_hour_12">12 საათი</string>
+    <string name="array_sync_interval_hour_24">24 საათი</string>
     </resources>

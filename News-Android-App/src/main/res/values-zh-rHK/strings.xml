@@ -225,14 +225,14 @@
     <string name="content_desc_pause">暫停</string>
     <string name="content_desc_playback_speed">播放速度</string>
     <string name="content_desc_rewind">倒帶</string>
-    <string name="content_desc_forward">快進</string>
+    <string name="content_desc_forward">轉寄</string>
     <string name="content_desc_expand">展開</string>
     <string name="content_desc_collapse">收合</string>
     <string name="content_desc_mark_as_read">標為已讀</string>
     <string name="content_desc_mark_as_unread">標為未讀</string>
     <string name="content_desc_tap_to_refresh">輕觸以更新</string>
-    <string name="content_desc_add_to_favorites">加到我的最愛</string>
-    <string name="content_desc_remove_from_favorites">從最愛移除</string>
+    <string name="content_desc_add_to_favorites">新增收藏</string>
+    <string name="content_desc_remove_from_favorites">從最愛中移除</string>
     <string name="content_desc_show_password">顯示密碼</string>
     <string name="content_desc_delete">刪除</string>
     <string name="content_desc_download">下載</string>

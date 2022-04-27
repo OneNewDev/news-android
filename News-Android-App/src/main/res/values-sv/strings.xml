@@ -219,21 +219,17 @@
     <string name="pref_display_font_size_l">Stor</string>
     <string name="pref_display_font_size_xl">Extra stor</string>
 
-    <string name="content_desc_play">spela</string>
-    <string name="content_desc_pause">pausa</string>
-    <string name="content_desc_playback_speed">uppspelningshastighet</string>
-    <string name="content_desc_rewind">spola bakåt</string>
-    <string name="content_desc_forward">spola framåt</string>
-    <string name="content_desc_expand">utöka</string>
-    <string name="content_desc_collapse">dölj</string>
-    <string name="content_desc_mark_as_read">markera som läst</string>
-    <string name="content_desc_mark_as_unread">markera som oläst</string>
-    <string name="content_desc_tap_to_refresh">tryck för att uppdatera</string>
-    <string name="content_desc_add_to_favorites">lägg till i favoriter</string>
-    <string name="content_desc_remove_from_favorites">ta bort från favoriter</string>
-    <string name="content_desc_show_password">visa lösenordet</string>
-    <string name="content_desc_delete">radera</string>
-    <string name="content_desc_download">hämta</string>
+    <string name="content_desc_play">Spela</string>
+    <string name="content_desc_pause">Pausa</string>
+    <string name="content_desc_forward">Vidarebefordra</string>
+    <string name="content_desc_collapse">Dölj</string>
+    <string name="content_desc_mark_as_read">Markera som läst</string>
+    <string name="content_desc_mark_as_unread">Markera som oläst</string>
+    <string name="content_desc_add_to_favorites">Lägg till i favoriter</string>
+    <string name="content_desc_remove_from_favorites">Ta bort från favoriter</string>
+    <string name="content_desc_show_password">Visa lösenord</string>
+    <string name="content_desc_delete">Radera</string>
+    <string name="content_desc_download">Ladda ner</string>
 
     <!-- Login Dialog -->
     <string name="login_dialog_title_error">Fel</string>

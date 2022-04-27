@@ -63,6 +63,12 @@
     <string name="feed_remove_button">ลบออก</string>
     <string name="feed_rename_button">เปลี่ยนชื่อ</string>
     <string name="confirm_feed_remove">คุณต้องการลบฟีดนี้หรือไม่? หากลบแล้วจะกู้คืนไม่ได้!</string>
+    <string name="action_folder_rename">เปลี่ยนชื่อโฟลเดอร์</string>
+    <string name="folder_remove_button">ลบออก</string>
+    <string name="folder_rename_button">เปลี่ยนชื่อ</string>
+    <!-- Strings related to AddFolderDialogFragment (Add Folder) -->
+    <string name="folder_add_button">เพิ่ม</string>
+    <string name="hint_folder_name">ชื่อโฟลเดอร์</string>
     <string name="pref_title_username">ชื่อผู้ใช้งาน</string>
     <string name="pref_title_password">รหัสผ่าน</string>
     <string name="pref_title_owncloudRootPath">ที่อยู่รากของ ownCloud</string>
@@ -106,24 +112,25 @@
     <string name="no_chapters_available">ไม่มีเรื่องที่สามารถใช้ได้</string>
     <!-- Settings for About -->
     <string name="pref_header_about">เกี่ยวกับเรา</string>
+    <string name="pref_privacy">ความเป็นส่วนตัว</string>
     <!-- Settings for Display -->
     <string name="pref_header_display">แสดงผล</string>
+    <string name="pref_title_app_theme">ธีม</string>
     <string name="pref_title_feed_list_layout">รูปแบบรายการฟีด</string>
+    <string name="pref_title_font_size">ขนาดตัวอักษร</string>
+    <string name="pref_display_apptheme_auto">ค่าเริ่มต้นของระบบ</string>
     <string name="pref_display_apptheme_light">สว่าง</string>
     <string name="pref_display_apptheme_dark">มืด</string>
 
+    <!-- font size scaling definitions -->
+    <string name="pref_display_font_size_s">เล็ก</string>
     <string name="pref_display_font_size_d">ค่าเริ่มต้น</string>
+    <string name="pref_display_font_size_l">ใหญ่</string>
     <string name="content_desc_play">เล่น</string>
     <string name="content_desc_pause">หยุดชั่วคราว</string>
-    <string name="content_desc_rewind">กรอกลับ</string>
-    <string name="content_desc_forward">เลื่อนไปข้างหน้า</string>
-    <string name="content_desc_expand">ขยาย</string>
     <string name="content_desc_collapse">ย่อ</string>
-    <string name="content_desc_mark_as_read">ทำเครื่องหมายว่าอ่านแล้ว</string>
-    <string name="content_desc_mark_as_unread">ทำเครื่องหมายว่ายังไม่ได้อ่าน</string>
-    <string name="content_desc_tap_to_refresh">แตะเพื่อรีเฟรช</string>
     <string name="content_desc_add_to_favorites">เพิ่มในรายการโปรด</string>
-    <string name="content_desc_remove_from_favorites">ลบออกจากรายการโปรด</string>
+    <string name="content_desc_remove_from_favorites">เอาออกจากรายการโปรด</string>
     <string name="content_desc_show_password">แสดงรหัสผ่าน</string>
     <string name="content_desc_delete">ลบ</string>
     <string name="content_desc_download">ดาวน์โหลด</string>
@@ -144,4 +151,8 @@
     <string name="pref_data_sync_image_cache_ask">ถามเมื่อไม่ได้เชื่อมต่อกับ WiFi</string>
 
     <string name="array_sync_interval_min_0">ไม่เคย</string>
+    <string name="array_sync_interval_min_30">30 นาที</string>
+    <string name="array_sync_interval_hour_1">1 ชั่วโมง</string>
+    <string name="switch_account">สลับบัญชี</string>
+    
     </resources>

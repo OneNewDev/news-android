@@ -226,21 +226,21 @@
     <string name="pref_display_font_size_l">Grande</string>
     <string name="pref_display_font_size_xl">Extra Grande</string>
 
-    <string name="content_desc_play">executar</string>
-    <string name="content_desc_pause">pausa</string>
-    <string name="content_desc_playback_speed">velocidade do playback</string>
-    <string name="content_desc_rewind">recarregar</string>
-    <string name="content_desc_forward">adiantar</string>
-    <string name="content_desc_expand">expandir</string>
-    <string name="content_desc_collapse">recolher</string>
-    <string name="content_desc_mark_as_read">marcar como lido</string>
-    <string name="content_desc_mark_as_unread">marcar como não lido</string>
-    <string name="content_desc_tap_to_refresh">toque para atualizar</string>
-    <string name="content_desc_add_to_favorites">adicionar aos favoritos</string>
-    <string name="content_desc_remove_from_favorites">remover dos favoritos</string>
-    <string name="content_desc_show_password">exibir senha</string>
-    <string name="content_desc_delete">excluir</string>
-    <string name="content_desc_download">baixar</string>
+    <string name="content_desc_play">Executar</string>
+    <string name="content_desc_pause">Pausar</string>
+    <string name="content_desc_playback_speed">Velocidade de reprodução</string>
+    <string name="content_desc_rewind">Retornar</string>
+    <string name="content_desc_forward">Avançar</string>
+    <string name="content_desc_expand">Expandir</string>
+    <string name="content_desc_collapse">Recolher</string>
+    <string name="content_desc_mark_as_read">Marcar como lida</string>
+    <string name="content_desc_mark_as_unread">Marcar como não lida</string>
+    <string name="content_desc_tap_to_refresh">Toque para atualizar</string>
+    <string name="content_desc_add_to_favorites">Adicionar aos favoritos</string>
+    <string name="content_desc_remove_from_favorites">Remover dos favoritos</string>
+    <string name="content_desc_show_password">Mostrar senha</string>
+    <string name="content_desc_delete">Excluir</string>
+    <string name="content_desc_download">Baixar</string>
 
     <!-- Login Dialog -->
     <string name="login_dialog_title_error">Erro</string>

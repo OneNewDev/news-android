@@ -226,21 +226,17 @@
     <string name="pref_display_font_size_l">Grand</string>
     <string name="pref_display_font_size_xl">Très grand</string>
 
-    <string name="content_desc_play">lire</string>
-    <string name="content_desc_pause">pause</string>
-    <string name="content_desc_playback_speed">vitesse de lecture</string>
-    <string name="content_desc_rewind">rembobiner</string>
-    <string name="content_desc_forward">avancer</string>
-    <string name="content_desc_expand">étendre</string>
-    <string name="content_desc_collapse">replier</string>
-    <string name="content_desc_mark_as_read">marquer comme lu</string>
-    <string name="content_desc_mark_as_unread">marquer comme non-lu</string>
-    <string name="content_desc_tap_to_refresh">Tapoter pour rafraîchir</string>
-    <string name="content_desc_add_to_favorites">ajouter aux favoris</string>
-    <string name="content_desc_remove_from_favorites">retirer des favoris</string>
-    <string name="content_desc_show_password">afficher le mot de passe</string>
-    <string name="content_desc_delete">suppression</string>
-    <string name="content_desc_download">télécharger</string>
+    <string name="content_desc_play">Lire</string>
+    <string name="content_desc_pause">Pause</string>
+    <string name="content_desc_forward">Transférer</string>
+    <string name="content_desc_collapse">Replier</string>
+    <string name="content_desc_mark_as_read">Marquer comme lu</string>
+    <string name="content_desc_mark_as_unread">Marquer comme non lu</string>
+    <string name="content_desc_add_to_favorites">Ajouter aux favoris</string>
+    <string name="content_desc_remove_from_favorites">Retirer des favoris</string>
+    <string name="content_desc_show_password">Afficher le mot de passe</string>
+    <string name="content_desc_delete">Supprimer</string>
+    <string name="content_desc_download">Télécharger</string>
 
     <!-- Login Dialog -->
     <string name="login_dialog_title_error">Erreur</string>

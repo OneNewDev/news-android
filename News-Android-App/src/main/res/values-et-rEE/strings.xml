@@ -3,6 +3,7 @@
 
     <string name="auto_sync_string">Auto sünk</string>
     <string name="empty_view_content">Siin pole üksusi</string>
+    <string name="empty_view_content_action">Pull down to refresh</string>
     <string name="no_wifi_available">WiFi pole ühendatud</string>
     <string name="current_version">Sa kasutad versioon %s</string>
     <string name="widget_header">ownCloud Uudised</string>
@@ -60,6 +61,12 @@
 
     <string name="feed_remove_button">Eemalda</string>
     <string name="feed_rename_button">Nimeta ümber</string>
+    <string name="action_folder_rename">Nimeta kaust ümber</string>
+    <string name="folder_remove_button">Eemalda</string>
+    <string name="folder_rename_button">Nimeta ümber</string>
+    <!-- Strings related to AddFolderDialogFragment (Add Folder) -->
+    <string name="folder_add_button">Lisa</string>
+    <string name="hint_folder_name">Kausta nimi</string>
     <string name="pref_title_username">Kasutajanimi</string>
     <string name="pref_title_password">Parool</string>
     <string name="pref_title_owncloudRootPath">ownCloud juur address</string>
@@ -105,6 +112,7 @@
     <!-- Settings for About -->
     <string name="pref_header_about">Info</string>
     <string name="pref_license">Litsents</string>
+    <string name="pref_privacy">Privaatsus</string>
     <!-- Settings for Display -->
     <string name="pref_header_display">Vaade</string>
     <string name="pref_title_feed_list_layout">Uudisvoo nimekirja paigutus</string>
@@ -112,20 +120,14 @@
     <string name="pref_display_apptheme_dark">Hele</string>
 
     <string name="pref_display_font_size_d">Vaikeväärtus</string>
-    <string name="content_desc_play">esita</string>
-    <string name="content_desc_pause">peata</string>
-    <string name="content_desc_rewind">keri tagasi</string>
-    <string name="content_desc_forward">edasi</string>
-    <string name="content_desc_expand">laienda</string>
-    <string name="content_desc_collapse">sulge</string>
-    <string name="content_desc_mark_as_read">märgi loetuks</string>
-    <string name="content_desc_mark_as_unread">märgi mitteloetuks</string>
-    <string name="content_desc_tap_to_refresh">värskendamiseks vajuta</string>
-    <string name="content_desc_add_to_favorites">lisa lemmikutesse</string>
-    <string name="content_desc_remove_from_favorites">eelamda lemmikutest</string>
-    <string name="content_desc_show_password">näita parooli</string>
-    <string name="content_desc_delete">kustuta</string>
-    <string name="content_desc_download">laadi alla</string>
+    <string name="content_desc_play">Esita</string>
+    <string name="content_desc_pause">Paus</string>
+    <string name="content_desc_forward">Edasi</string>
+    <string name="content_desc_collapse">Sulge</string>
+    <string name="content_desc_add_to_favorites">Lisa lemmikutesse</string>
+    <string name="content_desc_remove_from_favorites">Eemalda lemmikutest</string>
+    <string name="content_desc_delete">Kustuta</string>
+    <string name="content_desc_download">Lae alla</string>
 
     <!-- Login Dialog -->
     <string name="login_dialog_title_error">Viga</string>
@@ -143,4 +145,5 @@
     <string name="pref_data_sync_image_cache_ask">Küsi, kui pole WiFisse ühendatud</string>
 
     <string name="array_sync_interval_min_0">Mitte kunagi</string>
+    <string name="please_wait">Palun oota...</string>
     </resources>

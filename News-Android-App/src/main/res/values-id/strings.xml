@@ -3,6 +3,7 @@
 
     <string name="auto_sync_string">Sync otomatis</string>
     <string name="empty_view_content">Tak ada item disini</string>
+    <string name="empty_view_content_action">Pull down to refresh</string>
     <string name="no_wifi_available">Tidak ada WiFi yang terhubung</string>
     <string name="current_version">Anda menggunakan Versi %s</string>
     <string name="widget_header">Berita ownCloud</string>
@@ -63,6 +64,12 @@
     <string name="confirm_feed_remove">Apakah Anda yakin ingin menghapus Feed ini? Tindakan ini tidak dapat dibatalkan!</string>
     <string name="move_feed_root_folder">Folder akar</string>
 
+    <string name="action_folder_rename">Ubah nama folder</string>
+    <string name="folder_remove_button">Buang</string>
+    <string name="folder_rename_button">Ubah nama</string>
+    <!-- Strings related to AddFolderDialogFragment (Add Folder) -->
+    <string name="folder_add_button">Masukkan</string>
+    <string name="hint_folder_name">Nama Folder</string>
     <string name="pref_title_username">Nama pengguna</string>
     <string name="pref_title_password">Kata sandi</string>
     <string name="pref_title_owncloudRootPath">Alamat root ownCloud</string>
@@ -105,8 +112,9 @@
     <string name="no_podcast_selected">Tidak ada siniar yang dipilih</string>
     <string name="no_chapters_available">Tidak ada bab tersedia</string>
     <!-- Settings for About -->
-    <string name="pref_header_about">Tentang.</string>
+    <string name="pref_header_about">Tentang</string>
     <string name="pref_license">Lisensi</string>
+    <string name="pref_privacy">Privasi</string>
     <!-- Settings for Display -->
     <string name="pref_header_display">Tampilkan</string>
     <string name="pref_title_feed_list_layout">Tata letak daftar umpan</string>
@@ -114,20 +122,14 @@
     <string name="pref_display_apptheme_dark">Gelap</string>
 
     <string name="pref_display_font_size_d">Bawaan</string>
-    <string name="content_desc_play">putar</string>
-    <string name="content_desc_pause">jeda</string>
-    <string name="content_desc_rewind">mundur</string>
-    <string name="content_desc_forward">maju</string>
-    <string name="content_desc_expand">perluas</string>
-    <string name="content_desc_collapse">runtuh</string>
-    <string name="content_desc_mark_as_read">tandai sudah dibaca</string>
-    <string name="content_desc_mark_as_unread">tandai belum dibaca</string>
-    <string name="content_desc_tap_to_refresh">tekan untuk menyegarkan</string>
-    <string name="content_desc_add_to_favorites">tambah ke favorit</string>
-    <string name="content_desc_remove_from_favorites">hapus dari favorit</string>
-    <string name="content_desc_show_password">tampilkan kata sandi</string>
-    <string name="content_desc_delete">hapus</string>
-    <string name="content_desc_download">unduh</string>
+    <string name="content_desc_play">Putar</string>
+    <string name="content_desc_pause">Jeda</string>
+    <string name="content_desc_collapse">Tutup</string>
+    <string name="content_desc_add_to_favorites">Tambah ke favorit</string>
+    <string name="content_desc_remove_from_favorites">Remove from favorites</string>
+    <string name="content_desc_show_password">Tampilkan kata sandi</string>
+    <string name="content_desc_delete">Hapus</string>
+    <string name="content_desc_download">Unduh</string>
 
     <!-- Login Dialog -->
     <string name="login_dialog_title_error">Kesalahan</string>
@@ -145,4 +147,9 @@
     <string name="pref_data_sync_image_cache_ask">Tanya ketika tidak tersambung ke WiFi</string>
 
     <string name="array_sync_interval_min_0">Tidak pernah</string>
+    <string name="array_sync_interval_hour_1">1 jam</string>
+    <string name="array_sync_interval_hour_3">3 jam</string>
+    <string name="array_sync_interval_hour_12">12 jam</string>
+    <string name="switch_account">Pindah akun</string>
+    
     </resources>

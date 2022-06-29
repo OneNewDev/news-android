@@ -37,6 +37,7 @@
     <string name="action_settings">Beállítások</string>
     <string name="action_sync_settings">Szinkronizáálási beállítások</string>
     <string name="action_add_new_feed">Új hírcsatorna hozzáadása</string>
+    <string name="action_add_new_folder">Új mappa hozzáadása</string>
     <string name="action_textToSpeech">Kiolvasás</string>
     <string name="action_search">Keresés</string>
     <string name="action_download_articles_offline">Cikkek letöltése offline használatra</string>
@@ -79,16 +80,29 @@
     <string name="action_feed_remove">Hírfolyam eltávolítása</string>
     <string name="action_feed_rename">Hírfolyam átnevezése</string>
     <string name="action_feed_move">Hírcsatorna áthelyezése</string>
+    <string name="action_feed_notification_settings">Értesítési beállítások</string>
     <string name="feed_remove_button">Eltávolítás</string>
     <string name="feed_rename_button">Átnevezés</string>
     <string name="confirm_feed_remove">Biztos, hogy eltávolítja ezt a hírcsatornát? Ez nem vonható vissza!</string>
     <string name="feed_move_list_description">Válassza ki a mappát, amelybe áthelyezi a hírcsatornát</string>
     <string name="move_feed_root_folder">Gyökérmappa</string>
 
+    <!-- Strings related to FolderOptionsDialogFragment (Rename/Remove folder) -->
+    <string name="action_folder_remove">Mappa eltávolítása</string>
+    <string name="action_folder_rename">Mappa átnevezése</string>
+    <string name="folder_remove_button">Eltávolítás</string>
+    <string name="folder_rename_button">Átnevezés</string>
+    <string name="confirm_folder_remove">Biztos, hogy eltávolítja ezt a mappát? Ez nem vonható vissza!</string>
+
     <!-- Strings related to NewsReaderListDialogFragment (Notification Settings) -->
     <string name="notification_feed_unique">Egyedi értesítések fogadása erről a hírcsatornáról</string>
     <string name="notification_feed_default">Az alapértelmezett beállításokat használó összes hírcsatorna egy értesítésben fog megjelenni</string>
     <string name="notification_feed_none">Egyáltalán nincsenek értesítések</string>
+
+    <!-- Strings related to AddFolderDialogFragment (Add Folder) -->
+    <string name="folder_add_button">Hozzáadás</string>
+    <string name="hint_folder_name">Mappanév</string>
+    <string name="folder_already_exists">A mappa már létezik</string>
 
     <!-- Strings related to login -->
     <string name="login_manual">Kézi bejelentkezés</string>
@@ -159,6 +173,7 @@
     <!-- Podcast -->
     <string name="no_podcast_selected">Nincs podcast kiválasztva</string>
     <string name="no_chapters_available">Nincsenek elérhető fejezetek</string>
+    <string name="exit_playback">Kilépés a lejátszóból</string>
     <string name="podcast_playback_speed_dialog_title">Lejátszási sebesség</string>
     <string name="notification_downloading_podcast_title">Podcast letöltése</string>
 
@@ -211,21 +226,21 @@
     <string name="pref_display_font_size_l">Nagy</string>
     <string name="pref_display_font_size_xl">Extra nagy</string>
 
-    <string name="content_desc_play">lejátszás</string>
-    <string name="content_desc_pause">szünet</string>
-    <string name="content_desc_playback_speed">lejátszási sebesség</string>
-    <string name="content_desc_rewind">visszatekerés</string>
-    <string name="content_desc_forward">előretekerés</string>
-    <string name="content_desc_expand">kibontás</string>
-    <string name="content_desc_collapse">összecsukás</string>
-    <string name="content_desc_mark_as_read">megjelölés olvasottként</string>
-    <string name="content_desc_mark_as_unread">megjelölés olvasatlanként</string>
-    <string name="content_desc_tap_to_refresh">koppintson a frissítéshez</string>
-    <string name="content_desc_add_to_favorites">hozzáadás a kedvencekhez</string>
-    <string name="content_desc_remove_from_favorites">eltávolítás a kedvencekből</string>
-    <string name="content_desc_show_password">jelszó megjelenítése</string>
-    <string name="content_desc_delete">törlés</string>
-    <string name="content_desc_download">letöltés</string>
+    <string name="content_desc_play">Lejátszás</string>
+    <string name="content_desc_pause">Szünet</string>
+    <string name="content_desc_playback_speed">Lejátszási sebesség</string>
+    <string name="content_desc_rewind">Visszatekerés</string>
+    <string name="content_desc_forward">Továbbítás</string>
+    <string name="content_desc_expand">Kibontás</string>
+    <string name="content_desc_collapse">Összecsukás</string>
+    <string name="content_desc_mark_as_read">Megjelölés olvasottként</string>
+    <string name="content_desc_mark_as_unread">Megjelölés olvasatlanként</string>
+    <string name="content_desc_tap_to_refresh">Koppintson a frissítéshez</string>
+    <string name="content_desc_add_to_favorites">Hozzáadás a kedvencekhez</string>
+    <string name="content_desc_remove_from_favorites">Eltávolítás a kedvencek közül</string>
+    <string name="content_desc_show_password">Jelszó megjelenítése</string>
+    <string name="content_desc_delete">Törlés</string>
+    <string name="content_desc_download">Letöltés</string>
 
     <!-- Login Dialog -->
     <string name="login_dialog_title_error">Hiba</string>

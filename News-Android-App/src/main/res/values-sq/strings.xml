@@ -3,6 +3,7 @@
 
     <string name="auto_sync_string">Vetënjëkohëso</string>
     <string name="empty_view_content">S’ka gjë këtu</string>
+    <string name="empty_view_content_action">Pull down to refresh</string>
     <string name="no_wifi_available">Pa lidhje WiFi</string>
     <string name="do_you_want_to_download_without_wifi">Doni të shkarkoni imazhet pa lidhje me Wi-Fi</string>
     <string name="current_version">Po përdorni Versionin %s</string>
@@ -71,6 +72,12 @@
     <string name="feed_remove_button">Hiqe</string>
     <string name="feed_rename_button">Riemërtoje</string>
     <string name="confirm_feed_remove">Doni vërtet të hiqet kjo Prurje? Kjo s’mund të zhbëhet!</string>
+    <string name="action_folder_rename">Riemërtoni dosjen</string>
+    <string name="folder_remove_button">Hiq</string>
+    <string name="folder_rename_button">Rename</string>
+    <!-- Strings related to AddFolderDialogFragment (Add Folder) -->
+    <string name="folder_add_button">Shto</string>
+    <string name="hint_folder_name">Emri i dosjes</string>
     <string name="pref_title_username">Emër përdoruesi</string>
     <string name="pref_title_password">Fjalëkalim</string>
     <string name="pref_title_owncloudRootPath">Adresa rrënjë e ownCloud-it</string>
@@ -118,6 +125,7 @@
     <!-- Settings for About -->
     <string name="pref_header_about">Rreth </string>
     <string name="pref_license">Liçenca</string>
+    <string name="pref_privacy">Privatësia</string>
     <!-- Settings for Display -->
     <string name="pref_header_display">Ekran</string>
     <string name="pref_title_app_theme">Shabllon</string>
@@ -129,25 +137,24 @@
     <string name="pref_display_apptheme_dark">E errët</string>
 
     <string name="pref_display_font_size_d">E paracaktuar</string>
-    <string name="content_desc_play">luaje</string>
-    <string name="content_desc_pause">pushoje</string>
-    <string name="content_desc_rewind">mbrapsht</string>
-    <string name="content_desc_forward">përpara</string>
-    <string name="content_desc_expand">zgjeroje</string>
-    <string name="content_desc_collapse">tkurre</string>
-    <string name="content_desc_mark_as_read">shënoje si të lexuar</string>
-    <string name="content_desc_mark_as_unread">shënoje si të palexuar</string>
-    <string name="content_desc_tap_to_refresh">prekeni që të rifreskohet</string>
-    <string name="content_desc_add_to_favorites">shtojeni te të parapëlqyerat</string>
-    <string name="content_desc_remove_from_favorites">hiqe prej të parapëlqyerave</string>
-    <string name="content_desc_show_password">shfaqe fjalëkalimin</string>
-    <string name="content_desc_delete">fshi</string>
-    <string name="content_desc_download">shkarkoje</string>
+    <string name="content_desc_play">Luaj</string>
+    <string name="content_desc_pause">Pauzë</string>
+    <string name="content_desc_forward">Përpara</string>
+    <string name="content_desc_collapse">Tkurre</string>
+    <string name="content_desc_mark_as_read">Shënoje si të lexuar</string>
+    <string name="content_desc_mark_as_unread">Shënoje si të palexuar</string>
+    <string name="content_desc_add_to_favorites">Shtoje tek të parapëlqyerat</string>
+    <string name="content_desc_remove_from_favorites">Remove from favorites</string>
+    <string name="content_desc_delete">Fshij</string>
+    <string name="content_desc_download">Shkarko</string>
 
     <!-- Login Dialog -->
     <string name="login_dialog_title_error">Gabim</string>
     <string name="login_dialog_text_something_went_wrong">Diçka shkoi ters :(</string>
     <string name="login_dialog_title_security_warning">Sinjalizim Sigurie</string>
+    <string name="login_dialog_select_account_unknown_error_toast">Dicka shkoi keq. Ju lutemi provoni përsëri.</string>
+
+
     <!-- Data & Sync -->
     <string name="pref_header_data_sync">Të dhëna &amp; njëkohësim</string>
     <string name="pref_title_clearCache">Pastroje fshehtinën</string>
@@ -160,4 +167,16 @@
     <string name="pref_data_sync_image_cache_ask">Pyet, kur s\’është i lidhur me WiFi</string>
 
     <string name="array_sync_interval_min_0">Kurrë</string>
+    <string name="array_sync_interval_min_5">5 minuta</string>
+    <string name="array_sync_interval_min_15">15 minutes</string>
+    <string name="array_sync_interval_min_30">30 minutes</string>
+    <string name="array_sync_interval_hour_1">1 Orë</string>
+    <string name="array_sync_interval_hour_2">2 orë </string>
+    <string name="array_sync_interval_hour_3">3 orë</string>
+    <string name="array_sync_interval_hour_6">6 orë</string>
+    <string name="array_sync_interval_hour_12">12 orë</string>
+    <string name="array_sync_interval_hour_24">24 orë</string>
+    <string name="switch_account">Ndrysho Llogarinë</string>
+    
+    <string name="please_wait">Ju lutem prisni ...</string>
     </resources>

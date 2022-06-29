@@ -12,6 +12,7 @@
     <string name="widget_header">Notícias Nextcloud</string>
     <plurals name="message_bar_new_articles_available">
         <item quantity="one">%d novo item disponível</item>
+        <item quantity="many">%d novos itens disponíveis</item>
         <item quantity="other">%d novos itens disponíveis</item>
     </plurals>
     <string name="message_bar_reload">Recarregar</string>
@@ -37,6 +38,7 @@
     <string name="action_settings">Configurações</string>
     <string name="action_sync_settings">Configurações de Sincronização</string>
     <string name="action_add_new_feed">Adicionar novo feed</string>
+    <string name="action_add_new_folder">Adicionar nova pasta</string>
     <string name="action_textToSpeech">Leia</string>
     <string name="action_search">Pesquisar</string>
     <string name="action_download_articles_offline">Download de artigos offline</string>
@@ -45,10 +47,12 @@
     <string name="notification_download_images_offline">Download de imagens para uso offline</string>
     <plurals name="notification_new_items_ticker">
         <item quantity="one">Você tem %d novo item não lido</item>
+        <item quantity="many">Você tem %d novos itens não lidos</item>
         <item quantity="other">Você tem %d novos itens não lidos</item>
     </plurals>
     <plurals name="notification_new_items_text">
         <item quantity="one">%d novo item não lido disponível</item>
+        <item quantity="many">%d novos itens não lidos disponíveis</item>
         <item quantity="other">%d novos itens não lidos disponíveis</item>
     </plurals>
 
@@ -79,16 +83,29 @@
     <string name="action_feed_remove">Remover alimentação</string>
     <string name="action_feed_rename">Renomear Alimentação</string>
     <string name="action_feed_move">Mover Feed</string>
+    <string name="action_feed_notification_settings">Configurações de notificação</string>
     <string name="feed_remove_button">Remover</string>
     <string name="feed_rename_button">Renomear</string>
     <string name="confirm_feed_remove">Você realmente deseja remover esta alimentação? Isso não pode ser desfeito!</string>
     <string name="feed_move_list_description">Selecione a pasta para mover o feed</string>
     <string name="move_feed_root_folder">Pasta raiz</string>
 
+    <!-- Strings related to FolderOptionsDialogFragment (Rename/Remove folder) -->
+    <string name="action_folder_remove">Remover pasta</string>
+    <string name="action_folder_rename">Renomear pasta</string>
+    <string name="folder_remove_button">Remover</string>
+    <string name="folder_rename_button">Renomear</string>
+    <string name="confirm_folder_remove">Deseja realmente remover esta pasta? Isto não pode ser desfeito!</string>
+
     <!-- Strings related to NewsReaderListDialogFragment (Notification Settings) -->
     <string name="notification_feed_unique">Receba notificações exclusivas para este feed</string>
     <string name="notification_feed_default">Todos os feeds com as configurações padrão aparecerão em uma notificação</string>
     <string name="notification_feed_none">Sem notificações</string>
+
+    <!-- Strings related to AddFolderDialogFragment (Add Folder) -->
+    <string name="folder_add_button">Adicionar</string>
+    <string name="hint_folder_name">Nome da pasta</string>
+    <string name="folder_already_exists">A pasta já existe</string>
 
     <!-- Strings related to login -->
     <string name="login_manual">Login manual</string>
@@ -108,11 +125,13 @@
     <!-- Toast Messages -->
     <plurals name="toast_downloaded_x_items">
         <item quantity="one">Transferido %d item antigo</item>
+        <item quantity="many">Transferidos %d itens antigos</item>
         <item quantity="other">Transferidos %d itens antigos</item>
     </plurals>
     <string name="toast_no_more_downloads_available">Nenhum item disponível</string>
     <plurals name="fetched_items_so_far">
         <item quantity="one">Já foi buscado %d itens até agora...</item>
+        <item quantity="many">Já foram buscados %d itens até agora...</item>
         <item quantity="other">Já foram buscados %d itens até agora...</item>
     </plurals>
 
@@ -159,6 +178,7 @@
     <!-- Podcast -->
     <string name="no_podcast_selected">Nenhum podcast selecionado</string>
     <string name="no_chapters_available">Nenhum capítulo disponível</string>
+    <string name="exit_playback">Sair</string>
     <string name="podcast_playback_speed_dialog_title">Velocidade do Playback</string>
     <string name="notification_downloading_podcast_title">Baixando podcast</string>
 
@@ -211,21 +231,21 @@
     <string name="pref_display_font_size_l">Grande</string>
     <string name="pref_display_font_size_xl">Extra Grande</string>
 
-    <string name="content_desc_play">executar</string>
-    <string name="content_desc_pause">pausa</string>
-    <string name="content_desc_playback_speed">velocidade do playback</string>
-    <string name="content_desc_rewind">recarregar</string>
-    <string name="content_desc_forward">adiantar</string>
-    <string name="content_desc_expand">expandir</string>
-    <string name="content_desc_collapse">recolher</string>
-    <string name="content_desc_mark_as_read">marcar como lido</string>
-    <string name="content_desc_mark_as_unread">marcar como não lido</string>
-    <string name="content_desc_tap_to_refresh">toque para atualizar</string>
-    <string name="content_desc_add_to_favorites">adicionar aos favoritos</string>
-    <string name="content_desc_remove_from_favorites">remover dos favoritos</string>
-    <string name="content_desc_show_password">exibir senha</string>
-    <string name="content_desc_delete">excluir</string>
-    <string name="content_desc_download">baixar</string>
+    <string name="content_desc_play">Executar</string>
+    <string name="content_desc_pause">Pausar</string>
+    <string name="content_desc_playback_speed">Velocidade de reprodução</string>
+    <string name="content_desc_rewind">Retornar</string>
+    <string name="content_desc_forward">Avançar</string>
+    <string name="content_desc_expand">Expandir</string>
+    <string name="content_desc_collapse">Recolher</string>
+    <string name="content_desc_mark_as_read">Marcar como lida</string>
+    <string name="content_desc_mark_as_unread">Marcar como não lida</string>
+    <string name="content_desc_tap_to_refresh">Toque para atualizar</string>
+    <string name="content_desc_add_to_favorites">Adicionar aos favoritos</string>
+    <string name="content_desc_remove_from_favorites">Remover dos favoritos</string>
+    <string name="content_desc_show_password">Mostrar senha</string>
+    <string name="content_desc_delete">Excluir</string>
+    <string name="content_desc_download">Baixar</string>
 
     <!-- Login Dialog -->
     <string name="login_dialog_title_error">Erro</string>

@@ -12,6 +12,7 @@
     <string name="widget_header">Noticias de Nextcloud</string>
     <plurals name="message_bar_new_articles_available">
         <item quantity="one">%d nuevo elemento disponible</item>
+        <item quantity="many">%d nuevos elementos disponibles</item>
         <item quantity="other">%d nuevos elementos disponibles</item>
     </plurals>
     <string name="message_bar_reload">Recargar</string>
@@ -37,6 +38,7 @@
     <string name="action_settings">Ajustes</string>
     <string name="action_sync_settings">Ajustes de sincronización</string>
     <string name="action_add_new_feed">Añadir nueva fuente</string>
+    <string name="action_add_new_folder">Añadir carpeta nueva</string>
     <string name="action_textToSpeech">Recopilar información</string>
     <string name="action_search">Buscar</string>
     <string name="action_download_articles_offline">Descargar los artículos sin conexión</string>
@@ -45,10 +47,12 @@
     <string name="notification_download_images_offline">Descargar las imágenes para uso sin conexión</string>
     <plurals name="notification_new_items_ticker">
         <item quantity="one">Tienes %d elemento nuevo sin leer</item>
+        <item quantity="many">Tienes %d elementos nuevos sin leer</item>
         <item quantity="other">Tienes %d elementos nuevos sin leer</item>
     </plurals>
     <plurals name="notification_new_items_text">
         <item quantity="one">%d elementos nuevos sin leer</item>
+        <item quantity="many">%d elementos nuevos sin leer</item>
         <item quantity="other">%d elementos nuevos sin leer</item>
     </plurals>
 
@@ -79,16 +83,29 @@
     <string name="action_feed_remove">Eliminar fuente</string>
     <string name="action_feed_rename">Renombrar Fuente</string>
     <string name="action_feed_move">Mover fuente</string>
+    <string name="action_feed_notification_settings">Configuraciones de notificación</string>
     <string name="feed_remove_button">Eliminar</string>
     <string name="feed_rename_button">Renombrar</string>
     <string name="confirm_feed_remove">¿Realmente desea eliminar esta Fuente? ¡Esto no se puede deshacer!</string>
     <string name="feed_move_list_description">Selecciona la carpeta a la que mover la fuente</string>
     <string name="move_feed_root_folder">Carpeta raíz</string>
 
+    <!-- Strings related to FolderOptionsDialogFragment (Rename/Remove folder) -->
+    <string name="action_folder_remove">Eliminar carpeta</string>
+    <string name="action_folder_rename">Renombrar carpeta</string>
+    <string name="folder_remove_button">Eliminar</string>
+    <string name="folder_rename_button">Renombrar</string>
+    <string name="confirm_folder_remove">¿Seguro que quieres eliminar esta carpeta? Esto no se puede deshacer.</string>
+
     <!-- Strings related to NewsReaderListDialogFragment (Notification Settings) -->
     <string name="notification_feed_unique">Recibir notificaciones únicas para esta fuente</string>
     <string name="notification_feed_default">Todas las fuentes con los ajustes por defecto aparecerán en una notificación</string>
     <string name="notification_feed_none">Ninguna notificación</string>
+
+    <!-- Strings related to AddFolderDialogFragment (Add Folder) -->
+    <string name="folder_add_button">Añadir</string>
+    <string name="hint_folder_name">Nombre de la carpeta</string>
+    <string name="folder_already_exists">La carpeta ya existe</string>
 
     <!-- Strings related to login -->
     <string name="login_manual">Inicio de sesión manual</string>
@@ -108,11 +125,13 @@
     <!-- Toast Messages -->
     <plurals name="toast_downloaded_x_items">
         <item quantity="one">Se ha descargado %d elemento antiguo</item>
+        <item quantity="many">Se han descargado %d elementos antiguos</item>
         <item quantity="other">Se han descargado %d elementos antiguos</item>
     </plurals>
     <string name="toast_no_more_downloads_available">No hay elementos disponibles</string>
     <plurals name="fetched_items_so_far">
         <item quantity="one">Recuperado %d ítem por ahora…</item>
+        <item quantity="many">Recuperados %d ítems por ahora…</item>
         <item quantity="other">Recuperados %d ítems por ahora…</item>
     </plurals>
 
@@ -159,6 +178,7 @@
     <!-- Podcast -->
     <string name="no_podcast_selected">Ningún podcast seleccionado</string>
     <string name="no_chapters_available">No hay capítulos disponibles</string>
+    <string name="exit_playback">Salir del reproductor</string>
     <string name="podcast_playback_speed_dialog_title">Velocidad de reproducción</string>
     <string name="notification_downloading_podcast_title">Descargando podcast</string>
 
@@ -211,21 +231,21 @@
     <string name="pref_display_font_size_l">Grande</string>
     <string name="pref_display_font_size_xl">Muy grande</string>
 
-    <string name="content_desc_play">reproducir</string>
-    <string name="content_desc_pause">pausar</string>
-    <string name="content_desc_playback_speed">velocidad de reproducción</string>
-    <string name="content_desc_rewind">rebobinar</string>
-    <string name="content_desc_forward">avance</string>
-    <string name="content_desc_expand">expandir</string>
-    <string name="content_desc_collapse">encoger</string>
-    <string name="content_desc_mark_as_read">marcar como leído</string>
-    <string name="content_desc_mark_as_unread">marcar como no leído</string>
-    <string name="content_desc_tap_to_refresh">toque para refrescar</string>
-    <string name="content_desc_add_to_favorites">agregar a los favoritos</string>
-    <string name="content_desc_remove_from_favorites">eliminarlo de favoritos</string>
-    <string name="content_desc_show_password">mostrar contraseña</string>
-    <string name="content_desc_delete">borrar</string>
-    <string name="content_desc_download">descargar</string>
+    <string name="content_desc_play">Reproducir</string>
+    <string name="content_desc_pause">Pausar</string>
+    <string name="content_desc_playback_speed">Velocidad de reproducció</string>
+    <string name="content_desc_rewind">Retroceso</string>
+    <string name="content_desc_forward">Reenviar</string>
+    <string name="content_desc_expand">Expendir</string>
+    <string name="content_desc_collapse">Colapsar</string>
+    <string name="content_desc_mark_as_read">Marcar como leído</string>
+    <string name="content_desc_mark_as_unread">Marcar como no leído</string>
+    <string name="content_desc_tap_to_refresh">Tocar para refrescar</string>
+    <string name="content_desc_add_to_favorites">Añadir a favoritos</string>
+    <string name="content_desc_remove_from_favorites">Eliminar de favoritos</string>
+    <string name="content_desc_show_password">Mostrar contraseña</string>
+    <string name="content_desc_delete">Eliminar</string>
+    <string name="content_desc_download">Descargar</string>
 
     <!-- Login Dialog -->
     <string name="login_dialog_title_error">Error</string>

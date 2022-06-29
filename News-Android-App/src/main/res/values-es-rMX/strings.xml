@@ -3,12 +3,14 @@
 
     <string name="auto_sync_string">Sincronización automática</string>
     <string name="empty_view_content">Aquí no hay elementos</string>
+    <string name="empty_view_content_action">Jala hacia abajo para actualizar</string>
     <string name="no_wifi_available">No estás conectado a una WiFi</string>
     <string name="do_you_want_to_download_without_wifi">¿Deseas descargar imágenes sin conexión a Wi-Fi?</string>
     <string name="current_version">Estás usando la Versión %s</string>
     <string name="widget_header">Noticias de Nextcloud</string>
     <plurals name="message_bar_new_articles_available">
         <item quantity="one">%d elemento nuevo disponible</item>
+        <item quantity="many">%d elementos nuevos disponibles</item>
         <item quantity="other">%d elementos nuevos disponibles</item>
     </plurals>
     <string name="message_bar_reload">Volver a cargar</string>
@@ -36,10 +38,12 @@
     <string name="action_search">Buscar</string>
     <plurals name="notification_new_items_ticker">
         <item quantity="one">Tienes %d elemento nuevo sin leer</item>
+        <item quantity="many">Tienes %d elmentos nuevos sin leer</item>
         <item quantity="other">Tienes %d elmentos nuevos sin leer</item>
     </plurals>
     <plurals name="notification_new_items_text">
         <item quantity="one">%d elemento nuevo no leído disponible</item>
+        <item quantity="many">%d elementos nuevos no leídos disponibles</item>
         <item quantity="other">%d elementos nuevos no leídos disponibles</item>
     </plurals>
 
@@ -67,6 +71,12 @@
     <string name="feed_remove_button">Eliminar</string>
     <string name="feed_rename_button">Renombrar</string>
     <string name="confirm_feed_remove">¿Realmente deseas eliminar esta Fuente? ¡Esta operación no se puede deshacer!</string>
+    <string name="action_folder_rename">Renombrar carpeta</string>
+    <string name="folder_remove_button">Eliminar</string>
+    <string name="folder_rename_button">Renombrar</string>
+    <!-- Strings related to AddFolderDialogFragment (Add Folder) -->
+    <string name="folder_add_button">Agregar</string>
+    <string name="hint_folder_name">Nombre de la carpeta</string>
     <string name="pref_title_username">Nombre de usuario</string>
     <string name="pref_title_password">Contraseña</string>
     <string name="pref_title_owncloudRootPath">Dirección raíz de Nextcloud</string>
@@ -81,6 +91,7 @@
     <!-- Toast Messages -->
     <plurals name="toast_downloaded_x_items">
         <item quantity="one">%d elemento antiguo descargado</item>
+        <item quantity="many">%d elementos antiguos descargados</item>
         <item quantity="other">%d elementos antiguos descargados</item>
     </plurals>
     <string name="toast_no_more_downloads_available">No hay más elementos disponibles</string>
@@ -118,6 +129,7 @@
     <!-- Settings for About -->
     <string name="pref_header_about">Acerca de</string>
     <string name="pref_license">Licencia</string>
+    <string name="pref_privacy">Privacidad</string>
     <!-- Settings for Display -->
     <string name="pref_header_display">Mostrar</string>
     <string name="pref_title_app_theme">Tema</string>
@@ -135,21 +147,14 @@
     <string name="pref_display_browser_external">Navegador Externo</string>
 
     <string name="pref_display_font_size_d">Predeterminado</string>
-    <string name="content_desc_play">reproducir</string>
-    <string name="content_desc_pause">pausar</string>
-    <string name="content_desc_playback_speed">velocidad de reproducción</string>
-    <string name="content_desc_rewind">rebobinar</string>
-    <string name="content_desc_forward">adelantar</string>
-    <string name="content_desc_expand">expandir</string>
-    <string name="content_desc_collapse">colapsar</string>
-    <string name="content_desc_mark_as_read">marcar como leído</string>
-    <string name="content_desc_mark_as_unread">marcar como no leído</string>
-    <string name="content_desc_tap_to_refresh">pulsar para actualizar</string>
-    <string name="content_desc_add_to_favorites">agregar a favoritos</string>
-    <string name="content_desc_remove_from_favorites">eliminar de favoritos</string>
-    <string name="content_desc_show_password">mostrar contraseña</string>
-    <string name="content_desc_delete">borrar</string>
-    <string name="content_desc_download">descargar</string>
+    <string name="content_desc_play">Reproducir</string>
+    <string name="content_desc_pause">Pausar</string>
+    <string name="content_desc_forward">Adelante</string>
+    <string name="content_desc_collapse">Colapsar</string>
+    <string name="content_desc_add_to_favorites">Agregar a favoritos</string>
+    <string name="content_desc_remove_from_favorites">Eliminar de favoritos</string>
+    <string name="content_desc_delete">Eliminar</string>
+    <string name="content_desc_download">Descargar</string>
 
     <!-- Login Dialog -->
     <string name="login_dialog_title_error">Error</string>
@@ -170,4 +175,14 @@
     <string name="pref_data_sync_image_cache_ask">Preguntar cuando no esté conectado a WiFi</string>
 
     <string name="array_sync_interval_min_0">Nunca</string>
+    <string name="array_sync_interval_min_5">5 minutos</string>
+    <string name="array_sync_interval_min_15">15 minutos</string>
+    <string name="array_sync_interval_min_30">30 minutos</string>
+    <string name="array_sync_interval_hour_1">1 hora</string>
+    <string name="array_sync_interval_hour_3">3 horas</string>
+    <string name="array_sync_interval_hour_6">6 horas</string>
+    <string name="array_sync_interval_hour_12">12 horas</string>
+    <string name="array_sync_interval_hour_24">24 horas</string>
+    <string name="switch_account">Cambiar cuenta</string>
+    
     </resources>

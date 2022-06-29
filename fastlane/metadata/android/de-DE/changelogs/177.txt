@@ -1,0 +1,1 @@
+Fixed incompatibility issues with Nextcloud News 18.1.0

@@ -71,10 +71,12 @@ android {
         oss {
             dimension "default"
             versionNameSuffix '-doubletab'
+            applicationIdSuffix '.doubletab'
         }
         // Used for continous integration, e.g. to test built .apk-files from pull requests
         dev {
             dimension "default"
+            versionNameSuffix '-dev'
             applicationIdSuffix ".dev"
         }
     }

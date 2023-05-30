@@ -12,7 +12,7 @@ An Android client for [Nextcloud News App](https://github.com/nextcloud/news/).
 
 ## ▶️ Access
 
-[![Latest Release](https://img.shields.io/github/v/tag/nextcloud/news-android?label=latest+release&sort=semver)](https://github.com/nextcloud/news-android/releases)
+[![Latest Release](https://img.shields.io/github/v/release/nextcloud/news-android?label=latest+release&sort=semver&display_name=release)](https://github.com/nextcloud/news-android/releases)
 [![F-Droid Release](https://img.shields.io/f-droid/v/de.luhmer.owncloudnewsreader)](https://f-droid.org/de/packages/de.luhmer.owncloudnewsreader/)
 [![Beta channel](https://img.shields.io/badge/Play%0DStore-Beta%0Dchannel-informational)](https://play.google.com/apps/testing/de.luhmer.owncloudnewsreader)
 
@@ -39,7 +39,7 @@ An Android client for [Nextcloud News App](https://github.com/nextcloud/news/).
 * [Pick a good first issue](https://github.com/nextcloud/news-android/labels/good%20first%20issue) :notebook:
 * Create a [Pull Request](https://opensource.guide/how-to-contribute/#opening-a-pull-request)
 * Help increasing the test coverage by contributing unit tests
-* Translate the app on [Transifex](https://www.transifex.com/nextcloud/nextcloud/)
+* Translate the app on [Transifex](https://app.transifex.com/nextcloud/nextcloud/)
 * Send me a bottle of your favorite beer :beers: :wink:
 
 ## How to compile the App

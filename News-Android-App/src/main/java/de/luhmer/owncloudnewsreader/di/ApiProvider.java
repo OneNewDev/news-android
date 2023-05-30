@@ -11,14 +11,9 @@ import com.nextcloud.android.sso.api.NextcloudAPI;
 import com.nextcloud.android.sso.exceptions.SSOException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
-import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import de.luhmer.owncloudnewsreader.SettingsActivity;
 import de.luhmer.owncloudnewsreader.helper.GsonConfig;
-import de.luhmer.owncloudnewsreader.reader.OkHttpImageDownloader;
 import de.luhmer.owncloudnewsreader.reader.nextcloud.NewsAPI;
 import de.luhmer.owncloudnewsreader.reader.nextcloud.OcsAPI;
 import de.luhmer.owncloudnewsreader.ssl.MemorizingTrustManager;
@@ -27,7 +22,7 @@ import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import retrofit2.NextcloudRetrofitApiBuilder;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -63,14 +58,12 @@ public class ApiProvider {
     public void initApi(@NonNull NextcloudAPI.ApiConnectedListener apiConnectedListener) {
         if(mNextcloudSsoApi != null) {
             // Destroy previous Service Connection if we need to reconnect (e.g. login again)
-            mNextcloudSsoApi.stop();
+            mNextcloudSsoApi.close();
             mNextcloudSsoApi = null;
         }
 
         boolean useSSO = mPrefs.getBoolean(SettingsActivity.SW_USE_SINGLE_SIGN_ON, false);
         if(useSSO) {
-            OkHttpClient client = new OkHttpClient.Builder().build();
-            initImageLoader(mPrefs, client, context);
             initSsoApi(apiConnectedListener);
         } else {
             if(mPrefs.contains(SettingsActivity.EDT_OWNCLOUDROOTPATH_STRING)) {
@@ -80,9 +73,8 @@ public class ApiProvider {
                 HttpUrl baseUrl = HttpUrl.parse(baseUrlStr).newBuilder()
                         .addPathSegments("index.php/apps/news/api/v1-2/")
                         .build();
-                Log.d("ApiModule", "HttpUrl: " + baseUrl.toString());
+                Log.d("ApiModule", "HttpUrl: " + baseUrl);
                 OkHttpClient client = OkHttpSSLClient.GetSslClient(baseUrl, username, password, mPrefs, mMemorizingTrustManager);
-                initImageLoader(mPrefs, client, context);
                 initRetrofitApi(baseUrl, client);
                 apiConnectedListener.onConnected();
             } else {
@@ -94,7 +86,7 @@ public class ApiProvider {
     private void initRetrofitApi(HttpUrl baseUrl, OkHttpClient client) {
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create(GsonConfig.GetGson()))
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .baseUrl(baseUrl)
                 .client(client)
                 .build();
@@ -112,30 +104,6 @@ public class ApiProvider {
         } catch (SSOException e) {
             callback.onError(e);
         }
-    }
-
-
-
-    private void initImageLoader(SharedPreferences mPrefs, OkHttpClient okHttpClient, Context context) {
-        String cacheSize = mPrefs.getString(SettingsActivity.SP_MAX_CACHE_SIZE,"500");
-        int diskCacheSize = Integer.parseInt(cacheSize)*1024*1024;
-        if(ImageLoader.getInstance().isInited()) {
-            ImageLoader.getInstance().destroy();
-        }
-        DisplayImageOptions imageOptions = new DisplayImageOptions.Builder()
-                .cacheOnDisk(true)
-                .cacheInMemory(true)
-                .build();
-
-        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)
-                .diskCacheSize(diskCacheSize)
-                .memoryCacheSize(10 * 1024 * 1024)
-                .diskCacheFileNameGenerator(new Md5FileNameGenerator())
-                .defaultDisplayImageOptions(imageOptions)
-                .imageDownloader(new OkHttpImageDownloader(context, okHttpClient))
-                .build();
-
-        ImageLoader.getInstance().init(config);
     }
 
     public NewsAPI getNewsAPI() {

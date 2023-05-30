@@ -112,6 +112,9 @@ class InsertRssItemIntoDatabase {
         try {
             // try fixing relative image links
             content = ImageHandler.fixBrokenImageLinksInArticle(url, content);
+
+            // try fixing relative href links
+            content = ImageHandler.fixBrokenHrefInArticle(url, content);
         } catch (Exception ex) {
             ex.printStackTrace();
             Log.e(TAG, "Error while fixing broken image links in article" + ex);
@@ -128,7 +131,7 @@ class InsertRssItemIntoDatabase {
         if(mediaThumbnail.isEmpty()) {
             List<String> images = ImageHandler.getImageLinksFromText(url, content);
             if(images.size() > 0) {
-                Log.d(TAG, "extracted mediaThumbnail from body");
+                // Log.d(TAG, "extracted mediaThumbnail from body");
                 mediaThumbnail = images.get(0);
             } else {
                 Log.d(TAG, "extracting mediaThumbnail from body failed - no images detected");

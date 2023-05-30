@@ -5,8 +5,9 @@
     <string name="title_activity_sync_interval_selector">Synkroniseringsintervall</string>
     <string name="empty_view_content">Ingenting her</string>
     <string name="empty_view_content_action">Dra ned for å oppdatere</string>
+    <string name="toast_GettingMoreItems">Nedlasting av flere elementer startet. Vennligst vent...</string>
     <string name="no_wifi_available">Ingen WiFI tilkoblet</string>
-    <string name="do_you_want_to_download_without_wifi">Vil du laste ned bilder uten en WiFi-tilkobling</string>
+    <string name="do_you_want_to_download_without_wifi">Ønsker du å laste ned bildene uten å være koblet til inernett?</string>
     <string name="current_version">Du bruker versjon %s</string>
     <string name="widget_header">Nextcloud nyheter</string>
     <plurals name="message_bar_new_articles_available">
@@ -36,6 +37,7 @@
     <string name="action_settings">Innstillinger</string>
     <string name="action_sync_settings">Innstillinger for synkronisering</string>
     <string name="action_add_new_feed">Legg til ny strøm</string>
+    <string name="action_add_new_folder">Legg til en ny mappe</string>
     <string name="action_textToSpeech">Les opp</string>
     <string name="action_search">Søk</string>
     <string name="action_download_articles_offline">Last ned artikler offline</string>
@@ -66,6 +68,7 @@
     <string name="action_link_share">Del lenke</string>
     <string name="action_link_open">Åpne lenke i nettleser</string>
     <string name="action_link_copy">Kopier lenke</string>
+    <string name="toast_img_download_wait">Laster ned. Vennligst vent ...</string>
     <string name="toast_img_saved">Bilde er lagret</string>
     <string name="toast_img_notwriteable">Klarte ikke å skrive bilde.</string>
     <string name="toast_copied_to_clipboard">Kopiert til utklippstavlen</string>
@@ -84,9 +87,13 @@
     <string name="feed_move_list_description">Velg katalog å flytte strøm til</string>
     <string name="move_feed_root_folder">Root katalog</string>
 
+    <!-- Strings related to FolderOptionsDialogFragment (Rename/Remove folder) -->
+    <string name="action_folder_remove">Fjern mappe</string>
     <string name="action_folder_rename">Gi mappen nytt navn</string>
     <string name="folder_remove_button">Fjern</string>
     <string name="folder_rename_button">Endre navn</string>
+    <string name="confirm_folder_remove">Er du sikker på at du vil fjerne denne mappen? Dette kan ikke angres!</string>
+
     <!-- Strings related to NewsReaderListDialogFragment (Notification Settings) -->
     <string name="notification_feed_unique">Motta unike varsler for denne feeden</string>
     <string name="notification_feed_default">Alle feeder med standardinnstillingene vises i ett varsel</string>
@@ -95,6 +102,8 @@
     <!-- Strings related to AddFolderDialogFragment (Add Folder) -->
     <string name="folder_add_button">Legg til</string>
     <string name="hint_folder_name">Mappenavn</string>
+    <string name="folder_already_exists">Mappen finnes allerede</string>
+
     <!-- Strings related to login -->
     <string name="login_manual">Manuell innlogging</string>
     <string name="login_sso">Logg inn via Nextcloud filer app</string>
@@ -104,6 +113,7 @@
     <string name="pref_default_owncloudRootPath">https://1.2.3.4/nextcloud</string>
 
     <string name="action_sign_in_short">Logg inn</string>
+    <string name="login_progress_signing_in">Logger inn ...</string>
     <!-- <string name="error_incorrect_password">Incorrect password</string> -->
     <string name="error_field_required">Dette feltet er påkrevd</string>
     <string name="error_invalid_url">Ugyldig URL</string>
@@ -115,6 +125,12 @@
         <item quantity="other">Lastet ned %d gamle elementer</item>
     </plurals>
     <string name="toast_no_more_downloads_available">Ingen flere elemeter tilgjengelig</string>
+    <plurals name="fetched_items_so_far">
+        <item quantity="one">Hentet %d element så langt…</item>
+        <item quantity="other">Hentet %d elementer så langt…</item>
+    </plurals>
+
+
     <!-- Strings related to Settings -->
     <string name="title_activity_settings">Innstillinger</string>
     <string name="cache_is_cleared">Mellomlager er nullstilt!</string>
@@ -136,6 +152,7 @@
     <string name="pref_general_search_in_body">Kropp</string>
 
     <string name="dialog_clearing_cache">Tømmer hurtiglager</string>
+    <string name="dialog_clearing_cache_please_wait">Tømmer cache. Vennligst vent …</string>
     <string name="reset_cache_unsaved_changes">Det er usynkroniserte endringer i hurtiglagret, skal det nullstilles likevel?</string>
     <string name="warning">Advarsel</string>
     <string name="pref_title_AutoSyncOnStart">Synkroniser under oppstart</string>
@@ -156,6 +173,7 @@
     <!-- Podcast -->
     <string name="no_podcast_selected">Ingen podkast valgt</string>
     <string name="no_chapters_available">Ingen kapitler tilgjengelig</string>
+    <string name="exit_playback">Lukk avspiller</string>
     <string name="podcast_playback_speed_dialog_title">Avspillingshastighet</string>
     <string name="notification_downloading_podcast_title">Last ned podkast</string>
 
@@ -190,6 +208,9 @@
     <string name="pref_oled_mode">Svart bakgrunn</string>
     <string name="pref_oled_mode_summary">For mørkt tema på OLED skjermer</string>
 
+    <string name="pref_external_player">Ekstern spiller</string>
+    <string name="pref_external_player_summary">Spill av podkaster i din standard medieapp</string>
+
     <string name="pref_display_browser_cct">Innebygde tilpassede Chrome-faner</string>
     <string name="pref_display_browser_built_in">Innebygd nettleser</string>
     <string name="pref_display_browser_external">Ekstern nettleser</string>
@@ -210,10 +231,14 @@
 
     <string name="content_desc_play">Spill</string>
     <string name="content_desc_pause">Pause</string>
+    <string name="content_desc_playback_speed">Avspillingshastighet</string>
+    <string name="content_desc_rewind">Spole</string>
     <string name="content_desc_forward">Fremover</string>
+    <string name="content_desc_expand">Ekspander</string>
     <string name="content_desc_collapse">Skjul</string>
     <string name="content_desc_mark_as_read">Merk som lest</string>
     <string name="content_desc_mark_as_unread">Merk som ulest</string>
+    <string name="content_desc_tap_to_refresh">Trykk for å oppdatere</string>
     <string name="content_desc_add_to_favorites">Legg til i favoritter</string>
     <string name="content_desc_remove_from_favorites">Fjern fra favoritter</string>
     <string name="content_desc_show_password">Vis passord</string>

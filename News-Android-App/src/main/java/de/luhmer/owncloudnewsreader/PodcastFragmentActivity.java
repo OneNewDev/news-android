@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.media.session.MediaControllerCompat;
+import android.support.v4.media.session.PlaybackStateCompat;
 import android.util.Log;
 import android.util.TypedValue;
 import android.widget.Toast;
@@ -18,8 +19,10 @@ import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
 import com.nextcloud.android.sso.helper.VersionCheckHelper;
+import com.nextcloud.android.sso.model.FilesAppType;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import org.greenrobot.eventbus.EventBus;
@@ -74,7 +77,7 @@ public abstract class PodcastFragmentActivity extends AppCompatActivity implemen
         //if (mApi.getAPI() instanceof Proxy) { // doesn't work.. retrofit is also a "proxy"
         boolean useSSO = mPrefs.getBoolean(SettingsActivity.SW_USE_SINGLE_SIGN_ON, false);
         if(useSSO) {
-            VersionCheckHelper.verifyMinVersion(this, MIN_NEXTCLOUD_FILES_APP_VERSION_CODE);
+            VersionCheckHelper.verifyMinVersion(this, MIN_NEXTCLOUD_FILES_APP_VERSION_CODE, FilesAppType.PROD);
         }
 
         mPostDelayHandler.stopRunningPostDelayHandler();
@@ -210,7 +213,13 @@ public abstract class PodcastFragmentActivity extends AppCompatActivity implemen
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.podcast_frame, mPodcastFragment)
                 .commitAllowingStateLoss();
-        // collapsePodcastView();
+        MediaControllerCompat mediaController = MediaControllerCompat.getMediaController(this);
+        boolean isNotInit = mediaController == null ||
+                mediaController.getPlaybackState() == null ||
+                mediaController.getPlaybackState().getState() == PlaybackStateCompat.STATE_NONE;
+        if (isNotInit) {
+            collapsePodcastView();
+        }
     }
 
 
@@ -258,19 +267,28 @@ public abstract class PodcastFragmentActivity extends AppCompatActivity implemen
 
     @VisibleForTesting
     public void openMediaItem(final MediaItem mediaItem) {
-        Intent intent = new Intent(this, PodcastPlaybackService.class);
-        intent.putExtra(PodcastPlaybackService.MEDIA_ITEM, mediaItem);
-        startService(intent);
+        if (mPrefs.getBoolean(SettingsActivity.CB_EXTERNAL_PLAYER, false) && mediaItem instanceof PodcastItem) {
+            // PodcastItems can be audio or video
+            Uri uri = ((PodcastItem) mediaItem).offlineCached // in case it's locally cached (offline)
+                    ? FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".provider", new File(mediaItem.link))
+                    : Uri.parse(mediaItem.link);
 
-        /*
-        if(!mMediaBrowser.isConnected()) {
-            mMediaBrowser.connect();
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setDataAndType(uri, ((PodcastItem) mediaItem).mimeType);
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            startActivity(intent);
+        } else {
+            // in case the user wants to use the internal player or we have a TTS item (text to speech)
+            Intent intent = new Intent(this, PodcastPlaybackService.class);
+            intent.putExtra(PodcastPlaybackService.MEDIA_ITEM, mediaItem);
+            startService(intent);
+
+
+            // if(!mMediaBrowser.isConnected()) {
+            //    mMediaBrowser.connect();
+            // }
+            // bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
         }
-        */
-
-
-        //bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
-
     }
 
     @Override

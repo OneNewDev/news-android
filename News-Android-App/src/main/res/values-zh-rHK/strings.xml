@@ -7,7 +7,7 @@
     <string name="empty_view_content_action">下拉以更新</string>
     <string name="toast_GettingMoreItems">正在開始下載更多項目。請稍後 ...</string>
     <string name="no_wifi_available">WiFi 未連線</string>
-    <string name="do_you_want_to_download_without_wifi">是否要在沒有 WiFi 的狀況下下載圖像</string>
+    <string name="do_you_want_to_download_without_wifi">是否要在沒有 WiFi 的狀況下下載圖像?</string>
     <string name="current_version">您在使用版本 %s</string>
     <string name="widget_header">Nextcloud 新聞</string>
     <plurals name="message_bar_new_articles_available">
@@ -166,7 +166,7 @@
 
 
     <!-- Podcast -->
-    <string name="no_podcast_selected">沒有選擇 podcast</string>
+    <string name="no_podcast_selected">未選擇任何播客 (podcast)</string>
     <string name="no_chapters_available">沒有章節</string>
     <string name="exit_playback">退出播放器</string>
     <string name="podcast_playback_speed_dialog_title">播放速度</string>
@@ -202,6 +202,9 @@
 
     <string name="pref_oled_mode">黑色背景</string>
     <string name="pref_oled_mode_summary">供 OLED 螢幕使用的暗黑主題</string>
+
+    <string name="pref_external_player">外部播放器</string>
+    <string name="pref_external_player_summary">在您的默認媒體應用程式中播放播客</string>
 
     <string name="pref_display_browser_cct">內建 Chrome 自訂分頁</string>
     <string name="pref_display_browser_built_in">內建瀏覽器</string>

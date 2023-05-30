@@ -1,0 +1,1 @@
+Security related fixes (only F-Droid users affected)

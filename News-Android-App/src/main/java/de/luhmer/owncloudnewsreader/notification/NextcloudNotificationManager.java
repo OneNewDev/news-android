@@ -13,6 +13,7 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.service.notification.StatusBarNotification;
@@ -23,13 +24,17 @@ import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
 import android.text.TextUtils;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.FileProvider;
 import androidx.media.app.NotificationCompat.MediaStyle;
 import androidx.media.session.MediaButtonReceiver;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.ImageSize;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.transition.Transition;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -42,7 +47,7 @@ import de.luhmer.owncloudnewsreader.NewsReaderListActivity;
 import de.luhmer.owncloudnewsreader.R;
 import de.luhmer.owncloudnewsreader.database.DatabaseConnectionOrm;
 import de.luhmer.owncloudnewsreader.database.model.RssItem;
-import de.luhmer.owncloudnewsreader.helper.DatabaseUtils;
+import de.luhmer.owncloudnewsreader.helper.DatabaseUtilsKt;
 import de.luhmer.owncloudnewsreader.helper.NotificationActionReceiver;
 
 public class NextcloudNotificationManager {
@@ -54,30 +59,39 @@ public class NextcloudNotificationManager {
         String channelDownloadImage = context.getString(R.string.action_img_download);
         NotificationManager notificationManager = getNotificationManagerAndCreateChannel(context, channelDownloadImage);
 
-        // Load image, decode it to Bitmap and return Bitmap to callback
-        ImageSize targetSize = new ImageSize(1024,512); // result Bitmap will be fit to this size
-        Bitmap bitmap = ImageLoader.getInstance().loadImageSync("file://" + imagePath.getAbsolutePath(), targetSize);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && !notificationManager.areNotificationsEnabled()) {
+            return;
+        }
 
-        // Uri imageUri = Uri.parse(imagePath);
-        Uri imageUri = FileProvider.getUriForFile(context,
-                BuildConfig.APPLICATION_ID + ".provider",
-                imagePath);
+        Glide.with(context).asBitmap().load("file://" + imagePath.getAbsolutePath()).diskCacheStrategy(DiskCacheStrategy.NONE).into(new CustomTarget<Bitmap>(1024, 512) {
+            @Override
+            public void onResourceReady(@NonNull Bitmap bitmap, @Nullable Transition<? super Bitmap> transition) {
+                // Uri imageUri = Uri.parse(imagePath);
+                Uri imageUri = FileProvider.getUriForFile(context,
+                        BuildConfig.APPLICATION_ID + ".provider",
+                        imagePath);
 
-        Intent intent = new Intent();
-        intent.setAction(Intent.ACTION_VIEW);
-        intent.setDataAndType(imageUri, "image/*");
-        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.setDataAndType(imageUri, "image/*");
+                intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
+                NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, channelDownloadImage)
+                        .setSmallIcon(R.drawable.ic_notification)
+                        .setContentTitle(context.getString(R.string.toast_img_saved) + " - " + imagePath.getName())
+                        .setContentIntent(pendingIntent)
+                        .setAutoCancel(true)
+                        .setStyle(new NotificationCompat.BigPictureStyle().bigPicture(bitmap));
 
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, channelDownloadImage)
-                .setSmallIcon(R.drawable.ic_notification)
-                .setContentTitle(context.getString(R.string.toast_img_saved) + " - " + imagePath.getName())
-                .setContentIntent(pendingIntent)
-                .setAutoCancel(true)
-                .setStyle(new NotificationCompat.BigPictureStyle().bigPicture(bitmap));
+                notificationManager.notify(ID_DownloadSingleImageComplete, mBuilder.build());
+            }
 
-        notificationManager.notify(ID_DownloadSingleImageComplete, mBuilder.build());
+            @Override
+            public void onLoadCleared(@Nullable Drawable placeholder) {
+
+            }
+        });
     }
 
 
@@ -98,28 +112,6 @@ public class NextcloudNotificationManager {
                 .setOngoing(true);
     }
 
-    public static void showNotificationSaveSingleCachedImageService(Context context, String channelId, File file) {
-        NotificationManager notificationManager = getNotificationManagerAndCreateChannel(context, channelId);
-
-        Uri imageUri = FileProvider.getUriForFile(context,
-                BuildConfig.APPLICATION_ID + ".provider",
-                file.getAbsoluteFile());
-
-        Intent intent = new Intent();
-        intent.setAction(Intent.ACTION_VIEW);
-        intent.setDataAndType(imageUri, "image/*");
-        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE);
-
-        NotificationCompat.Builder mNotificationDownloadImages = new NotificationCompat.Builder(context, channelId)
-                .setContentTitle(context.getResources().getString(R.string.app_name))
-                .setContentText(context.getString(R.string.toast_img_saved) + " - " + file.getName())
-                .setSmallIcon(R.drawable.ic_notification)
-                .setContentIntent(pendingIntent);
-
-
-        notificationManager.notify(1235, mNotificationDownloadImages.build());
-    }
 
     public static NotificationCompat.Builder buildNotificationDownloadWebPageService(Context context, String channelId) {
         getNotificationManagerAndCreateChannel(context, channelId);
@@ -141,6 +133,10 @@ public class NextcloudNotificationManager {
 
     public static void showNotificationImageDownloadLimitReached(Context context, String channelId, int limit) {
         NotificationManager notificationManager = getNotificationManagerAndCreateChannel(context, channelId);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && !notificationManager.areNotificationsEnabled()) {
+            return;
+        }
 
         Intent intentNewsReader = new Intent(context, NewsReaderListActivity.class);
         PendingIntent pIntent = PendingIntent.getActivity(context, 0, intentNewsReader, PendingIntent.FLAG_IMMUTABLE);
@@ -266,17 +262,25 @@ public class NextcloudNotificationManager {
 
     public static void showUnreadRssItemsNotification(Context context, SharedPreferences mPrefs, Boolean updateExistingNotificationsOnly) {
         Resources res = context.getResources();
-
         String channelId = context.getString(R.string.app_name);
         NotificationManager notificationManager = getNotificationManagerAndCreateChannel(context, channelId);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && !notificationManager.areNotificationsEnabled()) {
+            return;
+        }
+
         DatabaseConnectionOrm dbConn = new DatabaseConnectionOrm(context);
-        DatabaseConnectionOrm.SORT_DIRECTION sortDirection = DatabaseUtils.getSortDirectionFromSettings(mPrefs);
+        DatabaseConnectionOrm.SORT_DIRECTION sortDirection = DatabaseUtilsKt.getSortDirectionFromSettings(mPrefs);
 
         Set<String> notificationGroups = dbConn.getNotificationGroups();
         for (String notificationGroup : notificationGroups) {
             // use hashcode for notification group as identifier for the notification
             Integer notificationId = notificationGroup.hashCode();
+
+            // if the user exists the app we need to update the notifications - but only if the notification is already visible
+            if (updateExistingNotificationsOnly && !isUnreadRssCountNotificationVisible(context, notificationId)) {
+                continue;
+            }
 
             QueryBuilder<RssItem> qbItemsForNotificationGroup = dbConn.getAllUnreadRssItemsForNotificationGroup(sortDirection, notificationGroup);
 
@@ -316,11 +320,6 @@ public class NextcloudNotificationManager {
             Intent notificationIntent = new Intent(context, NewsReaderListActivity.class);
             PendingIntent contentIntent = PendingIntent.getActivity(context, notificationId, notificationIntent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
             builder.setContentIntent(contentIntent);
-
-            // if the user exists the app we need to update the notifications - but only if the notification is already visible
-            if (updateExistingNotificationsOnly && !isUnreadRssCountNotificationVisible(context, notificationId)) {
-                continue;
-            }
 
             if (newItemsCount > 0) {
                 notificationManager.notify(notificationId, builder.build());

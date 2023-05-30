@@ -40,6 +40,7 @@ import android.webkit.WebHistoryItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -82,6 +83,7 @@ public class NewsDetailFragment extends Fragment implements RssItemToHtmlTask.Li
     private int section_number;
     protected String html;
     private String title = "";
+    private String baseUrl = null;
     private GestureDetector mGestureDetector;
 
 
@@ -303,7 +305,6 @@ public class NewsDetailFragment extends Fragment implements RssItemToHtmlTask.Li
         webSettings.setJavaScriptCanOpenWindowsAutomatically(false);
         webSettings.setSupportMultipleWindows(false);
         webSettings.setSupportZoom(false);
-        webSettings.setAppCacheEnabled(true);
         webSettings.setMediaPlaybackRequiresUserGesture(true);
 
         syncIncognitoState();
@@ -407,7 +408,11 @@ public class NewsDetailFragment extends Fragment implements RssItemToHtmlTask.Li
                             .setStartAnimations(activity, R.anim.slide_in_right, R.anim.slide_out_left)
                             .setExitAnimations(activity, R.anim.slide_in_left, R.anim.slide_out_right)
                             .addDefaultShareMenuItem();
-                    builder.build().launchUrl(activity, Uri.parse(url));
+                    try {
+                        builder.build().launchUrl(activity, Uri.parse(url));
+                    } catch(Exception ex) {
+                        Toast.makeText(NewsDetailFragment.this.getContext(), "Invalid URL: " + url, Toast.LENGTH_LONG).show();
+                    }
                     break;
                 case 1: // External Browser
                     Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));

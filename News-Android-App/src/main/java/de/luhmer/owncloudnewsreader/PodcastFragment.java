@@ -4,7 +4,6 @@ import static android.media.MediaMetadata.METADATA_KEY_MEDIA_ID;
 import static de.luhmer.owncloudnewsreader.services.PodcastPlaybackService.CURRENT_PODCAST_MEDIA_TYPE;
 import static de.luhmer.owncloudnewsreader.services.PodcastPlaybackService.PLAYBACK_SPEED_FLOAT;
 
-import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -29,9 +28,13 @@ import android.widget.SeekBar;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.MultiTransformation;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import org.greenrobot.eventbus.EventBus;
@@ -73,7 +76,7 @@ public class PodcastFragment extends Fragment {
     private PodcastSlidingUpPanelLayout sliding_layout;
     private EventBus eventBus;
     private MediaBrowserCompat mMediaBrowser;
-    private Activity mActivity;
+    private FragmentActivity mActivity;
 
     private long currentPositionInMillis = 0;
     private long maxPositionInMillis = 100000;
@@ -390,12 +393,15 @@ public class PodcastFragment extends Fragment {
         String favIconUrl = metadata.getString(MediaMetadataCompat.METADATA_KEY_ALBUM_ART_URI);
         if(favIconUrl != null) {
             Log.d(TAG, "currentPlayingPodcastReceived: " + favIconUrl);
-            DisplayImageOptions displayImageOptions = new DisplayImageOptions.Builder().
-                    showImageOnLoading(R.drawable.default_feed_icon_light).
-                    showImageForEmptyUri(R.drawable.default_feed_icon_light).
-                    showImageOnFail(R.drawable.default_feed_icon_light).
-                    build();
-            ImageLoader.getInstance().displayImage(favIconUrl, binding.imgFeedFavicon, displayImageOptions);
+
+            int placeholder = R.drawable.default_feed_icon_light;
+            Glide.with(this.mActivity)
+                    .load(favIconUrl)
+                    .diskCacheStrategy(DiskCacheStrategy.DATA)
+                    .placeholder(placeholder)
+                    .error(placeholder)
+                    .transform(new MultiTransformation<>(new CenterCrop(), new RoundedCorners(10)))
+                    .into(binding.imgFeedFavicon);
         }
 
         PlaybackService.VideoType mediaType = PlaybackService.VideoType.valueOf(metadata.getString(CURRENT_PODCAST_MEDIA_TYPE));

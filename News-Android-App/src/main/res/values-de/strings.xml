@@ -81,11 +81,15 @@
     <string name="action_feed_rename">Feed umbenennen</string>
     <string name="action_feed_move">Feed verschieben</string>
     <string name="action_feed_notification_settings">Benachrichtigungseinstellungen</string>
+    <string name="action_feed_open_in">Öffnen-in Einstellungen</string>
+    <string name="action_feed_open_in_general_setting">Allgemeine Einstellungen verwenden</string>
+    <string name="action_feed_open_in_detailed_view">Detaillierte Ansicht</string>
     <string name="feed_remove_button">Entfernen</string>
     <string name="feed_rename_button">Umbenennen</string>
     <string name="confirm_feed_remove">Möchten Sie wirklich dieses Feed löschen? Die Aktion kann nicht rückgängig gemacht werden!</string>
     <string name="feed_move_list_description">Den Zielordner für den Feed auswählen</string>
     <string name="move_feed_root_folder">Quellordner</string>
+
 
     <!-- Strings related to FolderOptionsDialogFragment (Rename/Remove folder) -->
     <string name="action_folder_remove">Ordner entfernen</string>
@@ -150,6 +154,7 @@
 
     <string name="pref_general_search_in_title">Titel</string>
     <string name="pref_general_search_in_body">Artikel</string>
+    <string name="pref_general_search_in_both">Beide</string>
 
     <string name="dialog_clearing_cache">Zwischenspeicher wird geleert</string>
     <string name="dialog_clearing_cache_please_wait">Zwischenspeicher wird geleert. Bitte warten …</string>

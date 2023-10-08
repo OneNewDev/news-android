@@ -31,7 +31,7 @@
     <string name="action_read">Skaityti</string>
     <string name="action_playPodacst">Groti tinklalaidę</string>
     <string name="action_openInBrowser">Atverti saityno naršyklėje</string>
-    <string name="action_Share">Dalintis</string>
+    <string name="action_Share">Bendrinti</string>
     <string name="action_login">Serverio nustatymai</string>
     <string name="action_save">Išsaugoti</string>
     <string name="action_settings">Nustatymai</string>
@@ -84,6 +84,7 @@
     <string name="confirm_feed_remove">Ar tikrai norite pašalinti šį kanalą? Šio veiksmo neįmanoma bus atšaukti!</string>
     <string name="feed_move_list_description">Pasirinkite aplanką į kurį norite perkelti kanalą</string>
     <string name="move_feed_root_folder">Šakninis aplankas</string>
+
 
     <string name="action_folder_rename">Pervadinti aplanką</string>
     <string name="folder_remove_button">Šalinti</string>

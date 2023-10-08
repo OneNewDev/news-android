@@ -81,6 +81,7 @@
     <string name="confirm_feed_remove">Apakah Anda yakin ingin menghapus Feed ini? Tindakan ini tidak dapat dibatalkan!</string>
     <string name="move_feed_root_folder">Folder akar</string>
 
+
     <!-- Strings related to FolderOptionsDialogFragment (Rename/Remove folder) -->
     <string name="action_folder_remove">Hapus folder</string>
     <string name="action_folder_rename">Ubah nama folder</string>
@@ -189,4 +190,5 @@
     <string name="array_sync_interval_hour_12">12 jam</string>
     <string name="switch_account">Pindah akun</string>
     
+    <string name="please_wait">Harap tunggu...</string>
     </resources>

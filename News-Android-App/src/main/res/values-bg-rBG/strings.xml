@@ -87,6 +87,7 @@
     <string name="feed_move_list_description">Изберете в коя папка да бъде преместена емисията</string>
     <string name="move_feed_root_folder">Основна папка</string>
 
+
     <!-- Strings related to FolderOptionsDialogFragment (Rename/Remove folder) -->
     <string name="action_folder_remove">Премахване на папка</string>
     <string name="action_folder_rename">Преименуване на папка</string>
@@ -150,7 +151,6 @@
 
     <string name="pref_general_search_in_title">Заглавието</string>
     <string name="pref_general_search_in_body">Съдържанието</string>
-
     <string name="dialog_clearing_cache">Изчистване на кеш</string>
     <string name="dialog_clearing_cache_please_wait">Изчистване на кеш. Моля изчакайте ...</string>
     <string name="reset_cache_unsaved_changes">Има несинхронизирани промени. Наистина ли желаете кеша да бъде изтрит?</string>

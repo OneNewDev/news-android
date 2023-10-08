@@ -84,6 +84,7 @@
     <string name="feed_move_list_description">Vælg mappe at flytte strøm til </string>
     <string name="move_feed_root_folder">Rodmappe</string>
 
+
     <string name="action_folder_rename">Omdøb mappe</string>
     <string name="folder_remove_button">Fjern</string>
     <string name="folder_rename_button">Omdøb</string>
@@ -129,7 +130,6 @@
 
     <string name="pref_general_search_in_title">Titel</string>
     <string name="pref_general_search_in_body">Krop</string>
-
     <string name="dialog_clearing_cache">Nulstil mellemlager</string>
     <string name="reset_cache_unsaved_changes">Der er ændringer som ikke er synkroniseret. Vil du nulstille mellemlageret alligevel?</string>
     <string name="warning">Advarsel</string>

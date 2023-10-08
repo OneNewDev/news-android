@@ -84,6 +84,7 @@
     <string name="feed_move_list_description">选择文件夹以移动订阅源</string>
     <string name="move_feed_root_folder">根目录</string>
 
+
     <!-- Strings related to FolderOptionsDialogFragment (Rename/Remove folder) -->
     <string name="action_folder_remove">移除文件夹</string>
     <string name="action_folder_rename">重命名文件夹</string>
@@ -145,6 +146,7 @@
 
     <string name="pref_general_search_in_title">标题</string>
     <string name="pref_general_search_in_body">主体</string>
+    <string name="pref_general_search_in_both">都是</string>
 
     <string name="dialog_clearing_cache">清除缓存</string>
     <string name="dialog_clearing_cache_please_wait">正在清理缓存。请稍候 ...</string>
@@ -203,6 +205,9 @@
     <string name="pref_oled_mode">黑色背景</string>
     <string name="pref_oled_mode_summary">用于 OLED 屏幕的深色主题</string>
 
+    <string name="pref_external_player">外部播放器</string>
+    <string name="pref_external_player_summary">在您的默认媒体应用程序中播放博客</string>
+
     <string name="pref_display_browser_cct">内置 Chrome 自定义分页</string>
     <string name="pref_display_browser_built_in">内置浏览器</string>
     <string name="pref_display_browser_external">外部浏览器</string>
@@ -260,16 +265,16 @@
     <string name="pref_data_sync_image_cache_ask">未连接到 WiFi 时询问</string>
 
     <string name="array_sync_interval_min_0">永不</string>
-    <string name="array_sync_interval_min_5">5 分钟 </string>
-    <string name="array_sync_interval_min_15">15 分钟 </string>
-    <string name="array_sync_interval_min_30">30 分钟 </string>
-    <string name="array_sync_interval_min_45">45 分钟</string>
-    <string name="array_sync_interval_hour_1">1 小时 </string>
-    <string name="array_sync_interval_hour_2">2 小时 </string>
-    <string name="array_sync_interval_hour_3">3 小时 </string>
-    <string name="array_sync_interval_hour_6">6 小时 </string>
-    <string name="array_sync_interval_hour_12">12 小时 </string>
-    <string name="array_sync_interval_hour_24">24 小时 </string>
+    <string name="array_sync_interval_min_5">5分钟</string>
+    <string name="array_sync_interval_min_15">15分钟 </string>
+    <string name="array_sync_interval_min_30">30分钟 </string>
+    <string name="array_sync_interval_min_45">45分钟</string>
+    <string name="array_sync_interval_hour_1">1小时 </string>
+    <string name="array_sync_interval_hour_2">2小时</string>
+    <string name="array_sync_interval_hour_3">3小时</string>
+    <string name="array_sync_interval_hour_6">6小时</string>
+    <string name="array_sync_interval_hour_12">12小时</string>
+    <string name="array_sync_interval_hour_24">24小时</string>
     <string name="switch_account">切换账户</string>
     
     <string name="successfully_exported">已成功导出到：</string>

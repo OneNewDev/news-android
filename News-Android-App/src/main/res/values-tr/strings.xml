@@ -40,10 +40,10 @@
     <string name="action_add_new_folder">Yeni klasör ekle</string>
     <string name="action_textToSpeech">Sesli oku</string>
     <string name="action_search">Arama</string>
-    <string name="action_download_articles_offline">Makaleleri çevrimdış olarak indir</string>
+    <string name="action_download_articles_offline">Makaleleri çevrim dışı olarak indir</string>
     <!-- notifications -->
-    <string name="notification_download_articles_offline">Makaleler çevrimdışı kullanım için indiriliyor</string>
-    <string name="notification_download_images_offline">Görseller çevrimdışı kullanım için indiriliyor</string>
+    <string name="notification_download_articles_offline">Makaleler çevrim dışı kullanım için indiriliyor</string>
+    <string name="notification_download_images_offline">Görseller çevrim dışı kullanım için indiriliyor</string>
     <plurals name="notification_new_items_ticker">
         <item quantity="one">Yeni %d okunmamış ögeniz var</item>
         <item quantity="other">Okunmamış %d yeni ögeniz var</item>
@@ -81,11 +81,15 @@
     <string name="action_feed_rename">Akışı yeniden adlandır</string>
     <string name="action_feed_move">Akışı taşı</string>
     <string name="action_feed_notification_settings">Bildirim ayarları</string>
+    <string name="action_feed_open_in">Açılış ayarları</string>
+    <string name="action_feed_open_in_general_setting">Genel ayarlar kullanılsın</string>
+    <string name="action_feed_open_in_detailed_view">Ayrıntılı görünüm</string>
     <string name="feed_remove_button">Sil</string>
     <string name="feed_rename_button">Yeniden adlandır</string>
     <string name="confirm_feed_remove">Bu akışı silmek istediğinize emin misiniz? Bu işlem geri alınamaz!</string>
     <string name="feed_move_list_description">Akışın içine taşınacağı klasörü seçin</string>
     <string name="move_feed_root_folder">Kök klasör</string>
+
 
     <!-- Strings related to FolderOptionsDialogFragment (Rename/Remove folder) -->
     <string name="action_folder_remove">Klasörü sil</string>
@@ -150,6 +154,7 @@
 
     <string name="pref_general_search_in_title">Başlık</string>
     <string name="pref_general_search_in_body">İçerik</string>
+    <string name="pref_general_search_in_both">İkisi de</string>
 
     <string name="dialog_clearing_cache">Ön bellek temizleniyor</string>
     <string name="dialog_clearing_cache_please_wait">Lütfen ön bellek temizlenirken bekleyin…</string>
@@ -259,7 +264,7 @@
     <!-- Data & Sync -->
     <string name="pref_header_data_sync">Veri ve eşitleme</string>
     <string name="pref_title_clearCache">Ön belleği temizle</string>
-    <string name="pref_title_CacheImagesOffline">Görseller çevrimdışı ön belleğe alınsın</string>
+    <string name="pref_title_CacheImagesOffline">Görseller çevrim dışı ön belleğe alınsın</string>
     <string name="pref_title_Max_Cache_Size">En büyük ön bellek boyutu</string>
 
     <string name="pref_data_sync_image_cache_never">Asla</string>

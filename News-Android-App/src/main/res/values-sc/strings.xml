@@ -83,6 +83,7 @@
     <string name="feed_move_list_description">Sèbera sa cartella a ue nche cheres tramudare sa fonte</string>
     <string name="move_feed_root_folder">Cartella raighina</string>
 
+
     <string name="action_folder_rename">Torra a numenare sa cartella</string>
     <string name="folder_remove_button">Boga</string>
     <string name="folder_rename_button">Torra a numenare</string>
@@ -128,7 +129,6 @@
 
     <string name="pref_general_search_in_title">Tìtulu</string>
     <string name="pref_general_search_in_body">Corpus</string>
-
     <string name="dialog_clearing_cache">Lìmpia memòria temporànea</string>
     <string name="reset_cache_unsaved_changes">Ddoe at càmbios non sincronizados. Cheres azerare sa memòria temporànea gasi etotu?</string>
     <string name="warning">Avisu</string>

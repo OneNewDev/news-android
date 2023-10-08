@@ -53,7 +53,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.browser.customtabs.CustomTabsIntent;
-import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.customview.widget.ViewDragHelper;
 import androidx.fragment.app.DialogFragment;
@@ -141,7 +140,10 @@ public class NewsReaderListActivity extends PodcastFragmentActivity implements
 
     public static HashSet<Long> stayUnreadItems = new HashSet<>();
 
+	private MenuItem menuItemOnlyUnread;
 	private MenuItem menuItemDownloadMoreItems;
+
+	private Long currentFolderId;
 
 	@VisibleForTesting(otherwise = PROTECTED)
 	public ActivityNewsreaderBinding binding;
@@ -224,7 +226,6 @@ public class NewsReaderListActivity extends PodcastFragmentActivity implements
 			startLoginActivity();
 		}
 
-
 		Bundle args = new Bundle();
 		String userName = mPrefs.getString(SettingsActivity.EDT_USERNAME_STRING, null);
 		String url = mPrefs.getString(SettingsActivity.EDT_OWNCLOUDROOTPATH_STRING, null);
@@ -271,6 +272,8 @@ public class NewsReaderListActivity extends PodcastFragmentActivity implements
 		if (savedInstanceState == null) { //When the app starts (no orientation change)
 			updateDetailFragment(SubscriptionExpandableListAdapter.SPECIAL_FOLDERS.ALL_UNREAD_ITEMS.getValue(), true, null, true);
 		}
+
+		showChangelogIfNecessary();
 	}
 
 	@Override
@@ -331,6 +334,17 @@ public class NewsReaderListActivity extends PodcastFragmentActivity implements
 		super.onConfigurationChanged(newConfig);
 		if (drawerToggle != null) {
 			drawerToggle.onConfigurationChanged(newConfig);
+		}
+	}
+
+	void showChangelogIfNecessary() {
+		// on first app start with new version - always show the changelog
+		int currentVersionCode = BuildConfig.VERSION_CODE;
+		int previousVersionCode = mPrefs.getInt(Constants.PREVIOUS_VERSION_CODE, 0);
+		if (currentVersionCode > previousVersionCode) {
+			DialogFragment dialog = new VersionInfoDialogFragment();
+			dialog.show(getSupportFragmentManager(), "VersionChangelogDialogFragment");
+			mPrefs.edit().putInt(Constants.PREVIOUS_VERSION_CODE, currentVersionCode).apply();
 		}
 	}
 
@@ -661,37 +675,7 @@ public class NewsReaderListActivity extends PodcastFragmentActivity implements
 	}
 
 
-    private NewsReaderDetailFragment updateDetailFragment(long id, Boolean folder, Long optional_folder_id, boolean updateListView) {
-        if(menuItemDownloadMoreItems != null) {
-            menuItemDownloadMoreItems.setEnabled(true);
-        }
-
-        DatabaseConnectionOrm dbConn = new DatabaseConnectionOrm(getApplicationContext());
-
-        Long feedId = null;
-        Long folderId;
-        String title = null;
-
-        if(!folder) {
-            feedId = id;
-            folderId = optional_folder_id;
-            title = dbConn.getFeedById(id).getFeedTitle();
-        } else {
-            folderId = id;
-            int idFolder = (int) id;
-            if(idFolder >= 0) {
-                title = dbConn.getFolderById(id).getLabel();
-            } else if(idFolder == -10) {
-                title = getString(R.string.allUnreadFeeds);
-            } else if(idFolder == -11) {
-                title = getString(R.string.starredFeeds);
-            }
-        }
-
-        NewsReaderDetailFragment fragment = getNewsReaderDetailFragment();
-        fragment.setData(feedId, folderId, title, updateListView);
-        return fragment;
-    }
+	public static final int RESULT_ADD_NEW_FEED = 15643;
 
 	private void updateDetailFragmentTitle() {
 		NewsReaderDetailFragment fragment = getNewsReaderDetailFragment();
@@ -779,6 +763,45 @@ public class NewsReaderListActivity extends PodcastFragmentActivity implements
 		}
     }
 
+    private NewsReaderDetailFragment updateDetailFragment(long id, Boolean folder, Long optional_folder_id, boolean updateListView) {
+        if(menuItemDownloadMoreItems != null) {
+            menuItemDownloadMoreItems.setEnabled(true);
+        }
+
+        DatabaseConnectionOrm dbConn = new DatabaseConnectionOrm(getApplicationContext());
+
+        Long feedId = null;
+        Long folderId;
+        String title = null;
+
+        if(!folder) {
+			currentFolderId = null;
+            feedId = id;
+            folderId = optional_folder_id;
+            title = dbConn.getFeedById(id).getFeedTitle();
+        } else {
+			currentFolderId = id;
+			folderId = id;
+			int idFolder = (int) id;
+			if (idFolder >= 0) {
+				title = dbConn.getFolderById(id).getLabel();
+			} else if (idFolder == -10) {
+				title = getString(R.string.allUnreadFeeds);
+			} else if (idFolder == -11) {
+				title = getString(R.string.starredFeeds);
+			}
+		}
+
+		syncMenuItemUnreadOnly();
+
+		NewsReaderDetailFragment fragment = getNewsReaderDetailFragment();
+		fragment.setData(feedId, folderId, title, updateListView);
+		return fragment;
+	}
+
+	public MenuItem getMenuItemDownloadMoreItems() {
+		return menuItemDownloadMoreItems;
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -790,6 +813,9 @@ public class NewsReaderListActivity extends PodcastFragmentActivity implements
 		menuItemDownloadMoreItems.setEnabled(false);
 
 		MenuItem searchItem = menu.findItem(R.id.menu_search);
+		menuItemOnlyUnread = menu.findItem(R.id.menu_toggleShowOnlyUnread);
+		menuItemOnlyUnread.setChecked(mPrefs.getBoolean(SettingsActivity.CB_SHOWONLYUNREAD_STRING, false));
+		syncMenuItemUnreadOnly();
 
         //Set expand listener to close keyboard
         searchItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
@@ -833,26 +859,20 @@ public class NewsReaderListActivity extends PodcastFragmentActivity implements
         return true;
 	}
 
-	public MenuItem getMenuItemDownloadMoreItems() {
-		return menuItemDownloadMoreItems;
-	}
-
 	@Override
 	public void onBackPressed() {
-        if(!handlePodcastBackPressed()) {
-			if (binding.drawerLayout != null) {
-				if (binding.drawerLayout.isDrawerOpen(GravityCompat.START))
-					super.onBackPressed();
-				else
-					binding.drawerLayout.openDrawer(GravityCompat.START);
-			} else {
-				super.onBackPressed();
-			}
+		if (!handlePodcastBackPressed()) {
+			super.onBackPressed();
 		}
 	}
 
 	public static final int RESULT_SETTINGS = 15642;
-    public static final int RESULT_ADD_NEW_FEED = 15643;
+
+	private void syncMenuItemUnreadOnly() {
+		if (menuItemOnlyUnread != null && currentFolderId != null) {
+			menuItemOnlyUnread.setVisible(!(currentFolderId == -11 || currentFolderId == -10));
+		}
+	}
 
 	@Override
 	public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -865,7 +885,15 @@ public class NewsReaderListActivity extends PodcastFragmentActivity implements
 				return true;
 		} else if (itemId == R.id.menu_update) {
 			startSync();
-		} else if (itemId == R.id.menu_StartImageCaching) {
+		}
+		else if (itemId == R.id.menu_toggleShowOnlyUnread) {
+			boolean newValue = !mPrefs.getBoolean(SettingsActivity.CB_SHOWONLYUNREAD_STRING, false);
+			mPrefs.edit().putBoolean(SettingsActivity.CB_SHOWONLYUNREAD_STRING, newValue).commit();
+			item.setChecked(newValue);
+			getSlidingListFragment().reloadAdapter();
+			updateCurrentRssView();
+		}
+		else if (itemId == R.id.menu_StartImageCaching) {
 			final DatabaseConnectionOrm dbConn = new DatabaseConnectionOrm(this);
 
 			long highestItemId = dbConn.getLowestRssItemIdUnread();
@@ -1117,35 +1145,75 @@ public class NewsReaderListActivity extends PodcastFragmentActivity implements
 
 	@Override
 	public void onClick(RssItemViewHolder vh, int position) {
+		Feed feed = vh.getRssItem().getFeed();
+		Long openIn	= feed.getOpenIn();
 
-		if (mPrefs.getBoolean(SettingsActivity.CB_SKIP_DETAILVIEW_AND_OPEN_BROWSER_DIRECTLY_STRING, false)) {
-			String currentUrl = vh.getRssItem().getLink();
+		Uri currentUrl = Uri.parse(vh.getRssItem().getLink());
 
-			//Choose Browser based on user settings
-			//modified copy from NewsDetailFragment.java:loadUrl(String url)
-			int selectedBrowser = Integer.parseInt(mPrefs.getString(SettingsActivity.SP_DISPLAY_BROWSER, "0"));
-			if (selectedBrowser == 0) { // Custom Tabs
-				CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder()
-						.setToolbarColor(ContextCompat.getColor(this, R.color.colorPrimary))
-						.setShowTitle(true)
-						.setStartAnimations(this, R.anim.slide_in_right, R.anim.slide_out_left)
-						.setExitAnimations(this, R.anim.slide_in_left, R.anim.slide_out_right)
-						.addDefaultShareMenuItem();
-				builder.build().launchUrl(this, Uri.parse(currentUrl));
-			} else { //External browser
-				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(currentUrl));
-				startActivity(browserIntent);
+		if (openIn == null) {
+			if (mPrefs.getBoolean(SettingsActivity.CB_SKIP_DETAILVIEW_AND_OPEN_BROWSER_DIRECTLY_STRING, false)) {
+
+				//Choose Browser based on user settings
+				//modified copy from NewsDetailFragment.java:loadUrl(String url)
+				int selectedBrowser = Integer.parseInt(mPrefs.getString(SettingsActivity.SP_DISPLAY_BROWSER, "0"));
+				switch(selectedBrowser) {
+					case 0:
+						openRssItemInCustomTab(currentUrl);
+						break;
+					case 1:
+						//openRssItemInInternalBrowser(currentUrl);
+						break;
+					case 2:
+						openRssItemInExternalBrowser(currentUrl);
+						break;
+				}
+
+				((NewsListRecyclerAdapter) getNewsReaderDetailFragment().getRecyclerView().getAdapter()).changeReadStateOfItem(vh, true);
+			} else {
+				openRssItemInDetailedView(position);
 			}
-
-			((NewsListRecyclerAdapter) getNewsReaderDetailFragment().getRecyclerView().getAdapter()).changeReadStateOfItem(vh, true);
 		} else {
-			Intent intentNewsDetailAct = new Intent(this, NewsDetailActivity.class);
-
-			intentNewsDetailAct.putExtra(NewsReaderListActivity.ITEM_ID, position);
-			intentNewsDetailAct.putExtra(NewsReaderListActivity.TITLE, getNewsReaderDetailFragment().getTitle());
-			startActivityForResult(intentNewsDetailAct, Activity.RESULT_CANCELED);
+			switch (openIn.intValue()) {
+				case 1:
+					openRssItemInDetailedView(position);
+					break;
+				case 2:
+					openRssItemInCustomTab(currentUrl);
+					break;
+				case 3:
+					openRssItemInExternalBrowser(currentUrl);
+					break;
+				default:
+					throw new RuntimeException("Unreachable: openIn has illegal value " + openIn);
+			}
 		}
 	}
+
+	private void openRssItemInDetailedView(int position) {
+		Intent intentNewsDetailAct = new Intent(this, NewsDetailActivity.class);
+
+		intentNewsDetailAct.putExtra(NewsReaderListActivity.ITEM_ID, position);
+		intentNewsDetailAct.putExtra(NewsReaderListActivity.TITLE, getNewsReaderDetailFragment().getTitle());
+		startActivityForResult(intentNewsDetailAct, Activity.RESULT_CANCELED);
+	}
+
+	private void openRssItemInCustomTab(Uri currentUrl) {
+		CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder()
+				.setShowTitle(true)
+				.setStartAnimations(this, R.anim.slide_in_right, R.anim.slide_out_left)
+				.setExitAnimations(this, R.anim.slide_in_left, R.anim.slide_out_right)
+				.setShareState(CustomTabsIntent.SHARE_STATE_ON);
+		builder.build().launchUrl(this, currentUrl);
+	}
+
+	private void openRssItemInExternalBrowser(Uri currentUrl) {
+		Intent browserIntent = new Intent(Intent.ACTION_VIEW, currentUrl);
+		startActivity(browserIntent);
+	}
+
+	// private void openRssItemInInternalBrowser(Uri currentUrl) {
+	// 	getNewsReaderDetailFragment().binding.webview.loadUrl(currentUrl.toString());
+	// }
 
 	@Override
 	public boolean onLongClick(RssItemViewHolder vh, int position) {

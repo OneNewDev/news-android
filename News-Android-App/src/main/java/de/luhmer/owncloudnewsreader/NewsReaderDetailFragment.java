@@ -102,7 +102,6 @@ public class NewsReaderDetailFragment extends Fragment {
     private Drawable rightSwipeDrawable;
     private String prevLeftAction = "";
     private String prevRightAction = "";
-    private int accentColor;
     private Parcelable layoutManagerSavedState;
 
     // Variables related to mark as read when scrolling
@@ -342,7 +341,6 @@ public class NewsReaderDetailFragment extends Fragment {
         });
         */
 
-        binding.swipeRefresh.setColorSchemeColors(accentColor);
         binding.swipeRefresh.setOnRefreshListener((SwipeRefreshLayout.OnRefreshListener) mActivity);
 
         binding.list.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -437,11 +435,7 @@ public class NewsReaderDetailFragment extends Fragment {
 
         ((NewsReaderApplication) requireActivity().getApplication()).getAppComponent().injectFragment(this);
 
-        TypedArray styledAttributes = context.obtainStyledAttributes(attrs, new int[]{androidx.appcompat.R.attr.colorAccent});
         updateSwipeDrawables(true);
-        int color = Constants.isNextCloud(mPrefs) ? R.color.nextcloudBlue : R.color.owncloudBlue;
-        accentColor = styledAttributes.getColor(2, ContextCompat.getColor(context, color));
-        styledAttributes.recycle();
     }
 
     /**
@@ -472,6 +466,7 @@ public class NewsReaderDetailFragment extends Fragment {
             case "0": return R.attr.openinbrowserDrawable;
             case "1": return R.attr.starredDrawable;
             case "2": return R.attr.markasreadDrawable;
+            case "3": return R.attr.shareDrawable;
             default:
                 Log.e(TAG, "Invalid option saved to prefs. This should not happen");
                 return Integer.MAX_VALUE;
@@ -635,6 +630,17 @@ public class NewsReaderDetailFragment extends Fragment {
                     break;
                 case "2": // Read
                     adapter.toggleReadStateOfItem((RssItemViewHolder) viewHolder);
+                    break;
+                case "3": // Share
+                    RssItem rssItem = ((RssItemViewHolder) viewHolder).getRssItem();
+                    String title = rssItem.getTitle();
+                    String content = rssItem.getLink();
+
+                    Intent share = new Intent(Intent.ACTION_SEND);
+                    share.setType("text/plain");
+                    share.putExtra(Intent.EXTRA_SUBJECT, title);
+                    share.putExtra(Intent.EXTRA_TEXT, content);
+                    startActivity(Intent.createChooser(share, "Share Item"));
                     break;
                 default:
                     Log.e(TAG, "Swipe preferences has an invalid value");

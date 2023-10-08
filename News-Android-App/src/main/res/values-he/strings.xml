@@ -89,6 +89,7 @@
     <string name="feed_move_list_description">לבחור תיקייה אליה להעביר את ההזנה</string>
     <string name="move_feed_root_folder">תיקיית בסיס</string>
 
+
     <string name="action_folder_rename">שינוי שם תיקייה</string>
     <string name="folder_remove_button">הסרה</string>
     <string name="folder_rename_button">שינוי שם</string>
@@ -133,7 +134,6 @@
 
     <string name="pref_general_search_in_title">כותרת</string>
     <string name="pref_general_search_in_body">גוף</string>
-
     <string name="dialog_clearing_cache">זכרון המטמון מתפנה</string>
     <string name="reset_cache_unsaved_changes">יש שינויים שלא סונכרנו. לאפס את המטמון בכל זאת?</string>
     <string name="warning">אזהרה</string>

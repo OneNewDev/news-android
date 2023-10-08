@@ -87,6 +87,7 @@
     <string name="feed_move_list_description">Hautatu jarioa ze karpetatara eraman nahi duzun</string>
     <string name="move_feed_root_folder">Erro karpeta</string>
 
+
     <!-- Strings related to FolderOptionsDialogFragment (Rename/Remove folder) -->
     <string name="action_folder_remove">Kendu karpeta</string>
     <string name="action_folder_rename">Berrizendatu karpeta</string>
@@ -150,6 +151,7 @@
 
     <string name="pref_general_search_in_title">Izenburua</string>
     <string name="pref_general_search_in_body">Gorputza</string>
+    <string name="pref_general_search_in_both">Biak</string>
 
     <string name="dialog_clearing_cache">Cachea garbitzen</string>
     <string name="dialog_clearing_cache_please_wait">Cachea garbitzen. Itxaron mesedez ...</string>

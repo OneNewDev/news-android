@@ -30,7 +30,7 @@ body.darkThemeOLED a:visited {
 }
 
 body.darkTheme {
-    background-color:   #212121;
+    background-color:   #121212;
     color:              #ffffff;
 }
 
@@ -222,6 +222,10 @@ ul li:before {
     margin-top:     0.6rem;
     margin-bottom:  100px;
     line-height:    1.5em !important;
+}
+
+h1 {
+    line-height: 1em !important;
 }
 
 #imgFavicon {

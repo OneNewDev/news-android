@@ -81,11 +81,14 @@
     <string name="action_feed_rename">Döp om Feed</string>
     <string name="action_feed_move">Flytta flöde</string>
     <string name="action_feed_notification_settings">Aviseringsinställningar</string>
+    <string name="action_feed_open_in_general_setting">Använd allmänna inställningar</string>
+    <string name="action_feed_open_in_detailed_view">Detaljerad vy</string>
     <string name="feed_remove_button">Ta bort</string>
     <string name="feed_rename_button">Byt namn</string>
     <string name="confirm_feed_remove">Vill du verkligen ta bort denna Feed? Det kan inte ångras!</string>
     <string name="feed_move_list_description">Välj mapp för att flytta flöde till</string>
     <string name="move_feed_root_folder">Topp-mapp</string>
+
 
     <!-- Strings related to FolderOptionsDialogFragment (Rename/Remove folder) -->
     <string name="action_folder_remove">Ta bort mapp</string>
@@ -150,6 +153,7 @@
 
     <string name="pref_general_search_in_title">Rubrik</string>
     <string name="pref_general_search_in_body">Textyta</string>
+    <string name="pref_general_search_in_both">Både</string>
 
     <string name="dialog_clearing_cache">Rensar cachen</string>
     <string name="dialog_clearing_cache_please_wait">Rensar cachen, vänligen vänta …</string>

@@ -87,11 +87,15 @@
     <string name="action_feed_rename">Přejmenovat kanál</string>
     <string name="action_feed_move">Přesunout kanál</string>
     <string name="action_feed_notification_settings">Nastavení upozorňování</string>
+    <string name="action_feed_open_in">Nastavení „Otevírat pomocí“</string>
+    <string name="action_feed_open_in_general_setting">Použít obecné nastavení</string>
+    <string name="action_feed_open_in_detailed_view">Podrobné zobrazení</string>
     <string name="feed_remove_button">Odstranit</string>
     <string name="feed_rename_button">Přejmenovat</string>
     <string name="confirm_feed_remove">Opravdu chcete odstranit tento kanál? Toto nelze vrátit zpět!</string>
     <string name="feed_move_list_description">Vyberte složku do které kanál přesunout</string>
     <string name="move_feed_root_folder">Kořenová složka</string>
+
 
     <!-- Strings related to FolderOptionsDialogFragment (Rename/Remove folder) -->
     <string name="action_folder_remove">Odstranit složku</string>
@@ -160,6 +164,7 @@
 
     <string name="pref_general_search_in_title">Nadpisu</string>
     <string name="pref_general_search_in_body">Těle textu</string>
+    <string name="pref_general_search_in_both">Obojí</string>
 
     <string name="dialog_clearing_cache">Vyprazdňování mezipaměťi</string>
     <string name="dialog_clearing_cache_please_wait">Maže se mezipaměť. Čekejte…</string>

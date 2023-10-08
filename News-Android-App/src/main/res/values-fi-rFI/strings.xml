@@ -87,6 +87,7 @@
     <string name="feed_move_list_description">Valitse kansio, johon syöte siirretään</string>
     <string name="move_feed_root_folder">Juurikansio</string>
 
+
     <!-- Strings related to FolderOptionsDialogFragment (Rename/Remove folder) -->
     <string name="action_folder_remove">Poista kansio</string>
     <string name="action_folder_rename">Nimeä kansio uudelleen</string>
@@ -150,6 +151,7 @@
 
     <string name="pref_general_search_in_title">Otsikko</string>
     <string name="pref_general_search_in_body">Sisältö</string>
+    <string name="pref_general_search_in_both">Molemmat</string>
 
     <string name="dialog_clearing_cache">Tyhjennetään välimuistia</string>
     <string name="dialog_clearing_cache_please_wait">Tyhjennetään välimuistia, odota hetki…</string>

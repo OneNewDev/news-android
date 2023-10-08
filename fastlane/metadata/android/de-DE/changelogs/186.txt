@@ -1,0 +1,3 @@
+Note: Due to changes to the database schema the data will be cleared when upgrading
+Note: What a release! Thank you for the endless contributions from the community!
+Note: The changelog is too long for this release - you'll see it when you launch the app!

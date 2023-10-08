@@ -84,6 +84,7 @@
     <string name="feed_move_list_description">フィードを移動するフォルダーを選択</string>
     <string name="move_feed_root_folder">ルートフォルダー</string>
 
+
     <!-- Strings related to FolderOptionsDialogFragment (Rename/Remove folder) -->
     <string name="action_folder_remove">フォルダーを削除</string>
     <string name="action_folder_rename">フォルダーの名前を変更</string>
@@ -145,7 +146,6 @@
 
     <string name="pref_general_search_in_title">タイトル</string>
     <string name="pref_general_search_in_body">本文</string>
-
     <string name="dialog_clearing_cache">キャッシュをクリアしています。</string>
     <string name="dialog_clearing_cache_please_wait">キャッシュをクリアしています、しばらくお待ちください...</string>
     <string name="reset_cache_unsaved_changes">未同期の変更があります。とにかくキャッシュをリセットしますか？</string>

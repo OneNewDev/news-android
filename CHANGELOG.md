@@ -1,3 +1,25 @@
+0.9.9.82
+---------------------
+- Note: Due to changes to the database schema the data will be cleared when upgrading
+- Note: What a release! Thank you for the endless contributions from the community! 
+- Added - <a href="https://github.com/nextcloud/news-android/pull/1262">!1262 - Add shortcut to "Show only unread articles" in the toolbar (thanks to @mkanilsson)</a>
+- Added - <a href="https://github.com/nextcloud/news-android/pull/1264">!1264 - Add share to swipe option (thanks to @mkanilsson)</a>
+- Added - <a href="https://github.com/nextcloud/news-android/pull/1266">!1266 - per-feed open-in settings (thanks to @mkanilsson)</a>
+- Added - <a href="https://github.com/nextcloud/news-android/pull/1265">!1265 - Allow searching both title and body at the same time (thanks to @mkanilsson)</a>
+- Added - <a href="https://github.com/nextcloud/news-android/pull/1271">!1271 - Enable support for predictive back gestures (thanks to @KingOfDog)</a>
+- Added - <a href="https://github.com/nextcloud/news-android/pull/1286">!1286 - Show changelog after update of app</a>
+- Changed - <a href="https://github.com/nextcloud/news-android/pull/1256">!1256 - Fix starred items not obeying sort order (thanks to @mkanilsson)</a>
+- Changed - <a href="https://github.com/nextcloud/news-android/pull/1186">!1186 - Material 3 Theme (thanks to @stefan-niedermann)</a>
+- Changed - Dependency updates
+- Fixed - <a href="https://github.com/nextcloud/news-android/pull/1255">!1255 - add line-height for h1 tags (thanks to @mkanilsson)</a>
+- Fixed - <a href="https://github.com/nextcloud/news-android/pull/1257">!1257 - Seeking in podcast player doesn't work (thanks to @annasoin)</a>
+- Fixed - <a href="https://github.com/nextcloud/news-android/pull/1272">!1272 - Fix weird formatting in articles (thanks to @mkanilsson)</a>
+- Fixed - <a href="https://github.com/nextcloud/news-android/issues/1276">#1276 - active toggles lack color</a>
+
+0.9.9.81
+---------------------
+- Changed - Updated SSO lib
+
 0.9.9.80
 ---------------------
 - Changed - Internal dependency updates
@@ -7,7 +29,6 @@
 - Changed - <a href="https://github.com/nextcloud/news-android/pull/1195">!1195 - Migrate some classes to Kotlin (thanks to @Unpublished)</a>
 - Fixed - <a href="https://github.com/nextcloud/news-android/pull/1214">!1214 - Text formatting is a bit weird</a>
 
- 
 0.9.9.79
 ---------------------
 - Changed - Internal dependency updates

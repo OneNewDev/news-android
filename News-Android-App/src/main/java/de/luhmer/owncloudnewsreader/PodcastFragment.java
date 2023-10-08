@@ -55,6 +55,7 @@ import de.luhmer.owncloudnewsreader.events.podcast.SpeedPodcast;
 import de.luhmer.owncloudnewsreader.events.podcast.StartDownloadPodcast;
 import de.luhmer.owncloudnewsreader.events.podcast.TogglePlayerStateEvent;
 import de.luhmer.owncloudnewsreader.events.podcast.WindPodcast;
+import de.luhmer.owncloudnewsreader.events.podcast.SeekPodcast;
 import de.luhmer.owncloudnewsreader.model.PodcastFeedItem;
 import de.luhmer.owncloudnewsreader.model.PodcastItem;
 import de.luhmer.owncloudnewsreader.services.PodcastDownloadService;
@@ -303,12 +304,10 @@ public class PodcastFragment extends Fragment {
             long ms = Math.round((after / 100d) * maxPositionInMillis);
             Log.v(TAG, "onStopTrackingTouch - after (%): " + after + " - ms: " + ms);
 
-            eventBus.post(new WindPodcast(ms));
+            eventBus.post(new SeekPodcast(ms));
             blockSeekbarUpdate = false;
         }
     };
-    // TODO SEEK DOES NOT WORK PROPERLY!!!!
-
 
     private void showPlaybackSpeedPicker() {
         final NumberPicker numberPicker = new NumberPicker(getContext());
@@ -437,7 +436,7 @@ public class PodcastFragment extends Fragment {
             }
         }
 
-        int drawableId = showPlayingButton ? R.drawable.ic_action_pause : R.drawable.ic_baseline_play_arrow_24;
+        int drawableId = showPlayingButton ? R.drawable.ic_action_pause_24 : R.drawable.ic_baseline_play_arrow_24;
         int contentDescriptionId = showPlayingButton ? R.string.content_desc_pause : R.string.content_desc_play;
 
         // If attached to context..

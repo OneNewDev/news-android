@@ -48,7 +48,9 @@ import android.view.View;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
@@ -64,6 +66,9 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.request.transition.Transition;
 import com.google.android.material.snackbar.Snackbar;
 import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.api.NextcloudAPI;
@@ -77,6 +82,7 @@ import com.nextcloud.android.sso.exceptions.SSOException;
 import com.nextcloud.android.sso.exceptions.TokenMismatchException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.nextcloud.android.sso.ui.UiExceptionManager;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -138,7 +144,7 @@ public class NewsReaderListActivity extends PodcastFragmentActivity implements
 	public static final String ITEM_ID = "ITEM_ID";
 	public static final String TITLE = "TITLE";
 
-    public static HashSet<Long> stayUnreadItems = new HashSet<>();
+	public static HashSet<Long> stayUnreadItems = new HashSet<>();
 
 	private MenuItem menuItemOnlyUnread;
 	private MenuItem menuItemDownloadMoreItems;
@@ -148,7 +154,11 @@ public class NewsReaderListActivity extends PodcastFragmentActivity implements
 	@VisibleForTesting(otherwise = PROTECTED)
 	public ActivityNewsreaderBinding binding;
 
+	private boolean mBackOpensDrawer = false;
+
 	//private ServiceConnection mConnection = null;
+
+	private OcsUser currentUser = null;
 
 	private ActionBarDrawerToggle drawerToggle;
 	private SearchView mSearchView;
@@ -196,6 +206,40 @@ public class NewsReaderListActivity extends PodcastFragmentActivity implements
 		return (mPrefs.getString(SettingsActivity.EDT_OWNCLOUDROOTPATH_STRING, null) != null);
 	}
 
+	SlidingUpPanelLayout.PanelSlideListener panelSlideListener = new SlidingUpPanelLayout.PanelSlideListener() {
+		@Override
+		public void onPanelSlide(View panel, float slideOffset) {
+		}
+
+		@Override
+		public void onPanelStateChanged(View panel, SlidingUpPanelLayout.PanelState previousState, SlidingUpPanelLayout.PanelState newState) {
+			boolean panelIsOpen = newState.equals(SlidingUpPanelLayout.PanelState.EXPANDED);
+			// in case the podcast panel is open, we need to close it first (intercept back presses)
+			onBackPressedCallback.setEnabled(panelIsOpen || mBackOpensDrawer);
+		}
+	};
+
+	OnBackPressedCallback onBackPressedCallback = new OnBackPressedCallback(true) {
+		// we need to handle two cases:
+		// - The user has the "Open Sidebar on Backpress" option enabled
+		//   - the callback need to be set because we want to close the podcast pane on back navigation (in case it's open)
+		//   - set callback will be enabled/disabled based on whether the podcast pane is open/closed
+		// - The user has the "Open Sidebar on Backpress" option disabled
+		//   - the callback needs to check first if the podcast is open - if so - close it and on
+		//     the next back navigation open the sidebar - and then close the app
+		//   - once the podcast pane is open - the callback will be disabled
+		//   - the event listener (onDrawerClosed) will enable the back pressed callback again
+		@Override
+		public void handleOnBackPressed() {
+			Log.d(TAG, "handleOnBackPressed() 1");
+			if (!handlePodcastBackPressed()) {
+				Log.d(TAG, "handleOnBackPressed() 2");
+				binding.drawerLayout.openDrawer(GravityCompat.START);
+				setEnabled(false);
+			}
+		}
+	};
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		((NewsReaderApplication) getApplication()).getAppComponent().injectActivity(this);
@@ -217,9 +261,6 @@ public class NewsReaderListActivity extends PodcastFragmentActivity implements
 		initAccountManager();
 
 		checkNotificationPermissions();
-
-		binding.toolbarLayout.avatar.setVisibility(View.VISIBLE);
-		binding.toolbarLayout.avatar.setOnClickListener((v) -> startActivityForResult(new Intent(this, LoginDialogActivity.class), RESULT_LOGIN));
 
 		// Init config --> if nothing is configured start the login dialog.
 		if (!isUserLoggedIn()) {
@@ -243,6 +284,7 @@ public class NewsReaderListActivity extends PodcastFragmentActivity implements
 				@Override
 				public void onDrawerClosed(View drawerView) {
 					super.onDrawerClosed(drawerView);
+					onBackPressedCallback.setEnabled(mBackOpensDrawer);
 
 					syncState();
 				}
@@ -251,6 +293,9 @@ public class NewsReaderListActivity extends PodcastFragmentActivity implements
 				public void onDrawerOpened(View drawerView) {
 					super.onDrawerOpened(drawerView);
 					reloadCountNumbersOfSlidingPaneAdapter();
+
+					// -> handleOnBackPressed() will disable it
+					// onBackPressedCallback.setEnabled(false);
 
 					syncState();
 				}
@@ -266,10 +311,13 @@ public class NewsReaderListActivity extends PodcastFragmentActivity implements
 			drawerToggle.syncState();
 		}
 
+		getPodcastSlidingUpPanelLayout().addPanelSlideListener(panelSlideListener);
+		getOnBackPressedDispatcher().addCallback(this, onBackPressedCallback);
+
 		//AppRater.app_launched(this);
 		//AppRater.rateNow(this);
 
-		if (savedInstanceState == null) { //When the app starts (no orientation change)
+		if (savedInstanceState == null) { // When the app starts (no orientation change)
 			updateDetailFragment(SubscriptionExpandableListAdapter.SPECIAL_FOLDERS.ALL_UNREAD_ITEMS.getValue(), true, null, true);
 		}
 
@@ -304,13 +352,13 @@ public class NewsReaderListActivity extends PodcastFragmentActivity implements
 		if (mSearchView != null) {
 			mSearchString = mSearchView.getQuery().toString();
 			outState.putString(SEARCH_KEY, mSearchString);
-        }
-    }
+		}
+	}
 
-    private void restoreInstanceState(Bundle savedInstanceState) {
-        if (savedInstanceState.containsKey(ID_FEED_STRING) &&
-                savedInstanceState.containsKey(IS_FOLDER_BOOLEAN) &&
-                savedInstanceState.containsKey(OPTIONAL_FOLDER_ID)) {
+	private void restoreInstanceState(Bundle savedInstanceState) {
+		if (savedInstanceState.containsKey(ID_FEED_STRING) &&
+				savedInstanceState.containsKey(IS_FOLDER_BOOLEAN) &&
+				savedInstanceState.containsKey(OPTIONAL_FOLDER_ID)) {
 
 			NewsListRecyclerAdapter adapter = new NewsListRecyclerAdapter(this, getNewsReaderDetailFragment().binding.list, this, mPostDelayHandler, mPrefs);
 
@@ -537,12 +585,16 @@ public class NewsReaderListActivity extends PodcastFragmentActivity implements
 
 	@Override
 	protected void onResume() {
+		mBackOpensDrawer = mPrefs.getBoolean(SettingsActivity.CB_PREF_BACK_OPENS_DRAWER, false);
+		onBackPressedCallback.setEnabled(mBackOpensDrawer);
+
 		NewsReaderListFragment newsReaderListFragment = getSlidingListFragment();
 		if (newsReaderListFragment != null) {
-            newsReaderListFragment.reloadAdapter();
+			newsReaderListFragment.reloadAdapter();
 			newsReaderListFragment.bindUserInfoToUI();
 		}
-        invalidateOptionsMenu();
+
+		invalidateOptionsMenu();
 		super.onResume();
 	}
 
@@ -596,24 +648,9 @@ public class NewsReaderListActivity extends PodcastFragmentActivity implements
 
 	@Override
 	public void onUserInfoUpdated(OcsUser userInfo) {
-		final Drawable placeHolder = getDrawable(R.drawable.ic_baseline_account_circle_24);
+		currentUser = userInfo;
 
-		if (userInfo.getId() != null) {
-			String mOc_root_path = mPrefs.getString(SettingsActivity.EDT_OWNCLOUDROOTPATH_STRING, null);
-			String avatarUrl = mOc_root_path + "/index.php/avatar/" + Uri.encode(userInfo.getId()) + "/64";
-
-			Glide.with(this)
-					.load(avatarUrl)
-					.diskCacheStrategy(DiskCacheStrategy.DATA)
-					.placeholder(placeHolder)
-					.error(placeHolder)
-					.circleCrop()
-					.into(binding.toolbarLayout.avatar);
-
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-				binding.toolbarLayout.avatar.setTooltipText(userInfo.getDisplayName());
-			}
-		}
+		invalidateOptionsMenu();
 	}
 
 	@Override
@@ -804,6 +841,14 @@ public class NewsReaderListActivity extends PodcastFragmentActivity implements
 	}
 
 	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		MenuItem accountItem = menu.findItem(R.id.menu_account);
+		prepareAccountMenuItem(accountItem);
+
+		return super.onPrepareOptionsMenu(menu);
+	}
+
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.news_reader, menu);
@@ -859,13 +904,6 @@ public class NewsReaderListActivity extends PodcastFragmentActivity implements
         return true;
 	}
 
-	@Override
-	public void onBackPressed() {
-		if (!handlePodcastBackPressed()) {
-			super.onBackPressed();
-		}
-	}
-
 	public static final int RESULT_SETTINGS = 15642;
 
 	private void syncMenuItemUnreadOnly() {
@@ -885,6 +923,9 @@ public class NewsReaderListActivity extends PodcastFragmentActivity implements
 				return true;
 		} else if (itemId == R.id.menu_update) {
 			startSync();
+		}
+		else if (itemId == R.id.menu_account) {
+			startLoginActivity();
 		}
 		else if (itemId == R.id.menu_toggleShowOnlyUnread) {
 			boolean newValue = !mPrefs.getBoolean(SettingsActivity.CB_SHOWONLYUNREAD_STRING, false);
@@ -1209,6 +1250,37 @@ public class NewsReaderListActivity extends PodcastFragmentActivity implements
 	private void openRssItemInExternalBrowser(Uri currentUrl) {
 		Intent browserIntent = new Intent(Intent.ACTION_VIEW, currentUrl);
 		startActivity(browserIntent);
+	}
+
+	private void prepareAccountMenuItem(MenuItem accountMenuItem) {
+		if (currentUser == null || currentUser.getId() == null) {
+			// the default menu item is fine if no user info is present
+			return;
+		}
+
+		accountMenuItem.setTitle(currentUser.getDisplayName());
+
+		String ownCloudRootPath = mPrefs.getString(SettingsActivity.EDT_OWNCLOUDROOTPATH_STRING, null);
+		String avatarUrl = currentUser.getAvatarUrl(ownCloudRootPath);
+
+		Glide.with(this)
+				.asDrawable()
+				.load(avatarUrl)
+				.diskCacheStrategy(DiskCacheStrategy.DATA)
+				.placeholder(R.drawable.ic_baseline_account_circle_24)
+				.error(R.drawable.ic_baseline_account_circle_24)
+				.circleCrop()
+				.into(new CustomTarget<Drawable>(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL) {
+					@Override
+					public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+						accountMenuItem.setIcon(resource);
+					}
+
+					@Override
+					public void onLoadCleared(@Nullable Drawable placeholder) {
+						accountMenuItem.setIcon(R.drawable.ic_baseline_account_circle_24);
+					}
+				});
 	}
 
 	// private void openRssItemInInternalBrowser(Uri currentUrl) {

@@ -81,6 +81,9 @@
     <string name="action_feed_rename">Renomear a fonte</string>
     <string name="action_feed_move">Mover a fonte</string>
     <string name="action_feed_notification_settings">Axustes de notificación</string>
+    <string name="action_feed_open_in">Axustes de apertura</string>
+    <string name="action_feed_open_in_general_setting">Usar os axustes xerais</string>
+    <string name="action_feed_open_in_detailed_view">Vista detallada</string>
     <string name="feed_remove_button">Retirar</string>
     <string name="feed_rename_button">Renomear</string>
     <string name="confirm_feed_remove">Confirma que quere retirar esta fonte? Isto non pode desfacerse!</string>
@@ -164,6 +167,7 @@
     <string name="pref_title_MarkAsReadWhileScrolling">Marcar como lido mentres se despraza</string>
     <string name="pref_title_ShowFastActions">Activar as funcións de acceso rápido</string>
     <string name="pref_title_OpenInBrowserDirectly">Omitir a vista detallada e abrir o artigo no navegador</string>
+    <string name="pref_title_BackButtonOpensDrawer">O botón de retroceso abre o caixón</string>
 
     <!-- MemorizingTrustManager -->
     <string name="mtm_accept_cert">Aceptar un certificado descoñecido?</string>

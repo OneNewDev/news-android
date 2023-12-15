@@ -2,7 +2,7 @@
 
 buildscript {
     ext {
-        kotlin_version = '1.9.20'
+        kotlin_version = '1.9.21'
     }
     repositories {
         google()
@@ -10,11 +10,11 @@ buildscript {
         gradlePluginPortal()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.1.2'
+        classpath 'com.android.tools.build:gradle:8.2.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
 plugins {
-    id 'com.google.devtools.ksp' version '1.9.20-1.0.14' apply false
+    id 'com.google.devtools.ksp' version '1.9.21-1.0.15' apply false
 }

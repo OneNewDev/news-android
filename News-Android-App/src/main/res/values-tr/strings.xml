@@ -17,6 +17,7 @@
     <string name="message_bar_reload">Yeniden yükle</string>
     <string name="allUnreadFeeds">Tüm okunmamış ögeler</string>
     <string name="starredFeeds">Yıldızlanmış ögeler</string>
+    <string name="downloadedPodcasts">İndirilmiş Podcast ortamları</string>
     <string name="title_activity_new_feed">Yeni akış ekle</string>
 
     <string name="menu_update">Yenile</string>
@@ -30,6 +31,7 @@
     <string name="action_starred">Yıldızlanmış</string>
     <string name="action_read">Oku</string>
     <string name="action_playPodacst">Podcast oynat</string>
+    <string name="action_removePodcast">Podcast ortamını sil</string>
     <string name="action_openInBrowser">Tarayıcıda aç</string>
     <string name="action_Share">Paylaş</string>
     <string name="action_login">Sunucu ayarları</string>
@@ -182,7 +184,11 @@
     <string name="exit_playback">Oynatıcıdan çık</string>
     <string name="podcast_playback_speed_dialog_title">Oynatma hızı</string>
     <string name="notification_downloading_podcast_title">Podcast indiriliyor</string>
-
+    <string name="dialog_podcast_remove_title">Emin misiniz?</string>
+    <string name="dialog_podcast_remove_body">%1$s indirilmiş ortamını silmek ister misiniz?</string>
+    <string name="dialog_podcast_status_failed">%1$s ortamı silinemedi</string>
+    <string name="dialog_podcast_status_success">%1$s ortamı silindi</string>
+    <string name="dialog_podcast_remove_confirm">Kaldır</string>
 
     <!-- Settings for About -->
     <string name="pref_header_about">Hakkında</string>
@@ -194,13 +200,15 @@
     <string name="pref_contribute_summary">Kaynak kodunu alın</string>
     <string name="pref_privacy">Gizlilik</string>
     <string name="pref_privacy_summary">Nextcloud News Android kişisel verilerin gizliliği ilkesi</string>
+    <string name="pref_news_policy">Bize ulaşın / Haberler ilkesi</string>
+    <string name="pref_news_policy_summary">Nextcloud haberleri Android haberleri ilkesi / Bize ulaşın</string>
     <string name="pref_version">Nextcloud News Android uygulaması</string>
 
 
     <!-- Settings for Display -->
     <string name="pref_header_display">Görüntüle</string>
     <string name="pref_title_app_theme">Tema</string>
-    <string name="pref_title_feed_list_layout">Akış listesi görünümü</string>
+    <string name="pref_title_feed_list_layout">Akış listesi yerleşimi</string>
     <string name="pref_title_font_size">Yazı boyutu</string>
     <string name="pref_display_browser">Tarayıcı</string>
 
@@ -226,7 +234,7 @@
     <string name="pref_display_feed_list_layout_simple_text">Basit metin</string>
     <string name="pref_display_feed_list_layout_headlines">Başlıklar</string>
     <string name="pref_display_feed_list_layout_full_text">Tam metin</string>
-    <string name="pref_display_feed_list_layout_web_layout">Site görünümü</string>
+    <string name="pref_display_feed_list_layout_web_layout">Site yerleşimi</string>
     <string name="pref_display_feed_list_layout_card_view">Kart görünümü</string>
 
     <!-- font size scaling definitions -->

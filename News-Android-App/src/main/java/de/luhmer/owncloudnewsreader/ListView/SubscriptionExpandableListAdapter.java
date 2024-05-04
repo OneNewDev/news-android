@@ -21,6 +21,7 @@
 
 package de.luhmer.owncloudnewsreader.ListView;
 
+import static de.luhmer.owncloudnewsreader.ListView.SubscriptionExpandableListAdapter.SPECIAL_FOLDERS.ALL_DOWNLOADED_PODCASTS;
 import static de.luhmer.owncloudnewsreader.ListView.SubscriptionExpandableListAdapter.SPECIAL_FOLDERS.ALL_STARRED_ITEMS;
 import static de.luhmer.owncloudnewsreader.ListView.SubscriptionExpandableListAdapter.SPECIAL_FOLDERS.ALL_UNREAD_ITEMS;
 import static de.luhmer.owncloudnewsreader.ListView.SubscriptionExpandableListAdapter.SPECIAL_FOLDERS.ITEMS_WITHOUT_FOLDER;
@@ -77,13 +78,14 @@ public class SubscriptionExpandableListAdapter extends BaseExpandableListAdapter
     private boolean showOnlyUnread = false;
 
     private SparseArray<String> starredCountFeeds;
+    private int downloadedPodcastsCount;
     private SparseArray<String> unreadCountFolders;
     private SparseArray<String> unreadCountFeeds;
 
     private final SharedPreferences mPrefs;
 
     public enum SPECIAL_FOLDERS  {
-        ALL_UNREAD_ITEMS(-10), ALL_STARRED_ITEMS(-11), ALL_ITEMS(-12), ITEMS_WITHOUT_FOLDER(-22);
+        ALL_UNREAD_ITEMS(-10), ALL_STARRED_ITEMS(-11), ALL_ITEMS(-12), ALL_DOWNLOADED_PODCASTS(-13), ITEMS_WITHOUT_FOLDER(-22);
 
         private final int id;
         SPECIAL_FOLDERS(int id) {
@@ -115,6 +117,7 @@ public class SubscriptionExpandableListAdapter extends BaseExpandableListAdapter
         unreadCountFeeds = new SparseArray<>();
         unreadCountFolders = new SparseArray<>();
         starredCountFeeds = new SparseArray<>();
+        downloadedPodcastsCount = 0;
 
         mCategoriesArrayList = new ArrayList<>();
         mItemsArrayList = new SparseArray<>();
@@ -150,31 +153,24 @@ public class SubscriptionExpandableListAdapter extends BaseExpandableListAdapter
         }
 
 
-        if(item != null)
-        {
-	        String headerText = (item.header != null) ? item.header : "";
-	        viewHolder.binding.summary.setText(headerText);
-
+        if (item != null) {
+            String headerText = (item.header != null) ? item.header : "";
+            viewHolder.binding.summary.setText(headerText);
 
             String unreadCount;
-            if(item.idFolder == ALL_STARRED_ITEMS.getValue()) {
+            if (item.idFolder == ALL_STARRED_ITEMS.getValue()) {
                 unreadCount = starredCountFeeds.get((int) item.id_database);
             } else {
                 unreadCount = unreadCountFeeds.get((int) item.id_database);
             }
 
-            if(unreadCount != null)
-                viewHolder.binding.tvUnreadCount.setText(unreadCount);
-            else
-                viewHolder.binding.tvUnreadCount.setText("");
+            viewHolder.binding.tvUnreadCount.setText(unreadCount != null ? unreadCount : "");
 
             favIconHandler.loadFavIconForFeed(item.favIcon, viewHolder.binding.iVFavicon);
-        }
-        else
-        {
-	        viewHolder.binding.summary.setText(mContext.getString(R.string.login_dialog_text_something_went_wrong));
-	        viewHolder.binding.tvUnreadCount.setText("");
-	        viewHolder.binding.iVFavicon.setImageDrawable(null);
+        } else {
+            viewHolder.binding.summary.setText(mContext.getString(R.string.login_dialog_text_something_went_wrong));
+            viewHolder.binding.tvUnreadCount.setText("");
+            viewHolder.binding.iVFavicon.setImageDrawable(null);
         }
 
         return convertView;
@@ -280,10 +276,15 @@ public class SubscriptionExpandableListAdapter extends BaseExpandableListAdapter
             skipGetUnread = true;
         }
 
-        if(!skipGetUnread) {
+        if (!skipGetUnread) {
             String unreadCount = unreadCountFolders.get((int) group.id_database);
-            if(unreadCount != null)
+            if (unreadCount != null) {
                 viewHolder.binding.tVFeedsCount.setText(unreadCount);
+            }
+        }
+
+        if (group.id_database == ALL_DOWNLOADED_PODCASTS.getValue()) {
+            viewHolder.binding.tVFeedsCount.setText(String.valueOf(downloadedPodcastsCount));
         }
 
 
@@ -291,10 +292,9 @@ public class SubscriptionExpandableListAdapter extends BaseExpandableListAdapter
         int contentDescriptionId = R.string.content_desc_none;
 
 
-        if(group.idFolder != null)
-        {
+        if (group.idFolder != null) {
             viewHolder.binding.imgViewExpandableIndicator.setVisibility(View.GONE);
-	        if(group.idFolder == ITEMS_WITHOUT_FOLDER.getValue())
+            if (group.idFolder == ITEMS_WITHOUT_FOLDER.getValue())
 	        {
                 ConcreteFeedItem concreteFeedItem = ((ConcreteFeedItem) group);
                 favIconHandler.loadFavIconForFeed(concreteFeedItem.favIcon, viewHolder.binding.imgViewFavicon);
@@ -302,9 +302,13 @@ public class SubscriptionExpandableListAdapter extends BaseExpandableListAdapter
         } else {
         	if(group.id_database == ALL_STARRED_ITEMS.getValue()) {
                 viewHolder.binding.imgViewExpandableIndicator.setVisibility(View.GONE);
-        		viewHolder.binding.imgViewFavicon.setVisibility(View.VISIBLE);
+                viewHolder.binding.imgViewFavicon.setVisibility(View.VISIBLE);
                 rotation = 0;
                 viewHolder.binding.imgViewFavicon.setImageResource(R.drawable.ic_star_border_24dp_theme_aware);
+            } else if(group.id_database == ALL_DOWNLOADED_PODCASTS.getValue()) {
+                viewHolder.binding.imgViewExpandableIndicator.setVisibility(View.GONE);
+                viewHolder.binding.imgViewFavicon.setVisibility(View.VISIBLE);
+                viewHolder.binding.imgViewFavicon.setImageResource(R.drawable.ic_baseline_play_arrow_24_theme_aware);
         	} else if (getChildrenCount( groupPosition ) == 0 ) {
 	        	viewHolder.binding.imgViewExpandableIndicator.setVisibility(View.GONE);
                 viewHolder.binding.imgViewFavicon.setVisibility(View.INVISIBLE);
@@ -371,21 +375,14 @@ public class SubscriptionExpandableListAdapter extends BaseExpandableListAdapter
         showOnlyUnread = mPrefs.getBoolean(SettingsActivity.CB_SHOWONLYUNREAD_STRING, false);
 
         ArrayList<AbstractItem> mCategories = new ArrayList<>();
-        SparseArray<ArrayList<ConcreteFeedItem>> mItems = new SparseArray<>();
-
         mCategories.add(new FolderSubscribtionItem(mContext.getString(R.string.allUnreadFeeds), null, ALL_UNREAD_ITEMS.getValue()));
         mCategories.add(new FolderSubscribtionItem(mContext.getString(R.string.starredFeeds), null, ALL_STARRED_ITEMS.getValue()));
-
+        mCategories.add(new FolderSubscribtionItem(mContext.getString(R.string.downloadedPodcasts), null, ALL_DOWNLOADED_PODCASTS.getValue()));
 
         StopWatch sw = new StopWatch();
         sw.start();
 
-        List<Folder> folderList;
-        //if(showOnlyUnread) {
-        //    folderList = dbConn.getListOfFoldersWithUnreadItems();
-        //} else {
-        folderList = dbConn.getListOfFolders();
-        //}
+        List<Folder> folderList = dbConn.getListOfFolders();
 
         sw.stop();
         Log.v(TAG, "Time needed (fetch folder list): " + sw);
@@ -399,6 +396,7 @@ public class SubscriptionExpandableListAdapter extends BaseExpandableListAdapter
             mCategories.add(new ConcreteFeedItem(feed.getFeedTitle(), (long) ITEMS_WITHOUT_FOLDER.getValue(), feed.getId(), feed.getFaviconUrl(), feed.getId()));
         }
 
+        SparseArray<ArrayList<ConcreteFeedItem>> mItems = new SparseArray<>();
 
         for (int groupPosition = 0; groupPosition < mCategories.size(); groupPosition++) {
             //int parent_id = (int)getGroupId(groupPosition);
@@ -411,6 +409,8 @@ public class SubscriptionExpandableListAdapter extends BaseExpandableListAdapter
                 feedItemList = dbConn.getAllFeedsWithUnreadRssItems();
             } else if (parent_id == ALL_STARRED_ITEMS.getValue()) {
                 feedItemList = dbConn.getAllFeedsWithStarredRssItems();
+            } else if (parent_id == ALL_DOWNLOADED_PODCASTS.getValue()) {
+                feedItemList = dbConn.getAllFeedsWithDownloadedPodcasts(mContext);
             } else {
                 for (Folder folder : folderList) {//Find the current selected folder
                     if (folder.getId() == parent_id) {//Current item
@@ -435,73 +435,32 @@ public class SubscriptionExpandableListAdapter extends BaseExpandableListAdapter
         new ReloadAdapterAsyncTask().execute((Void) null);
     }
 
-    private class NotifyDataSetChangedAsyncTask extends AsyncTask<Void, Void, Void> {
-        SparseArray<String> starredCountFeedsTemp;
-        SparseArray<String> unreadCountFoldersTemp;
-        SparseArray<String> unreadCountFeedsTemp;
-        SparseArray<String> urlsToFavIconsTemp;
+    @SuppressLint("NewApi") // wrongly reports setSelectionFromTop is only available in lollipop
+    public void notifyCountDataSetChanged(SparseArray<String> unreadCountFolders, SparseArray<String> unreadCountFeeds, SparseArray<String> starredCountFeeds, int downloadedPodcastsCount) {
+        this.unreadCountFolders = unreadCountFolders;
+        this.unreadCountFeeds = unreadCountFeeds;
+        this.starredCountFeeds = starredCountFeeds;
+        this.downloadedPodcastsCount = downloadedPodcastsCount;
 
-        @Override
-        protected Void doInBackground(Void... voids) {
-            StopWatch stopwatch = new StopWatch();
-            stopwatch.start();
+        BlockingExpandableListView bView = (BlockingExpandableListView) listView;
 
-            SparseArray<String>[] temp = dbConn.getUnreadItemCountFeedFolder();
+        int firstVisPos = bView.getFirstVisiblePosition();
+        View firstVisView = bView.getChildAt(0);
+        int top = firstVisView != null ? firstVisView.getTop() : 0;
 
-            unreadCountFoldersTemp = temp[0];// dbConn.getUnreadItemCountForFolder();
-            unreadCountFeedsTemp = temp[1]; // dbConn.getUnreadItemCountForFeed();
+        // Number of items added before the first visible item
+        int itemsAddedBeforeFirstVisible = 0;
 
-            starredCountFeedsTemp = dbConn.getStarredItemCount();
-            urlsToFavIconsTemp = dbConn.getUrlsToFavIcons();
+        bView.setBlockLayoutChildren(true);
+        notifyDataSetChanged();
+        bView.setBlockLayoutChildren(false);
 
-            stopwatch.stop();
-            Log.v(TAG, "Fetched folder/feed counts in " + stopwatch);
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            if(showOnlyUnread) {
-                for (int i = 0; i < mCategoriesArrayList.size(); i++) {
-                    AbstractItem item = mCategoriesArrayList.get(i);
-
-                    if(item instanceof FolderSubscribtionItem &&
-                            unreadCountFoldersTemp.get(((Long) item.id_database).intValue()) == null) {
-                        Log.v(TAG, "Remove folder item!!!");
-                        mCategoriesArrayList.remove(i);
-                        i--;
-                    } else if(item instanceof ConcreteFeedItem &&
-                            unreadCountFeedsTemp.get(((Long) item.id_database).intValue()) == null) {
-                        Log.v(TAG, "Remove feed item!!!");
-                        mCategoriesArrayList.remove(i);
-                        i--;
-                    } /* else {
-                        Log.v(TAG, "Keep.. " + unreadCountFoldersTemp.get(((Long) item.id_database).intValue()));
-                    } */
-                }
-
-                for (int i = 0; i < mItemsArrayList.size(); i++) {
-                    ArrayList<ConcreteFeedItem> item = mItemsArrayList.valueAt(i);
-                    for (int x = 0; x < item.size(); x++) {
-                        if (unreadCountFeedsTemp.get((int) item.get(x).id_database) == null) {
-                            item.remove(x);
-                            x--;
-                            Log.v(TAG, "Remove sub feed!!");
-                        }
-                    }
-                }
-            }
-
-            notifyCountDataSetChanged(unreadCountFoldersTemp, unreadCountFeedsTemp, starredCountFeedsTemp);
-            super.onPostExecute(aVoid);
-        }
+        // Call setSelectionFromTop to change the ListView position
+        if(bView.getCount() >= firstVisPos + itemsAddedBeforeFirstVisible)
+            bView.setSelectionFromTop(firstVisPos + itemsAddedBeforeFirstVisible, top);
     }
 
     private class ReloadAdapterAsyncTask extends AsyncTask<Void, Void, Tuple<ArrayList<AbstractItem>, SparseArray<ArrayList<ConcreteFeedItem>>>> {
-
-        public ReloadAdapterAsyncTask() {
-
-        }
 
         @Override
         protected Tuple<ArrayList<AbstractItem>, SparseArray<ArrayList<ConcreteFeedItem>>> doInBackground(Void... voids) {
@@ -524,29 +483,72 @@ public class SubscriptionExpandableListAdapter extends BaseExpandableListAdapter
 
     }
 
+    private class NotifyDataSetChangedAsyncTask extends AsyncTask<Void, Void, Void> {
+        SparseArray<String> starredCountFeedsTemp;
+        SparseArray<String> unreadCountFoldersTemp;
+        SparseArray<String> unreadCountFeedsTemp;
+        SparseArray<String> urlsToFavIconsTemp;
+        int downloadedPodcastsCountTemp;
 
-    @SuppressLint("NewApi") // wrongly reports setSelectionFromTop is only available in lollipop
-    public void notifyCountDataSetChanged(SparseArray<String> unreadCountFolders, SparseArray<String> unreadCountFeeds, SparseArray<String> starredCountFeeds) {
-        this.unreadCountFolders = unreadCountFolders;
-        this.unreadCountFeeds = unreadCountFeeds;
-        this.starredCountFeeds = starredCountFeeds;
+        @Override
+        protected Void doInBackground(Void... voids) {
+            StopWatch stopwatch = new StopWatch();
+            stopwatch.start();
 
-        BlockingExpandableListView bView = (BlockingExpandableListView) listView;
+            SparseArray<String>[] temp = dbConn.getUnreadItemCountFeedFolder();
 
-        int firstVisPos = bView.getFirstVisiblePosition();
-        View firstVisView = bView.getChildAt(0);
-        int top = firstVisView != null ? firstVisView.getTop() : 0;
+            unreadCountFoldersTemp = temp[0];// dbConn.getUnreadItemCountForFolder();
+            unreadCountFeedsTemp = temp[1]; // dbConn.getUnreadItemCountForFeed();
 
-        // Number of items added before the first visible item
-        int itemsAddedBeforeFirstVisible = 0;
+            starredCountFeedsTemp = dbConn.getStarredItemCount();
+            downloadedPodcastsCountTemp = dbConn.getDownloadedPodcastsCount(mContext);
+            urlsToFavIconsTemp = dbConn.getUrlsToFavIcons();
 
-        bView.setBlockLayoutChildren(true);
-        notifyDataSetChanged();
-        bView.setBlockLayoutChildren(false);
+            stopwatch.stop();
+            Log.v(TAG, "Fetched folder/feed counts in " + stopwatch);
+            return null;
+        }
 
-        // Call setSelectionFromTop to change the ListView position
-        if(bView.getCount() >= firstVisPos + itemsAddedBeforeFirstVisible)
-            bView.setSelectionFromTop(firstVisPos + itemsAddedBeforeFirstVisible, top);
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            if(showOnlyUnread) {
+                for (int i = 0; i < mCategoriesArrayList.size(); i++) {
+                    AbstractItem item = mCategoriesArrayList.get(i);
+
+                    if(item instanceof FolderSubscribtionItem &&
+                            unreadCountFoldersTemp.get(((Long) item.id_database).intValue()) == null) {
+                        Log.v(TAG, "Remove folder item: " + item.header);
+
+                        // we need to keep the ALL_DOWNLOADED_PODCASTS in case at least one article is in there
+                        if (!(item.id_database == ALL_DOWNLOADED_PODCASTS.getValue() && downloadedPodcastsCount > 0)) {
+                            mCategoriesArrayList.remove(i);
+                            i--;
+                        }
+                    } else if(item instanceof ConcreteFeedItem &&
+                            unreadCountFeedsTemp.get(((Long) item.id_database).intValue()) == null) {
+                        Log.v(TAG, "Remove feed item: " + item.header);
+                        mCategoriesArrayList.remove(i);
+                        i--;
+                    } /* else {
+                        Log.v(TAG, "Keep.. " + unreadCountFoldersTemp.get(((Long) item.id_database).intValue()));
+                    } */
+                }
+
+                for (int i = 0; i < mItemsArrayList.size(); i++) {
+                    ArrayList<ConcreteFeedItem> item = mItemsArrayList.valueAt(i);
+                    for (int x = 0; x < item.size(); x++) {
+                        if (unreadCountFeedsTemp.get((int) item.get(x).id_database) == null) {
+                            item.remove(x);
+                            x--;
+                            Log.v(TAG, "Remove sub feed!!");
+                        }
+                    }
+                }
+            }
+
+            notifyCountDataSetChanged(unreadCountFoldersTemp, unreadCountFeedsTemp, starredCountFeedsTemp, downloadedPodcastsCountTemp);
+            super.onPostExecute(aVoid);
+        }
     }
 
 

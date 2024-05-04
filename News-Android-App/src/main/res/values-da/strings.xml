@@ -95,7 +95,7 @@
     <string name="login_manual">Manuel login</string>
     <string name="login_sso">Login ved hjælp af Nextcloud Files app\'en</string>
     <string name="pref_title_username">Brugernavn</string>
-    <string name="pref_title_password">Kodeord</string>
+    <string name="pref_title_password">Password</string>
     <string name="pref_title_owncloudRootPath">rodadressen for ownCloud</string>
     <string name="pref_default_owncloudRootPath">https://1.2.3.4/owncloud</string>
 
@@ -151,7 +151,8 @@
     <string name="no_chapters_available">Ingen kapitler tilgængelige</string>
     <string name="podcast_playback_speed_dialog_title">Afspilningshastighed</string>
     <string name="notification_downloading_podcast_title">Henter podcast</string>
-
+    <string name="dialog_podcast_remove_title">Er du sikker?</string>
+    <string name="dialog_podcast_remove_confirm">Fjern</string>
 
     <!-- Settings for About -->
     <string name="pref_header_about">Om</string>

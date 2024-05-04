@@ -13,6 +13,9 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
@@ -32,6 +35,7 @@ import de.luhmer.owncloudnewsreader.databinding.SubscriptionDetailListItemThumbn
 import de.luhmer.owncloudnewsreader.databinding.SubscriptionDetailListItemWebLayoutBinding;
 import de.luhmer.owncloudnewsreader.events.podcast.PodcastCompletedEvent;
 import de.luhmer.owncloudnewsreader.helper.AsyncTaskHelper;
+import de.luhmer.owncloudnewsreader.helper.FavIconHandler;
 import de.luhmer.owncloudnewsreader.helper.PostDelayHandler;
 import de.luhmer.owncloudnewsreader.helper.StopWatch;
 import de.luhmer.owncloudnewsreader.interfaces.IPlayPausePodcastClicked;
@@ -43,6 +47,8 @@ public class NewsListRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
     @SuppressWarnings("FieldCanBeLocal")
     private final int VIEW_ITEM = 1; // Item
     private final int VIEW_PROG = 0; // Progress
+    private final FavIconHandler faviconHandler;
+    private final RequestManager glide;
 
     private long idOfCurrentlyPlayedPodcast = -1;
 
@@ -70,15 +76,13 @@ public class NewsListRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
         pDelayHandler = postDelayHandler;
 
         dbConn = new DatabaseConnectionOrm(activity);
+        faviconHandler = new FavIconHandler(activity);
+        glide = Glide.with(activity);
         setHasStableIds(true);
 
         EventBus.getDefault().register(this);
 
-        if (recyclerView.getLayoutManager() instanceof LinearLayoutManager) {
-
-            final LinearLayoutManager linearLayoutManager =
-                    (LinearLayoutManager) recyclerView.getLayoutManager();
-
+        if (recyclerView.getLayoutManager() instanceof LinearLayoutManager linearLayoutManager) {
 
             recyclerView
                     .addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -92,7 +96,8 @@ public class NewsListRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
                                     .findLastVisibleItemPosition();
                             if (!loading &&
                                     adapterTotalItemCount <= (lastVisibleItem + visibleThreshold) &&
-                                    adapterTotalItemCount < totalItemCount) {
+                                    adapterTotalItemCount < totalItemCount &&
+                                    adapterTotalItemCount > 0) {
                                 loading = true;
 
                                 Log.v(TAG, "start load more task...");
@@ -100,10 +105,15 @@ public class NewsListRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
                                 recyclerView.post(() -> {
                                     // End has been reached
                                     // Do something
-                                    lazyList.add(null);
-                                    notifyItemInserted(lazyList.size() - 1);
-
-                                    AsyncTaskHelper.StartAsyncTask(new LoadMoreItemsAsyncTask());
+                                    try {
+                                        lazyList.add(null);
+                                        notifyItemInserted(lazyList.size() - 1);
+                                        AsyncTaskHelper.StartAsyncTask(new LoadMoreItemsAsyncTask());
+                                    } catch (UnsupportedOperationException ex) {
+                                        Log.e(TAG, "error while lazy loading more items");
+                                        // this can happen in case a podcast download is running and
+                                        // the user tries to open the Downloaded Podcast View
+                                    }
                                 });
                             }
                         }
@@ -168,25 +178,60 @@ public class NewsListRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
             RssItemViewHolder viewHolder = null;
             switch (Integer.parseInt(mPrefs.getString(SettingsActivity.SP_FEED_LIST_LAYOUT, "0"))) {
                 case 0:
-                    viewHolder = new RssItemThumbnailViewHolder(SubscriptionDetailListItemThumbnailBinding.inflate(LayoutInflater.from(context), parent, false), mPrefs);
+                    viewHolder = new RssItemThumbnailViewHolder(
+                            SubscriptionDetailListItemThumbnailBinding.inflate(LayoutInflater.from(context), parent, false),
+                            faviconHandler,
+                            glide,
+                            mPrefs
+                    );
                     break;
                 case 1:
-                    viewHolder = new RssItemTextViewHolder(SubscriptionDetailListItemTextBinding.inflate(LayoutInflater.from(context), parent, false), mPrefs);
+                    viewHolder = new RssItemTextViewHolder(
+                            SubscriptionDetailListItemTextBinding.inflate(LayoutInflater.from(context), parent, false),
+                            faviconHandler,
+                            glide,
+                            mPrefs
+                    );
                     break;
                 case 3:
-                    viewHolder = new RssItemFullTextViewHolder(SubscriptionDetailListItemTextBinding.inflate(LayoutInflater.from(context), parent, false), mPrefs);
+                    viewHolder = new RssItemFullTextViewHolder(
+                            SubscriptionDetailListItemTextBinding.inflate(LayoutInflater.from(context), parent, false),
+                            faviconHandler,
+                            glide,
+                            mPrefs
+                    );
                     break;
                 case 2:
-                    viewHolder = new RssItemWebViewHolder(SubscriptionDetailListItemWebLayoutBinding.inflate(LayoutInflater.from(context), parent, false), mPrefs);
+                    viewHolder = new RssItemWebViewHolder(
+                            SubscriptionDetailListItemWebLayoutBinding.inflate(LayoutInflater.from(context), parent, false),
+                            faviconHandler,
+                            glide,
+                            mPrefs
+                    );
                     break;
                 case 4:
-                    viewHolder = new RssItemCardViewHolder(SubscriptionDetailListItemCardViewBinding.inflate(LayoutInflater.from(context), parent, false), mPrefs);
+                    viewHolder = new RssItemCardViewHolder(
+                            SubscriptionDetailListItemCardViewBinding.inflate(LayoutInflater.from(context), parent, false),
+                            faviconHandler,
+                            glide,
+                            mPrefs
+                    );
                     break;
                 case 5:
-                    viewHolder = new RssItemHeadlineViewHolder(SubscriptionDetailListItemHeadlineBinding.inflate(LayoutInflater.from(context), parent, false), mPrefs);
+                    viewHolder = new RssItemHeadlineViewHolder(
+                            SubscriptionDetailListItemHeadlineBinding.inflate(LayoutInflater.from(context), parent, false),
+                            faviconHandler,
+                            glide,
+                            mPrefs
+                    );
                     break;
                 case 6:
-                    viewHolder = new RssItemHeadlineThumbnailViewHolder(SubscriptionDetailListItemHeadlineThumbnailBinding.inflate(LayoutInflater.from(context), parent, false), mPrefs);
+                    viewHolder = new RssItemHeadlineThumbnailViewHolder(
+                            SubscriptionDetailListItemHeadlineThumbnailBinding.inflate(LayoutInflater.from(context), parent, false),
+                            faviconHandler,
+                            glide,
+                            mPrefs
+                    );
                     break;
                 default:
                     Log.e(TAG, "Unknown layout..");
@@ -378,7 +423,7 @@ public class NewsListRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
             List<RssItem> rssItems = refreshAdapterData();
 
             sw.stop();
-            Log.v(TAG, "Time needed (refreshing adapter): " + sw.toString());
+            Log.v(TAG, "Time needed (refreshing adapter): " + sw);
 
             return rssItems;
         }
@@ -407,7 +452,7 @@ public class NewsListRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
             List<RssItem> items = dbConn.getCurrentRssItemView(cachedPages++);
 
             sw.stop();
-            Log.v(TAG, "Time needed (loading more): " + sw.toString());
+            Log.v(TAG, "Time needed (loading more): " + sw);
             return items;
         }
 
@@ -440,7 +485,7 @@ public class NewsListRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
             holder.rssItems = list;
 
             sw.stop();
-            Log.v(TAG, "Reloaded CurrentRssView - time taken: " + sw.toString());
+            Log.v(TAG, "Reloaded CurrentRssView - time taken: " + sw);
             return holder;
         }
 

@@ -56,6 +56,7 @@
     <string name="intent_title_share">Partejar via</string>
 
 
+    <string name="action_feed_rename">Renomenar lo flux</string>
     <string name="action_feed_notification_settings">Paramètres de notificacions</string>
     <string name="feed_remove_button">Suprimir</string>
     <string name="feed_rename_button">Renomenar</string>
@@ -107,6 +108,9 @@
 
     <!-- Podcast -->
     <string name="no_podcast_selected">Cap de podcast pas seleccionat</string>
+    <string name="dialog_podcast_remove_title">Ne sètz segur ?</string>
+    <string name="dialog_podcast_remove_confirm">Suprimir</string>
+
     <!-- Settings for About -->
     <string name="pref_header_about">A prepaus</string>
     <string name="pref_license">Licéncia</string>
@@ -125,8 +129,8 @@
     <string name="content_desc_collapse">Replegar</string>
     <string name="content_desc_mark_as_read">Marcar coma legit</string>
     <string name="content_desc_mark_as_unread">Marcar coma pas legit</string>
-    <string name="content_desc_add_to_favorites">Add to favorites</string>
-    <string name="content_desc_remove_from_favorites">Remove from favorites</string>
+    <string name="content_desc_add_to_favorites">Apondre als favorits</string>
+    <string name="content_desc_remove_from_favorites">Tirar dels favorits</string>
     <string name="content_desc_show_password">Mostrar lo senhal</string>
     <string name="content_desc_delete">Suprimir</string>
     <string name="content_desc_download">Telecargar</string>

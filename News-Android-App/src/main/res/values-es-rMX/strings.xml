@@ -89,7 +89,6 @@
     <string name="error_field_required">Este es un campo requerido</string>
     <string name="error_invalid_url">URL incorrecta</string>
 
-
     <!-- Toast Messages -->
     <plurals name="toast_downloaded_x_items">
         <item quantity="one">%d elemento antiguo descargado</item>
@@ -146,6 +145,7 @@
 
     <string name="pref_display_news_detail_actionbar_icons_title">Íconos de acción (Vista Detallada)</string>
 
+    <string name="pref_display_apptheme_auto">Configuración predeterminada del sistema</string>
     <string name="pref_display_apptheme_light">Claro</string>
     <string name="pref_display_apptheme_dark">Oscuro</string>
 
@@ -188,6 +188,7 @@
     <string name="array_sync_interval_min_30">30 minutos</string>
     <string name="array_sync_interval_min_45">45 minutos</string>
     <string name="array_sync_interval_hour_1">1 hora</string>
+    <string name="array_sync_interval_hour_2">2 horas</string>
     <string name="array_sync_interval_hour_3">3 horas</string>
     <string name="array_sync_interval_hour_6">6 horas</string>
     <string name="array_sync_interval_hour_12">12 horas</string>

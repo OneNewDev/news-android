@@ -130,6 +130,13 @@
     <string name="error_field_required">Toto pole je povinné</string>
     <string name="error_invalid_url">Nesprávna URL</string>
 
+    <!--Snackbar Messages -->
+    <plurals name="marked_as_read_message">
+        <item quantity="one">Označiť %d položku ako prečítané</item>
+        <item quantity="few">Označiť %d položky ako prečítané</item>
+        <item quantity="many">Označiť %d položiek ako prečítané</item>
+        <item quantity="other">Označiť %d položiek ako prečítané</item>
+    </plurals>
 
     <!-- Toast Messages -->
     <plurals name="toast_downloaded_x_items">
@@ -179,6 +186,8 @@
     <string name="pref_title_MarkAsReadWhileScrolling">Označiť ako prečítané pri rolovaní stránky</string>
     <string name="pref_title_ShowFastActions">Aktivovať funkcie pre rýchly prístup</string>
     <string name="pref_title_OpenInBrowserDirectly">Preskočte podrobné zobrazenie a otvorte článok v prehliadači</string>
+    <string name="pref_title_BackButtonOpensDrawer">Tlačidlo Späť otvára zásuvku</string>
+
     <!-- MemorizingTrustManager -->
     <string name="mtm_accept_cert">Prijať neznámy certifikát?</string>
     <string name="mtm_decision_always">Vždy</string>
@@ -193,6 +202,9 @@
     <string name="podcast_playback_speed_dialog_title">Rýchlosť prehrávania</string>
     <string name="notification_downloading_podcast_title">Sťahovanie podcastu</string>
     <string name="dialog_podcast_remove_title">Ste si istý?</string>
+    <string name="dialog_podcast_remove_body">Chcete odstrániť stiahnuté médiá od %1$s?</string>
+    <string name="dialog_podcast_status_failed">Nepodarilo sa odstrániť médiá od %1$s</string>
+    <string name="dialog_podcast_status_success">Médiá od %1$s boli vymazané</string>
     <string name="dialog_podcast_remove_confirm">Odobrať</string>
 
     <!-- Settings for About -->

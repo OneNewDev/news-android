@@ -9,13 +9,14 @@
     <string name="no_wifi_available">没有连接到 WiFi</string>
     <string name="do_you_want_to_download_without_wifi">是否要在没有 WiFi 的状况下下载图像？</string>
     <string name="current_version">您正在使用的版本号为：%s</string>
-    <string name="widget_header">ownCloud 新闻</string>
+    <string name="widget_header">Nextcloud 新闻</string>
     <plurals name="message_bar_new_articles_available">
         <item quantity="other">%d 条新内容</item>
     </plurals>
     <string name="message_bar_reload">刷新</string>
     <string name="allUnreadFeeds">所有未读内容</string>
     <string name="starredFeeds">标星内容</string>
+    <string name="downloadedPodcasts">已下载播客</string>
     <string name="title_activity_new_feed">添加新订阅源</string>
 
     <string name="menu_update">刷新</string>
@@ -29,6 +30,7 @@
     <string name="action_starred">已加星标</string>
     <string name="action_read">阅读</string>
     <string name="action_playPodacst">播放 Podcast</string>
+    <string name="action_removePodcast">移除播客媒体</string>
     <string name="action_openInBrowser">在浏览器中打开网页</string>
     <string name="action_Share">共享</string>
     <string name="action_login">服务器配置</string>
@@ -119,7 +121,6 @@
     <string name="error_field_required">这个字段是必填的</string>
     <string name="error_invalid_url">网络地址不正确</string>
 
-
     <!-- Toast Messages -->
     <plurals name="toast_downloaded_x_items">
         <item quantity="other">已下载 %d 条旧内容</item>
@@ -178,6 +179,9 @@
     <string name="podcast_playback_speed_dialog_title">播放速度</string>
     <string name="notification_downloading_podcast_title">正在下载播客</string>
     <string name="dialog_podcast_remove_title">你确定吗？</string>
+    <string name="dialog_podcast_remove_body">是否要移除 %1$s 的已下载媒体？</string>
+    <string name="dialog_podcast_status_failed">无法移除 %1$s 的媒体</string>
+    <string name="dialog_podcast_status_success">已移除 %1$s 的媒体</string>
     <string name="dialog_podcast_remove_confirm">移除</string>
 
     <!-- Settings for About -->
@@ -190,6 +194,8 @@
     <string name="pref_contribute_summary">获取源代码</string>
     <string name="pref_privacy">隐私</string>
     <string name="pref_privacy_summary">Nextcloud News 安卓版隐私政策</string>
+    <string name="pref_news_policy">联系我们/新闻政策</string>
+    <string name="pref_news_policy_summary">Nextcloud 新闻 Android 新闻政策/联系我们</string>
     <string name="pref_version">Nextcloud News 安卓应用</string>
 
 
@@ -270,17 +276,17 @@
     <string name="pref_data_sync_image_cache_ask">未连接到 WiFi 时询问</string>
 
     <string name="array_sync_interval_min_0">永不</string>
-    <string name="array_sync_interval_min_5">5分钟</string>
-    <string name="array_sync_interval_min_15">15分钟 </string>
-    <string name="array_sync_interval_min_30">30分钟 </string>
-    <string name="array_sync_interval_min_45">45分钟</string>
+    <string name="array_sync_interval_min_5">5 分钟</string>
+    <string name="array_sync_interval_min_15">15 分钟 </string>
+    <string name="array_sync_interval_min_30">30 分钟 </string>
+    <string name="array_sync_interval_min_45">45 分钟</string>
     <string name="array_sync_interval_hour_1">1小时 </string>
     <string name="array_sync_interval_hour_2">2小时</string>
     <string name="array_sync_interval_hour_3">3小时</string>
     <string name="array_sync_interval_hour_6">6小时</string>
     <string name="array_sync_interval_hour_12">12小时</string>
     <string name="array_sync_interval_hour_24">24小时</string>
-    <string name="switch_account">切换账户</string>
+    <string name="switch_account">切换账号</string>
     
     <string name="successfully_exported">已成功导出到：</string>
     <string name="opml_export">OPML 导出</string>

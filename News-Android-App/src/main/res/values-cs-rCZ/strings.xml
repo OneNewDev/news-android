@@ -19,6 +19,7 @@
     <string name="message_bar_reload">Načíst znovu</string>
     <string name="allUnreadFeeds">Všechny nepřečtené položky</string>
     <string name="starredFeeds">Položky s hvězdičkou</string>
+    <string name="downloadedPodcasts">Stažené podcasty</string>
     <string name="title_activity_new_feed">Přidat nový kanál</string>
 
     <string name="menu_update">Načíst znovu</string>
@@ -32,6 +33,7 @@
     <string name="action_starred">S hvězdičkou</string>
     <string name="action_read">Číst</string>
     <string name="action_playPodacst">Přehrát podcast</string>
+    <string name="action_removePodcast">Odebrat podcast médium</string>
     <string name="action_openInBrowser">Otevřít ve webovém prohlížeči</string>
     <string name="action_Share">Sdílet</string>
     <string name="action_login">Nastavení serveru</string>
@@ -128,6 +130,13 @@
     <string name="error_field_required">Tuto kolonku je třeba vyplnit</string>
     <string name="error_invalid_url">Nesprávná URL</string>
 
+    <!--Snackbar Messages -->
+    <plurals name="marked_as_read_message">
+        <item quantity="one">Označena %d položka jako přečtená</item>
+        <item quantity="few">Označeny %d položky jako přečtené</item>
+        <item quantity="many">Označeno %d položek jako přečtené</item>
+        <item quantity="other">Označeny %d položky jako přečtené</item>
+    </plurals>
 
     <!-- Toast Messages -->
     <plurals name="toast_downloaded_x_items">
@@ -193,6 +202,9 @@
     <string name="podcast_playback_speed_dialog_title">Rychlost přehrávání</string>
     <string name="notification_downloading_podcast_title">Stahuje se podcast</string>
     <string name="dialog_podcast_remove_title">Opravdu to chcete?</string>
+    <string name="dialog_podcast_remove_body">Opravdu chcete odebrat stažená média pro %1$s?</string>
+    <string name="dialog_podcast_status_failed">Nepodařilo se odebrat médium pro %1$s</string>
+    <string name="dialog_podcast_status_success">Médium pro %1$s bylo odebráno</string>
     <string name="dialog_podcast_remove_confirm">Odebrat</string>
 
     <!-- Settings for About -->
@@ -201,10 +213,12 @@
     <string name="pref_license_summary">GNU Affero General Public License (AGPL) verze 3</string>
     <string name="pref_report_issue">Nahlásit problém</string>
     <string name="pref_report_issue_summary">Vyžaduje účet na portálu GitHub (zdarma)</string>
-    <string name="pref_contribute">Zapojení se</string>
+    <string name="pref_contribute">Zapojte se!</string>
     <string name="pref_contribute_summary">Získat zdrojové kódy</string>
     <string name="pref_privacy">Soukromí</string>
     <string name="pref_privacy_summary">Zásady ochrany soukromí aplikace Nextcloud Novinky pro Android</string>
+    <string name="pref_news_policy">Obraťte se na nás / Zásady novinek</string>
+    <string name="pref_news_policy_summary">Zásady Nextcloud (Android) Novinek / Obraťte se na nás</string>
     <string name="pref_version">Aplikace Nextcloud Novinky pro Android</string>
 
 

@@ -82,9 +82,10 @@ public class NewsDetailFragment extends Fragment implements RssItemToHtmlTask.Li
 
     private int section_number;
     protected String html;
-    private String title = "";
-    private String baseUrl = null;
-    private GestureDetector mGestureDetector;
+    // private String title = "";
+    // private String baseUrl = null;
+    private float scalingFactor = 1.0f;
+    // private GestureDetector mGestureDetector;
 
 
     public NewsDetailFragment() { }
@@ -97,6 +98,7 @@ public class NewsDetailFragment extends Fragment implements RssItemToHtmlTask.Li
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ((NewsReaderApplication) requireActivity().getApplication()).getAppComponent().injectFragment(this);
+        scalingFactor = Float.parseFloat(mPrefs.getString(SettingsActivity.SP_FONT_SIZE, "1.0"));
 
         // Retain this fragment across configuration changes.
         setRetainInstance(true);
@@ -255,8 +257,7 @@ public class NewsDetailFragment extends Fragment implements RssItemToHtmlTask.Li
 
         init_webView();
         RssItem rssItem = ndActivity.rssItems.get(section_number);
-        title = rssItem.getTitle();
-        Log.d(TAG, "startLoadRssItemToWebViewTask: " + title);
+        Log.d(TAG, "startLoadRssItemToWebViewTask: " + rssItem.getTitle());
         RssItemToHtmlTask task = new RssItemToHtmlTask(ndActivity, rssItem, this, mPrefs);
         AsyncTaskHelper.StartAsyncTask(task);
     }
@@ -306,6 +307,8 @@ public class NewsDetailFragment extends Fragment implements RssItemToHtmlTask.Li
         webSettings.setSupportMultipleWindows(false);
         webSettings.setSupportZoom(false);
         webSettings.setMediaPlaybackRequiresUserGesture(true);
+
+        webSettings.setTextZoom(Math.round(scalingFactor * 100));
 
         syncIncognitoState();
     }

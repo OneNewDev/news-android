@@ -63,7 +63,7 @@
     <string name="action_img_sharelink">Bendrinti paveikslo nuorodą</string>
     <string name="action_img_open">Atverti paveikslą naršyklėje</string>
     <string name="action_img_copylink">Kopijuoti paveikslo nuorodą</string>
-    <string name="action_link_share">Bendrinimo nuoroda</string>
+    <string name="action_link_share">Viešinio nuoroda</string>
     <string name="action_link_open">Atverti nuorodą naršyklėje</string>
     <string name="action_link_copy">Kopijuoti nuorodą</string>
     <string name="toast_img_download_wait">Atsisiunčiama. Palaukite…</string>
@@ -103,7 +103,6 @@
     <!-- <string name="error_incorrect_password">Incorrect password</string> -->
     <string name="error_field_required">Šis laukas privalomas</string>
     <string name="error_invalid_url">Neteisingas URL</string>
-
 
     <!-- Toast Messages -->
     <plurals name="toast_downloaded_x_items">

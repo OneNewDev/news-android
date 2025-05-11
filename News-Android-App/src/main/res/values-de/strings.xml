@@ -72,7 +72,7 @@
     <string name="action_link_copy">Link kopieren</string>
     <string name="toast_img_download_wait">Lade herunter. Bitte warten …</string>
     <string name="toast_img_saved">Bild gespeichert</string>
-    <string name="toast_img_notwriteable">Fehler beim Schreiben des Bildes.</string>
+    <string name="toast_img_notwriteable">Bild konnte nicht geschrieben werden</string>
     <string name="toast_copied_to_clipboard">In die Zwischenablage kopiert</string>
     <string name="error_download_failed">Herunterladen fehlgeschlagen</string>
     <string name="intent_title_share">Teilen mittels</string>
@@ -88,7 +88,7 @@
     <string name="action_feed_open_in_detailed_view">Detaillierte Ansicht</string>
     <string name="feed_remove_button">Entfernen</string>
     <string name="feed_rename_button">Umbenennen</string>
-    <string name="confirm_feed_remove">Möchten Sie wirklich dieses Feed löschen? Die Aktion kann nicht rückgängig gemacht werden!</string>
+    <string name="confirm_feed_remove">Möchten Sie wirklich diesen Feed entfernen? Dies kann nicht rückgängig gemacht werden!</string>
     <string name="feed_move_list_description">Den Zielordner für den Feed auswählen</string>
     <string name="move_feed_root_folder">Quellordner</string>
 
@@ -98,7 +98,7 @@
     <string name="action_folder_rename">Ordner umbenennen</string>
     <string name="folder_remove_button">Entfernen</string>
     <string name="folder_rename_button">Umbenennen</string>
-    <string name="confirm_folder_remove">Möchten Sie wirklich diesen Ordner löschen? Dies kann nicht rückgängig gemacht werden!</string>
+    <string name="confirm_folder_remove">Möchten Sie wirklich diesen Ordner entfernen? Dies kann nicht rückgängig gemacht werden!</string>
 
     <!-- Strings related to NewsReaderListDialogFragment (Notification Settings) -->
     <string name="notification_feed_unique">Spezielle Benachrichtigungen für diesen Feed erhalten</string>
@@ -124,6 +124,11 @@
     <string name="error_field_required">Dieses Feld ist erforderlich.</string>
     <string name="error_invalid_url">URL nicht korrekt</string>
 
+    <!--Snackbar Messages -->
+    <plurals name="marked_as_read_message">
+        <item quantity="one">%d Artikel als gelesen markiert</item>
+        <item quantity="other">%d Artikel als gelesen markiert</item>
+    </plurals>
 
     <!-- Toast Messages -->
     <plurals name="toast_downloaded_x_items">
@@ -186,7 +191,7 @@
     <string name="notification_downloading_podcast_title">Podcast wird herunterladen</string>
     <string name="dialog_podcast_remove_title">Sind Sie sicher?</string>
     <string name="dialog_podcast_remove_body">Möchten Sie heruntergeladene Medien für %1$s entfernen?</string>
-    <string name="dialog_podcast_status_failed">Fehler beim Entfernen der Medien für %1$s</string>
+    <string name="dialog_podcast_status_failed">Medien für %1$s konnten nicht entfernt werden</string>
     <string name="dialog_podcast_status_success">Medien für %1$s wurden entfernt</string>
     <string name="dialog_podcast_remove_confirm">Entfernen</string>
 
@@ -199,7 +204,7 @@
     <string name="pref_contribute">Mitmachen!</string>
     <string name="pref_contribute_summary">Zum Programmcode</string>
     <string name="pref_privacy">Datenschutz</string>
-    <string name="pref_privacy_summary">Nextcloud News Android App Datenschutz</string>
+    <string name="pref_privacy_summary">Nextcloud News Android App Datenschutzerklärung</string>
     <string name="pref_news_policy">Kontaktieren Sie uns / News-Richtlinie</string>
     <string name="pref_news_policy_summary">Nextcloud News Android News Richtlinie / Kontaktieren Sie uns</string>
     <string name="pref_version">Nextcloud News Android App</string>
@@ -294,7 +299,7 @@
     <string name="array_sync_interval_hour_24">24 Stunden</string>
     <string name="switch_account">Konto wechseln</string>
     
-    <string name="successfully_exported">Erfolgreich exportiert nach:</string>
+    <string name="successfully_exported">Exportiert nach:</string>
     <string name="opml_export">OPML Export</string>
     <string name="parsing_opml">Analysiere OPML</string>
     <string name="please_wait">Bitte warten …</string>

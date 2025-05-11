@@ -122,7 +122,6 @@
     <string name="error_field_required">Acest câmp este obligatoriu </string>
     <string name="error_invalid_url">URL incrorect</string>
 
-
     <!-- Toast Messages -->
     <plurals name="toast_downloaded_x_items">
         <item quantity="one">Descarcă %d articol vechi</item>
@@ -190,7 +189,7 @@
     <string name="pref_report_issue_summary">Necesită un cont (gratuit) GitHub</string>
     <string name="pref_contribute">Contribuie!</string>
     <string name="pref_contribute_summary">Obține codul sursă</string>
-    <string name="pref_privacy">Confindențialitate</string>
+    <string name="pref_privacy">Confidențialitate</string>
     <string name="pref_privacy_summary">Politica de Confidențialitate a Nextcloud News pentru Android</string>
     <string name="pref_version">aplicația Nextcloud News pentru Android</string>
 

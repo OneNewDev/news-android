@@ -4,6 +4,7 @@ import static de.luhmer.owncloudnewsreader.Constants.USER_INFO_STRING;
 import static de.luhmer.owncloudnewsreader.SettingsActivity.CB_MARK_AS_READ_WHILE_SCROLLING_STRING;
 import static de.luhmer.owncloudnewsreader.SettingsActivity.CB_NAVIGATE_WITH_VOLUME_BUTTONS_STRING;
 import static de.luhmer.owncloudnewsreader.SettingsActivity.CB_OLED_MODE;
+import static de.luhmer.owncloudnewsreader.SettingsActivity.CB_PREF_BACK_OPENS_DRAWER;
 import static de.luhmer.owncloudnewsreader.SettingsActivity.CB_REPORT_ISSUE;
 import static de.luhmer.owncloudnewsreader.SettingsActivity.CB_SHOWONLYUNREAD_STRING;
 import static de.luhmer.owncloudnewsreader.SettingsActivity.CB_SHOW_FAST_ACTIONS;
@@ -26,7 +27,6 @@ import static de.luhmer.owncloudnewsreader.SettingsActivity.SP_SORT_ORDER;
 import static de.luhmer.owncloudnewsreader.SettingsActivity.SP_SWIPE_LEFT_ACTION;
 import static de.luhmer.owncloudnewsreader.SettingsActivity.SP_SWIPE_RIGHT_ACTION;
 import static de.luhmer.owncloudnewsreader.SettingsActivity.SYNC_INTERVAL_IN_MINUTES_STRING_DEPRECATED;
-import static de.luhmer.owncloudnewsreader.SettingsActivity.CB_PREF_BACK_OPENS_DRAWER;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
@@ -53,7 +53,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.TwoStatePreference;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
@@ -345,45 +344,43 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     private void openBugReport() {
         String title = "";
         String body = "";
-        String debugInfo = "Please describe your bug here...\n\n---\n";
+        StringBuilder debugInfo = new StringBuilder("Please describe your bug here...\n\n---\n");
 
-        try {
-            PackageInfo pInfo = requireContext().getPackageManager().getPackageInfo(requireContext().getPackageName(), 0);
-            debugInfo += "\nApp Version: " + pInfo.versionName;
-            debugInfo += "\nApp Version Code: " + pInfo.versionCode;
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        debugInfo += "\n\n---\n";
-
-        debugInfo += "\nSSO enabled: " + mPrefs.getBoolean(SettingsActivity.SW_USE_SINGLE_SIGN_ON, false);
-
-
-        debugInfo += "\n\n---\n";
-        debugInfo += "\nOS Version: " + System.getProperty("os.version") + "(" + Build.VERSION.INCREMENTAL + ")";
-        debugInfo += "\nOS API Level: " + Build.VERSION.SDK_INT;
-        debugInfo += "\nDevice: " + Build.DEVICE;
-        debugInfo += "\nModel (and Product): " + Build.MODEL + " ("+ Build.PRODUCT + ")";
-
-        debugInfo += "\n\n---\n\n";
-
-        List<String> excludedSettings = Arrays.asList(EDT_USERNAME_STRING, EDT_PASSWORD_STRING, EDT_OWNCLOUDROOTPATH_STRING, Constants.LAST_UPDATE_NEW_ITEMS_COUNT_STRING, USER_INFO_STRING);
-        Map<String, ?> allEntries = mPrefs.getAll();
-        for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
-            String key =entry.getKey();
-            if(!excludedSettings.contains(key)) {
-                debugInfo += entry + "\n";
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            try {
+                PackageInfo pInfo = requireContext().getPackageManager().getPackageInfo(requireContext().getPackageName(), 0);
+                debugInfo.append("\nApp Version: ").append(pInfo.versionName);
+                debugInfo.append("\nApp Version Code: ").append(pInfo.versionCode);
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
             }
-        }
 
-        try {
-            body = URLEncoder.encode(debugInfo, StandardCharsets.UTF_8.toString());
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/nextcloud/news-android/issues/new?title=" + title + "&body=" + body));
-            startActivity(browserIntent);
-        } catch (UnsupportedEncodingException e) {
-            // Should never happen for UTF8 on android
+            debugInfo.append("\n\n---\n");
+
+            debugInfo.append("\nSSO enabled: ").append(mPrefs.getBoolean(SettingsActivity.SW_USE_SINGLE_SIGN_ON, false));
+
+
+            debugInfo.append("\n\n---\n");
+            debugInfo.append("\nOS Version: ").append(System.getProperty("os.version")).append("(").append(Build.VERSION.INCREMENTAL).append(")");
+            debugInfo.append("\nOS API Level: ").append(Build.VERSION.SDK_INT);
+            debugInfo.append("\nDevice: ").append(Build.DEVICE);
+            debugInfo.append("\nModel (and Product): ").append(Build.MODEL).append(" (").append(Build.PRODUCT).append(")");
+
+            debugInfo.append("\n\n---\n\n");
+
+            List<String> excludedSettings = Arrays.asList(EDT_USERNAME_STRING, EDT_PASSWORD_STRING, EDT_OWNCLOUDROOTPATH_STRING, Constants.LAST_UPDATE_NEW_ITEMS_COUNT_STRING, USER_INFO_STRING);
+            Map<String, ?> allEntries = mPrefs.getAll();
+            for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
+                String key = entry.getKey();
+                if (!excludedSettings.contains(key)) {
+                    debugInfo.append(entry).append("\n");
+                }
+            }
+
+            body = URLEncoder.encode(debugInfo.toString(), StandardCharsets.UTF_8);
         }
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/nextcloud/news-android/issues/new?title=" + title + "&body=" + body));
+        startActivity(browserIntent);
     }
 
 
@@ -438,7 +435,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
             DatabaseConnectionOrm dbConn = new DatabaseConnectionOrm(context);
             dbConn.resetDatabase();
-            ImageHandler.clearCache(context);
             NewsFileUtils.clearWebArchiveCache(context);
             NewsFileUtils.clearPodcastCache(context);
             return null;
@@ -447,6 +443,9 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
+
+            // needs to be executed on main thread
+            ImageHandler.clearCache(context);
 
             pd.dismiss();
             Toast.makeText(context, context.getString(R.string.cache_is_cleared), Toast.LENGTH_SHORT).show();

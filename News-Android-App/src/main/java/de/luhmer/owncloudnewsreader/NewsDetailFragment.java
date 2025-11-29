@@ -85,7 +85,7 @@ public class NewsDetailFragment extends Fragment implements RssItemToHtmlTask.Li
     // private String title = "";
     // private String baseUrl = null;
     private float scalingFactor = 1.0f;
-    // private GestureDetector mGestureDetector;
+    private GestureDetector mGestureDetector;
 
 
     public NewsDetailFragment() { }

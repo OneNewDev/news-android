@@ -6,7 +6,7 @@
     <string name="empty_view_content">Burada herhangi bir öge yok</string>
     <string name="empty_view_content_action">Yenilemek için aşağı çekin</string>
     <string name="toast_GettingMoreItems">Diğer ögelerin indirilmesine başlandı. Lütfen bekleyin…</string>
-    <string name="no_wifi_available">Wi-Fi bağlantısı kurulmamış</string>
+    <string name="no_wifi_available">Kablosuz ağ bağlantısı kurulmamış</string>
     <string name="do_you_want_to_download_without_wifi">Görselleri bir kablosuz ağ bağlantısı olmadan indirmek ister misiniz?</string>
     <string name="current_version">%s sürümünü kullanıyorsunuz</string>
     <string name="widget_header">Nextcloud News</string>
@@ -70,7 +70,7 @@
     <string name="action_link_share">Paylaşım bağlantısı</string>
     <string name="action_link_open">Bağlantıyı tarayıcıda aç</string>
     <string name="action_link_copy">Bağlantıyı kopyala</string>
-    <string name="toast_img_download_wait">Lütfen indirilirken bekleyin…</string>
+    <string name="toast_img_download_wait">İndiriliyor. Lütfen bekleyin…</string>
     <string name="toast_img_saved">Görsel kaydedildi</string>
     <string name="toast_img_notwriteable">Görsel diske yazılamadı.</string>
     <string name="toast_copied_to_clipboard">Panoya kopyalandı</string>
@@ -124,6 +124,12 @@
     <string name="error_field_required">Bu alanın doldurulması zorunludur</string>
     <string name="error_invalid_url">Adres yanlış</string>
 
+    <!--Snackbar Messages -->
+    <plurals name="marked_as_read_message">
+        <item quantity="one">%d öge okunmuş olarak işaretlendi</item>
+        <item quantity="other">%d öge okunmuş olarak işaretlendi</item>
+    </plurals>
+
     <!-- Toast Messages -->
     <plurals name="toast_downloaded_x_items">
         <item quantity="one">%d eski öge indirildi</item>
@@ -158,7 +164,7 @@
     <string name="pref_general_search_in_both">İkisi de</string>
 
     <string name="dialog_clearing_cache">Ön bellek temizleniyor</string>
-    <string name="dialog_clearing_cache_please_wait">Lütfen ön bellek temizlenirken bekleyin…</string>
+    <string name="dialog_clearing_cache_please_wait">Ön bellek temizleniyor. Lütfen bekleyin…</string>
     <string name="reset_cache_unsaved_changes">Eşitlenmemiş değişiklikler var. Yine de ön belleği sıfırlamak ister misiniz?</string>
     <string name="warning">Uyarı</string>
     <string name="pref_title_AutoSyncOnStart">Başlangıçta eşitle</string>
@@ -166,7 +172,7 @@
     <string name="pref_title_DisableHostnameVerification">Sunucu adı doğrulanmasın</string>
     <string name="pref_title_NavigateWithVolumeButtons">Ses düğmeleri ile gezilebilsin</string>
     <string name="pref_title_MarkAsReadWhileScrolling">Kaydırırken okundu olarak işaretlensin</string>
-    <string name="pref_title_ShowFastActions">Hızlı erişim işlevlerini kullanıma al</string>
+    <string name="pref_title_ShowFastActions">Hızlı erişim işlevlerini aç</string>
     <string name="pref_title_OpenInBrowserDirectly">Ayrıntılı görünümü atlayıp yazıyı tarayıcıda aç</string>
     <string name="pref_title_BackButtonOpensDrawer">Geri düğmesi menüyü açsın</string>
 
@@ -230,9 +236,9 @@
 
     <string name="pref_display_feed_list_layout_headline_thumbnails">Küçük görseller (yalnızca başlıklar)</string>
     <string name="pref_display_feed_list_layout_thumbnails">Küçük görseller</string>
-    <string name="pref_display_feed_list_layout_simple_text">Basit metin</string>
+    <string name="pref_display_feed_list_layout_simple_text">Basit yazı</string>
     <string name="pref_display_feed_list_layout_headlines">Başlıklar</string>
-    <string name="pref_display_feed_list_layout_full_text">Tam metin</string>
+    <string name="pref_display_feed_list_layout_full_text">Tam yazı</string>
     <string name="pref_display_feed_list_layout_web_layout">Site yerleşimi</string>
     <string name="pref_display_feed_list_layout_card_view">Kart görünümü</string>
 
@@ -276,9 +282,9 @@
     <string name="pref_title_Max_Cache_Size">En büyük ön bellek boyutu</string>
 
     <string name="pref_data_sync_image_cache_never">Asla</string>
-    <string name="pref_data_sync_image_cache_wifi_only">Yalnızca Wi-Fi üzerinden</string>
-    <string name="pref_data_sync_image_cache_wifi_and_mobile">Wi-Fi ve mobil veri üzerinden</string>
-    <string name="pref_data_sync_image_cache_ask">Wi-Fi bağlı değilken sorulsun</string>
+    <string name="pref_data_sync_image_cache_wifi_only">Yalnızca kablosuz ağ üzerinden</string>
+    <string name="pref_data_sync_image_cache_wifi_and_mobile">Kablosuz ağ ve mobil veri üzerinden</string>
+    <string name="pref_data_sync_image_cache_ask">Kablosuz ağ bağlı değilken sorulsun</string>
 
     <string name="array_sync_interval_min_0">Asla</string>
     <string name="array_sync_interval_min_5">5 dakika</string>

@@ -20,7 +20,7 @@
     <string name="downloadedPodcasts">Downloadede podcasts</string>
     <string name="title_activity_new_feed">Tilføj nyt feed</string>
 
-    <string name="menu_update">Opdater</string>
+    <string name="menu_update">Opdatér</string>
     <string name="menu_markAllAsRead">Marker alle som læst</string>
     <string name="menu_StartImageCaching">Hent billeder</string>
     <string name="menu_downloadMoreItems">Hent flere artikler</string>
@@ -58,8 +58,8 @@
     <!-- Add new feed -->
     <string name="hint_feed_url">Feed URL</string>
     <string name="action_add_feed">Tilføj feed</string>
-    <string name="import_opml">Importer OPML</string>
-    <string name="export_opml">Eksporter OPML</string>
+    <string name="import_opml">Importér OPML</string>
+    <string name="export_opml">Eksportér OPML</string>
 
 
     <!-- String related to NewsDetail-ContextMenu Items -->
@@ -232,7 +232,7 @@
     <string name="pref_display_feed_list_layout_thumbnails">Miniaturer</string>
     <string name="pref_display_feed_list_layout_simple_text">Simpel tekst</string>
     <string name="pref_display_feed_list_layout_headlines">Overskrifter</string>
-    <string name="pref_display_feed_list_layout_full_text">Fuld text</string>
+    <string name="pref_display_feed_list_layout_full_text">Fuld tekst</string>
     <string name="pref_display_feed_list_layout_web_layout">Web layout</string>
     <string name="pref_display_feed_list_layout_card_view">Kortvisning</string>
 

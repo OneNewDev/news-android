@@ -10,6 +10,7 @@
     <string name="do_you_want_to_download_without_wifi">Görselleri bir kablosuz ağ bağlantısı olmadan indirmek ister misiniz?</string>
     <string name="current_version">%s sürümünü kullanıyorsunuz</string>
     <string name="widget_header">Nextcloud News</string>
+    <string name="message_bar_scroll_top">Yeniden yükle ve üste kaydır</string>
     <plurals name="message_bar_new_articles_available">
         <item quantity="one">%d yeni öge var</item>
         <item quantity="other">%d yeni öge var</item>
@@ -227,6 +228,9 @@
     <string name="pref_oled_mode">Siyah arka plan</string>
     <string name="pref_oled_mode_summary">OLED ekranlarda koyu tema için</string>
 
+    <string name="pref_detailed_view_zoom">Ayrıntılı görünüm yakınlaştırması</string>
+    <string name="pref_detailed_view_zoom_summary">Açıldığında, ayrıntılı görünümde içeriği yakınlaştırır</string>
+
     <string name="pref_external_player">Dış oynatıcı</string>
     <string name="pref_external_player_summary">Podcast yayınlarını varsayılan ortam uygulamanızda dinleyin</string>
 
@@ -267,12 +271,12 @@
     <!-- Login Dialog -->
     <string name="login_dialog_title_error">Hata</string>
     <string name="login_dialog_text_news_app_not_installed_on_server" formatted="true">Haberler uygulamanız sunucu üzerinde kurulmamış ya da kullanıma alınmamış gibi görünüyor. Lütfen önce sunucu üzerine haberler uygulamasını kurmak için yönergeyi izleyin: %1$s</string>
-    <string name="login_dialog_text_something_went_wrong">Bir şeyler ters gitti :(</string>
+    <string name="login_dialog_text_something_went_wrong">Bir sorun çıktı :(</string>
     <string name="login_dialog_text_zero_version_code">Site haberleri uygulamasının sürümü \"0\" olarak görünüyor. Lütfen şu hata raporuna bakın: https://github.com/nextcloud/news/issues/5#issuecomment-242883795</string>
     <string name="login_dialog_text_not_compatible">Bu uygulama sürümü kullandığınız Nextcloud Haberler uygulaması ile uyumlu değil. Lütfen Haberler uygulaması ve uygulama çatısını güncelleyin.</string>
     <string name="login_dialog_title_security_warning">Güvenlik uyarısı</string>
     <string name="login_dialog_text_security_warning">Kullanılması önemle önerilen HTTPS kullanmıyorsunuz. Bir saldırgan trafiğinizi izleyip önemli verilere erişebilir (parolanız gibi).</string>
-    <string name="login_dialog_select_account_unknown_error_toast">Bir şeyler ters gitti. Lütfen yeniden deneyin.</string>
+    <string name="login_dialog_select_account_unknown_error_toast">Bir sorun çıktı. Lütfen yeniden deneyin.</string>
 
 
     <!-- Data & Sync -->
